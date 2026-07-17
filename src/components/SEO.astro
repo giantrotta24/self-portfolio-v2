@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  /** Path of the page, e.g. "/services" — used for the canonical URL. */
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const canonical = new URL(path, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': 'https://giantrotta.dev/#business',
+      name: 'Gian Trotta — Web Developer',
+      url: 'https://giantrotta.dev/',
+      email: 'gian@giantrotta.dev',
+      areaServed: {
+        '@type': 'Place',
+        name: 'Cleveland and Northeast Ohio',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Cleveland',
+        addressRegion: 'OH',
+        addressCountry: 'US',
+      },
+      founder: { '@id': 'https://giantrotta.dev/#gian' },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://giantrotta.dev/#gian',
+      name: 'Gian Trotta',
+      jobTitle: 'Senior Software Engineer',
+      url: 'https://giantrotta.dev/',
+      sameAs: ['https://github.com/giantrotta24'],
+    },
+  ],
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="Gian Trotta" />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

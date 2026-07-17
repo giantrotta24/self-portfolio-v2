@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Contact — Gian Trotta"
+  description="Tell me about your project or book a free 15-minute call. Website rescues and builds for Northeast Ohio small businesses."
+>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+      Have a website problem?
+    </h1>
+    <p class="mt-4 text-lg text-mist">
+      Two ways in — write to me, or grab a time directly. Either way, you'll get a straight answer
+      about whether I can help.
+    </p>
+
+    <!-- Netlify Forms: must stay static HTML so the build bot registers it -->
+    <form
+      name="project"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      class="mt-10 space-y-6"
+    >
+      <input type="hidden" name="form-name" value="project" />
+      <p class="hidden">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <div>
+        <label for="name" class="block font-semibold">Your name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          class="mt-2 w-full border border-line bg-white px-4 py-3"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block font-semibold">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          class="mt-2 w-full border border-line bg-white px-4 py-3"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block font-semibold">What's going on with your site?</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="mt-2 w-full border border-line bg-white px-4 py-3"
+          placeholder="It's slow, it costs me every month, nobody can find it…"></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="rounded-md bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+      >
+        Send it
+      </button>
+    </form>
+
+    <div class="mt-12 border-2 border-dashed border-ink bg-white p-8">
+      <h2 class="font-display text-2xl font-bold">Rather just talk?</h2>
+      <p class="mt-2 text-mist">
+        Book a free 15-minute call — no prep needed.
+      </p>
+      <!-- TODO: replace with Cal.com (or similar) booking embed as a lazy island -->
+      <p class="mt-4 font-utility text-sm text-flare">Booking link coming soon.</p>
+    </div>
+  </section>
+</Base>

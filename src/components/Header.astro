@@ -1,0 +1,42 @@
+---
+const links = [
+  { href: '/services/', label: 'Services' },
+  { href: '/case-studies/', label: 'Case studies' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/about/', label: 'About' },
+];
+const current = Astro.url.pathname;
+---
+
+<header class="border-b border-line">
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+    <a href="/" class="font-display text-lg font-bold tracking-tight">
+      Gian Trotta<span class="text-flare">.</span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                aria-current={current.startsWith(href) ? 'page' : undefined}
+                class="text-mist hover:text-ink aria-[current=page]:font-semibold aria-[current=page]:text-ink"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href="/contact/"
+            class="rounded-md bg-ink px-4 py-2 font-semibold text-porcelain hover:bg-steel"
+          >
+            Book a checkup
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

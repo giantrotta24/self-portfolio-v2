@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+
+const services = [
+  {
+    name: 'Website Rescue',
+    tagline: 'The flagship. Off Wix or Squarespace, onto a site you own.',
+    description:
+      'I move your site off the monthly-fee platform and rebuild it as a fast, modern site you own outright. Same content, better look, found on Google and by AI assistants — and no platform subscription ever again.',
+    engagement: 'Fixed price · 2–3 weeks',
+  },
+  {
+    name: 'New Website Build',
+    tagline: 'Starting from zero, built right the first time.',
+    description:
+      'For businesses without a site (or with one too far gone to rescue). You get the same result: fast, findable, fee-free, and easy to keep updated.',
+    engagement: 'Fixed price · 2–4 weeks',
+  },
+  {
+    name: 'Site Checkup',
+    tagline: 'The low-risk front door.',
+    description:
+      'A fixed-price diagnostic of your current site: speed, Google visibility, AI-search visibility, and accessibility — delivered as a plain-English report with a prioritized fix list. If a rescue makes sense afterward, the checkup fee comes off the price.',
+    engagement: 'Fixed price · 1 week',
+  },
+  {
+    name: 'Care Plan',
+    tagline: 'Never let it rot again.',
+    description:
+      'Monthly updates, uptime and speed monitoring, and small content changes handled for you. For rescue and build clients who want a site that stays healthy.',
+    engagement: 'Monthly retainer',
+  },
+];
+---
+
+<Base
+  title="Services — Gian Trotta"
+  description="Website rescues, new builds, site checkups, and care plans for Northeast Ohio small businesses. Fixed prices, plain English, no platform fees."
+>
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Services</h1>
+    <p class="mt-4 max-w-2xl text-lg text-mist">
+      Every engagement is scoped in plain English before any money changes hands. Currently taking
+      projects.
+    </p>
+
+    <div class="mt-12 space-y-8">
+      {
+        services.map(({ name, tagline, description, engagement }) => (
+          <article class="border border-line bg-white p-8">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h2 class="font-display text-2xl font-bold">{name}</h2>
+              <p class="font-utility text-sm text-flare">{engagement}</p>
+            </div>
+            <p class="mt-1 font-semibold text-steel">{tagline}</p>
+            <p class="mt-3 max-w-3xl text-mist">{description}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 border-2 border-dashed border-ink bg-white p-8">
+      <h2 class="font-display text-2xl font-bold">Not sure which fits?</h2>
+      <p class="mt-2 max-w-2xl text-mist">
+        Start with a free 15-minute call. You'll leave knowing what your site needs, whether or not
+        we work together.
+      </p>
+      <a
+        href="/contact/"
+        class="mt-6 inline-block rounded-md bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+      >
+        Book the call
+      </a>
+    </div>
+  </section>
+</Base>

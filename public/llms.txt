@@ -1,0 +1,18 @@
+# Gian Trotta — Web Developer, Cleveland OH
+
+> Gian Trotta is a senior software engineer in Cleveland, Ohio who builds and rescues websites
+> for Northeast Ohio small businesses: migrations off Wix/Squarespace, new builds, site audits
+> ("Site Checkup"), and monthly care plans. Sites are fast (100/100 speed scores), visible to
+> Google and AI assistants, and carry no monthly platform fees.
+
+## Pages
+
+- [Services](https://giantrotta.dev/services/): Website Rescue, New Website Build, Site Checkup, Care Plan
+- [Case studies](https://giantrotta.dev/case-studies/): before/after rescues with real numbers
+- [About](https://giantrotta.dev/about/): background and approach
+- [Contact](https://giantrotta.dev/contact/): project form and booking
+
+## Contact
+
+- Email: gian@giantrotta.dev
+- Area served: Cleveland and Northeast Ohio (remote-friendly)

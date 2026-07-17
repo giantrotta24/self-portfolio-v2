@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+
+const services = [
+  {
+    name: 'Website Rescue',
+    blurb:
+      'Stuck on Wix or Squarespace, paying every month for a slow site? I rebuild it fast, findable, and fee-free.',
+  },
+  {
+    name: 'New Website Build',
+    blurb: 'Starting from zero? Same result, built right the first time.',
+  },
+  {
+    name: 'Site Checkup',
+    blurb:
+      'A fixed-price audit of your speed, Google visibility, and AI visibility — with a plain-English report.',
+  },
+  {
+    name: 'Care Plan',
+    blurb: 'Monthly updates, monitoring, and small changes, so your site never rots again.',
+  },
+];
+---
+
+<Base
+  title="Gian Trotta — Fast websites for Northeast Ohio small businesses"
+  description="Your website should be bringing you customers, not costing you a subscription. Website rescues, rebuilds, and checkups by a senior engineer in Cleveland, Ohio."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-6 pb-16 pt-20">
+    <p class="font-utility text-sm uppercase tracking-widest text-flare">
+      Cleveland, Ohio · Taking projects
+    </p>
+    <h1
+      class="mt-4 max-w-3xl font-display text-4xl font-bold leading-tight tracking-tight sm:text-6xl"
+    >
+      Your website should be bringing you customers — not costing you a subscription.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-mist">
+      I'm a senior engineer who keeps a website fast for millions of visitors at my day job. I do
+      the same for Northeast Ohio small businesses — rescues off Wix and Squarespace, new builds,
+      and tune-ups.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href="/contact/"
+        class="rounded-md bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+      >
+        Book a free 15-minute call
+      </a>
+      <a
+        href="/services/"
+        class="rounded-md border border-ink px-6 py-3 font-semibold hover:bg-ink hover:text-porcelain"
+      >
+        See services
+      </a>
+    </div>
+
+    <!-- Signature: the checkup receipt — this site's own diagnostic tag -->
+    <aside
+      class="mt-14 max-w-md border-2 border-dashed border-ink bg-white p-6"
+      aria-label="This site's own checkup results"
+    >
+      <p class="font-utility text-xs uppercase tracking-widest text-mist">
+        Site checkup · giantrotta.dev
+      </p>
+      <dl class="mt-4 space-y-2 font-utility text-sm">
+        <div class="flex justify-between gap-4 border-b border-line pb-2">
+          <dt>Google speed score</dt>
+          <dd class="font-bold text-steel">100 / 100</dd>
+        </div>
+        <div class="flex justify-between gap-4 border-b border-line pb-2">
+          <dt>Loads in</dt>
+          <dd class="font-bold text-steel">under 1 second</dd>
+        </div>
+        <div class="flex justify-between gap-4">
+          <dt>Monthly platform fee</dt>
+          <dd class="font-bold text-flare">$0</dd>
+        </div>
+      </dl>
+      <p class="mt-4 text-xs text-mist">
+        This site is built the way I build yours. The previous version took 72 seconds to load on a
+        phone. <a href="/blog/" class="underline hover:text-ink">That story →</a>
+      </p>
+    </aside>
+  </section>
+
+  <!-- Services teaser -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <h2 class="font-display text-3xl font-bold tracking-tight">Four ways in</h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        {
+          services.map(({ name, blurb }) => (
+            <div class="border border-line bg-porcelain p-6">
+              <h3 class="font-display text-xl font-semibold">{name}</h3>
+              <p class="mt-2 text-mist">{blurb}</p>
+            </div>
+          ))
+        }
+      </div>
+      <a href="/services/" class="mt-8 inline-block font-semibold text-steel underline">
+        Details, engagement, and availability →
+      </a>
+    </div>
+  </section>
+
+  <!-- Proof strip -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="font-display text-3xl font-bold tracking-tight">Recent rescue</h2>
+    <p class="mt-4 max-w-2xl text-mist">
+      A children's book author was paying monthly for a slow Wix site. I rebuilt it: loads in under
+      a second, found on Google, and the platform fee went to zero.
+    </p>
+    <a href="/case-studies/" class="mt-6 inline-block font-semibold text-steel underline">
+      Read the case study →
+    </a>
+  </section>
+</Base>

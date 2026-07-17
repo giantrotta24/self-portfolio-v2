@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Base
+  title="Blog — Gian Trotta"
+  description="Plain-English writing about website speed, Google visibility, and AI-search visibility for small business owners — plus the occasional build story."
+>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Blog</h1>
+    <p class="mt-4 text-lg text-mist">
+      Plain-English notes on what makes websites fast, findable, and worth owning.
+    </p>
+
+    {
+      posts.length === 0 ? (
+        <p class="mt-12 border border-dashed border-line bg-white p-8 text-mist">
+          First posts land with the site launch. In the meantime,
+          <a href="/contact/" class="underline hover:text-ink">
+            book a free 15-minute call
+          </a>
+          if your site needs help now.
+        </p>
+      ) : (
+        <ul class="mt-12 space-y-8">
+          {posts.map((post) => (
+            <li class="border-b border-line pb-8">
+              <a href={`/blog/${post.id}/`} class="group">
+                <h2 class="font-display text-2xl font-bold group-hover:text-steel">
+                  {post.data.title}
+                </h2>
+                <p class="mt-1 font-utility text-sm text-mist">
+                  {post.data.pubDate.toISOString().slice(0, 10)}
+                </p>
+                <p class="mt-2 text-mist">{post.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>

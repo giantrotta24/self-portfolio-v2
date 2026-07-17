@@ -1,18 +1,54 @@
 ---
 const year = new Date().getFullYear();
+
+const links = [
+  { href: '/services/', label: 'Services' },
+  { href: '/case-studies/', label: 'Case studies' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
 ---
 
-<footer class="border-t border-line">
-  <div
-    class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-mist"
-  >
-    <p>
-      Gian Trotta — web developer in Cleveland, Ohio.
-      <a href="mailto:gian@giantrotta.dev" class="underline hover:text-ink">gian@giantrotta.dev</a>
-    </p>
-    <p>
-      <a href="https://github.com/giantrotta24" class="underline hover:text-ink">GitHub</a>
-      · © {year}
+<footer class="border-t-2 border-dashed border-line">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="flex flex-wrap items-start justify-between gap-8">
+      <div class="max-w-sm">
+        <p class="font-display text-lg font-bold tracking-tight">
+          Gian Trotta<span class="text-flare">.</span>
+        </p>
+        <p class="mt-2 text-sm text-mist">
+          Web developer in Cleveland, Ohio. Fast, findable websites for small businesses — no
+          monthly platform fee.
+        </p>
+        <a
+          href="mailto:gian@giantrotta.dev"
+          class="mt-3 inline-block font-utility text-sm underline hover:text-flare"
+        >
+          gian@giantrotta.dev
+        </a>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="grid gap-2 text-sm text-mist sm:grid-cols-2 sm:gap-x-10">
+          {
+            links.map(({ href, label }) => (
+              <li>
+                <a href={href} class="hover:text-ink hover:underline">
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="https://github.com/giantrotta24" class="hover:text-ink hover:underline">
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <p class="mt-10 font-utility text-xs uppercase tracking-widest text-mist">
+      © {year} · Static site, $0/month — built the way I build client sites.
     </p>
   </div>
 </footer>

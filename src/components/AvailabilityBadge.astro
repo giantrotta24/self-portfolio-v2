@@ -1,0 +1,26 @@
+---
+/**
+ * The availability status light.
+ *
+ * To change status, edit these two lines — everything else follows:
+ *   open = true  → pulsing green dot + OPEN_LABEL
+ *   open = false → solid red dot + BOOKED_LABEL
+ */
+const open = true;
+const OPEN_LABEL = 'Taking projects';
+const BOOKED_LABEL = 'Booked up right now';
+
+const label = open ? OPEN_LABEL : BOOKED_LABEL;
+---
+
+<span class="inline-flex items-center gap-2">
+  {label}
+  <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+    {
+      open && (
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-open opacity-75 motion-reduce:hidden" />
+      )
+    }
+    <span class:list={['relative inline-flex h-2.5 w-2.5 rounded-full', open ? 'bg-open' : 'bg-booked']} />
+  </span>
+</span>

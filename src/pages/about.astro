@@ -1,5 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import selfPortrait from '../assets/about/self-portrait.jpg';
+import cleveland from '../assets/about/cleveland.jpg';
 ---
 
 <Base
@@ -14,18 +17,18 @@ import Base from '../layouts/Base.astro';
 
     <div class="mt-12 grid items-start gap-10 lg:grid-cols-12">
       <figure class="lg:col-span-5">
-        <picture>
-          <source srcset="/about/self-portrait.webp" type="image/webp" />
-          <img
-            src="/about/self-portrait.jpg"
-            alt="Gian Trotta with his daughter"
-            width="900"
-            height="1200"
-            class="w-full max-w-md object-cover object-[center_20%] lg:max-w-none"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+        <Picture
+          src={selfPortrait}
+          formats={['webp']}
+          fallbackFormat="jpg"
+          widths={[400, 640, 900]}
+          sizes="(min-width: 1024px) 400px, calc(100vw - 48px)"
+          alt="Gian Trotta with his daughter"
+          class="w-full max-w-md object-cover object-[center_20%] lg:max-w-none"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
         <figcaption class="mt-3 font-utility text-xs uppercase tracking-widest text-mist">
           Cleveland, Ohio · with my daughter
         </figcaption>
@@ -58,18 +61,17 @@ import Base from '../layouts/Base.astro';
   <section class="border-y border-line bg-white" aria-label="Northeast Ohio">
     <div class="mx-auto max-w-5xl px-6 py-12">
       <figure>
-        <picture>
-          <source srcset="/about/cleveland.webp" type="image/webp" />
-          <img
-            src="/about/cleveland.jpg"
-            alt="Cleveland script sign overlooking the downtown skyline at dusk"
-            width="1600"
-            height="1066"
-            class="w-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
+        <Picture
+          src={cleveland}
+          formats={['webp']}
+          fallbackFormat="jpg"
+          widths={[400, 800, 1600]}
+          sizes="(min-width: 1024px) 976px, calc(100vw - 48px)"
+          alt="Cleveland script sign overlooking the downtown skyline at dusk"
+          class="w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
         <figcaption class="mt-4 font-utility text-xs uppercase tracking-widest text-mist">
           Cleveland · Northeast Ohio
         </figcaption>

@@ -8,6 +8,8 @@ interface Props {
 
 const { title, description, path } = Astro.props;
 const canonical = new URL(path, Astro.site);
+const markdownPath = path.replace(/\/$/, '') || '/index';
+const markdownVersion = new URL(`${markdownPath}.md`, Astro.site);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -45,6 +47,7 @@ const jsonLd = {
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+<link rel="alternate" type="text/markdown" href={markdownVersion} />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content={title} />

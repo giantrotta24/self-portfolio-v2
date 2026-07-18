@@ -30,3 +30,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Cross-Origin-Opener-Policy = "same-origin"
+
+# Markdown page versions (generate-markdown-pages.mjs) — serve with the
+# correct MIME type instead of Netlify's default octet-stream for .md.
+[[headers]]
+  for = "/*.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"

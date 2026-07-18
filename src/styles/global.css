@@ -59,3 +59,74 @@ html {
     conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 22px 51%
       repeat-x;
 }
+
+/* Blog post body — .prose-custom had no rules at all, so anything beyond
+   plain paragraphs (tables especially) fell back to dense browser defaults. */
+.prose-custom h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.prose-custom a {
+  color: var(--color-steel);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-custom a:hover {
+  color: var(--color-flare);
+}
+
+.prose-custom strong {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.prose-custom table {
+  width: 100%;
+  margin: 1.75rem 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.prose-custom th,
+.prose-custom td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose-custom th:first-child,
+.prose-custom td:first-child {
+  padding-left: 0;
+}
+
+.prose-custom th:last-child,
+.prose-custom td:last-child {
+  padding-right: 0;
+}
+
+.prose-custom thead th {
+  font-family: var(--font-utility);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-mist);
+  border-bottom: 2px solid var(--color-ink);
+}
+
+/* Small screens: let wide tables scroll instead of crushing columns */
+@media (max-width: 640px) {
+  .prose-custom table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

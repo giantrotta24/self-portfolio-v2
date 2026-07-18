@@ -74,8 +74,17 @@ import Base from '../layouts/Base.astro';
       <p class="mt-2 text-mist">
         Book a free 15-minute call — no prep needed.
       </p>
-      <!-- TODO: replace with Cal.com (or similar) booking embed as a lazy island -->
-      <p class="mt-4 font-utility text-sm text-flare-deep">Booking link coming soon.</p>
+      <a
+        id="book-call"
+        href="https://cal.com/gian-trotta-wysuez/15min"
+        target="_blank"
+        rel="noopener"
+        class="mt-4 inline-block bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+      >
+        Book a time →
+      </a>
     </div>
   </section>
+
+  <script src="/scripts/cal-booking.js" defer></script>
 </Base>

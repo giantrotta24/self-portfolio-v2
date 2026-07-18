@@ -49,17 +49,23 @@ if (window.trustedTypes && trustedTypes.createPolicy) {
     };
 })(window, 'https://app.cal.com/embed/embed.js', 'init');
 
-document.getElementById('book-call')?.addEventListener(
-  'click',
-  function (e) {
-    e.preventDefault();
-    Cal('init', { origin: 'https://cal.com' });
-    Cal('ui', {
-      styles: { branding: { brandColor: '#e8531f' } },
-      hideEventTypeDetails: false,
-      layout: 'month_view',
-    });
-    Cal('modal', { calLink: 'gian-trotta-wysuez/15min' });
-  },
-  { once: true }
-);
+// No {once: true} here: the modal open is async (embed.js has to load and
+// render), so a user who doesn't see anything happen right away will click
+// again before it finishes. If the listener had already detached, that
+// second click would fall through to the plain href/target=_blank link
+// instead of the embed — leaving the first click's modal (iframe + a
+// scroll-locked body) stranded mid-open in the tab being navigated away
+// from, which is what produced the mobile stuck-page bug on back-navigation.
+document.getElementById('book-call')?.addEventListener('click', function (e) {
+  e.preventDefault();
+  Cal('init', { origin: 'https://cal.com' });
+  Cal('ui', {
+    cssVarsPerTheme: {
+      light: { 'cal-brand': '#e8531f' },
+      dark: { 'cal-brand': '#e8531f' },
+    },
+    hideEventTypeDetails: false,
+    layout: 'month_view',
+  });
+  Cal('modal', { calLink: 'gian-trotta-wysuez/15min' });
+});

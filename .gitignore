@@ -13,3 +13,6 @@ npm-debug.log*
 .DS_Store
 
 .worktrees/
+
+# Claude Code local-only config (machine-specific permissions/paths)
+.claude/settings.local.json

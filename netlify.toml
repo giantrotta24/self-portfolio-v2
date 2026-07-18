@@ -1,3 +1,26 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Security headers. Lighthouse's Best Practices "trust & safety" audits
+# (csp-xss, has-hsts, origin-isolation, clickjacking-mitigation,
+# trusted-types-xss) flag these as missing — they're weight-0 in the
+# score so they don't move the number, but the gaps are real in
+# production, not just on the dev server.
+#
+# script-src's hash covers the one inline script Astro emits (the
+# mobile-nav Escape-key handler in Header.astro) — it's byte-identical
+# on every page. If a future dependency bump changes the minified
+# output, this hash will need regenerating: build the site, then
+#   node -e "const c=require('fs').readFileSync('dist/index.html','utf8').match(/<script type=\"module\">(.*?)<\/script>/s)[1]; console.log('sha256-'+require('crypto').createHash('sha256').update(c).digest('base64'))"
+# JSON-LD <script type="application/ld+json"> blocks are exempt from
+# script-src by spec (non-JS MIME type), so they need no entry here
+# despite differing per page.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-kOf4WRzWmFPXcQvmRYat0Nt1+40XXSbXeSPuO+Kl/C8='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; require-trusted-types-for 'script'"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cross-Origin-Opener-Policy = "same-origin"

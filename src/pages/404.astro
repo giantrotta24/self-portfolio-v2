@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+
+const links = [
+  { href: '/services/', label: 'Services' },
+  { href: '/case-studies/', label: 'Case studies' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<Base
+  title="Page not found — Gian Trotta"
+  description="This page didn't make it to the exam room. Head back home or find your way to services, case studies, the blog, or about."
+>
+  <section class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <div class="receipt-wrap mx-auto max-w-md">
+      <div class="receipt-paper px-8 py-10 sm:px-12">
+        <p class="font-utility text-sm uppercase tracking-widest text-flare">Diagnosis</p>
+        <h1 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+          404: Patient missing
+        </h1>
+        <p class="mt-4 text-lg text-mist">This page didn't make it to the exam room.</p>
+        <a
+          href="/"
+          class="mt-8 inline-block bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+        >
+          Back home
+        </a>
+
+        <nav aria-label="Suggested pages" class="mt-8 border-t border-line pt-6">
+          <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-mist">
+            {
+              links.map(({ href, label }) => (
+                <li>
+                  <a href={href} class="hover:text-ink hover:underline">
+                    {label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</Base>

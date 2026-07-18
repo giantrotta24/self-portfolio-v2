@@ -8,6 +8,11 @@
   --color-steel: #35586c;
   --color-flare: #e8531f;
   --color-flare-deep: #c03e10;
+  /* Accessible variant of the accent for small/normal-weight text on dark
+     (ink) backgrounds. --color-flare fails WCAG AA (4.5:1) at body-text
+     sizes on both porcelain/white (use --color-flare-deep there, 5.3:1)
+     and ink; --color-flare-bright passes 5.7:1 on ink. */
+  --color-flare-bright: #ff7a45;
   --color-mist: #5c6b73;
   --color-line: #d8d5cc;
 

@@ -6,30 +6,81 @@ import Base from '../layouts/Base.astro';
   title="About — Gian Trotta"
   description="Senior software engineer in Cleveland, Ohio. I've spent years making one very large website fast — now I do it for businesses whose owners I can shake hands with."
 >
-  <section class="mx-auto max-w-3xl px-6 py-16">
-    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">About</h1>
+  <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
+    <p class="font-utility text-xs uppercase tracking-widest text-flare">About</p>
+    <h1 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+      Gian Trotta
+    </h1>
 
-    <div class="mt-8 space-y-6 text-lg leading-relaxed">
-      <p>
-        I've spent years making one very large website fast — I'm a senior engineer at RVshare, an
-        RV rental marketplace that serves millions of visitors. Speed, search visibility, and
-        reliability are my day job.
-      </p>
-      <p>
-        Now I'm doing the same for businesses whose owners I can actually shake hands with. I'm
-        early in that journey — which means you get senior-level work, newcomer-level attention,
-        and a developer genuinely hungry to make your project a portfolio piece.
-      </p>
-      <p>
-        I live in Parma, Ohio with my wife and daughter. When your site loads instantly and shows
-        up when someone asks Google — or ChatGPT — for a business like yours, that's the whole
-        pitch.
-      </p>
+    <div class="mt-12 grid items-start gap-10 lg:grid-cols-12">
+      <figure class="lg:col-span-5">
+        <picture>
+          <source srcset="/about/self-portrait.webp" type="image/webp" />
+          <img
+            src="/about/self-portrait.jpg"
+            alt="Gian Trotta with his daughter"
+            width="900"
+            height="1200"
+            class="w-full max-w-md object-cover object-[center_20%] lg:max-w-none"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+        <figcaption class="mt-3 font-utility text-xs uppercase tracking-widest text-mist">
+          Parma, Ohio · with my daughter
+        </figcaption>
+      </figure>
+
+      <div class="space-y-6 text-lg leading-relaxed lg:col-span-7">
+        <p>
+          I've spent years making one very large website fast — I'm a senior engineer at RVshare, an
+          RV rental marketplace that serves millions of visitors. Speed, search visibility, and
+          reliability are my day job.
+        </p>
+        <p>
+          Now I'm doing the same for businesses whose owners I can actually shake hands with. I'm
+          early in that journey — which means you get senior-level work, newcomer-level attention,
+          and a developer genuinely hungry to make your project a portfolio piece.
+        </p>
+        <p>
+          I live in Parma with my wife and daughter. When your site loads instantly and shows up
+          when someone asks Google — or ChatGPT — for a business like yours, that's the whole pitch.
+        </p>
+      </div>
     </div>
+  </section>
 
+  <section class="border-y border-line bg-white" aria-label="Northeast Ohio">
+    <div class="mx-auto max-w-5xl px-6 py-12">
+      <figure>
+        <picture>
+          <source srcset="/about/cleveland.webp" type="image/webp" />
+          <img
+            src="/about/cleveland.jpg"
+            alt="Cleveland script sign overlooking the downtown skyline at dusk"
+            width="1600"
+            height="1066"
+            class="w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption class="mt-4 flex flex-wrap items-baseline justify-between gap-2">
+          <p class="font-utility text-xs uppercase tracking-widest text-mist">
+            Cleveland · Northeast Ohio
+          </p>
+          <p class="max-w-xl text-sm text-mist">
+            Local-first work for small businesses here — remote-friendly when it fits.
+          </p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 py-16">
     <a
       href="/contact/"
-      class="mt-10 inline-block rounded-md bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+      class="inline-block bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
     >
       Book a free 15-minute call
     </a>

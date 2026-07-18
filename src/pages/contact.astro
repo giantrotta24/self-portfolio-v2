@@ -74,8 +74,70 @@ import Base from '../layouts/Base.astro';
       <p class="mt-2 text-mist">
         Book a free 15-minute call — no prep needed.
       </p>
-      <!-- TODO: replace with Cal.com (or similar) booking embed as a lazy island -->
-      <p class="mt-4 font-utility text-sm text-flare">Booking link coming soon.</p>
+      <a
+        id="book-call"
+        href="https://cal.com/gian-trotta-wysuez/15min"
+        target="_blank"
+        rel="noopener"
+        class="mt-4 inline-block bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+      >
+        Book a time →
+      </a>
     </div>
   </section>
+
+  <!--
+    Cal.com booking, loaded lazily: this defines window.Cal but fetches nothing.
+    The real embed script only loads on click, so the button costs ~0 bytes until used.
+  -->
+  <script is:inline>
+    (function (C, A, L) {
+      let p = function (a, ar) {
+        a.q.push(ar);
+      };
+      let d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === 'string') {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ['initNamespace', namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
+  </script>
+  <script is:inline>
+    document.getElementById('book-call').addEventListener(
+      'click',
+      function (e) {
+        e.preventDefault();
+        Cal('init', { origin: 'https://cal.com' });
+        Cal('ui', {
+          styles: { branding: { brandColor: '#e8531f' } },
+          hideEventTypeDetails: false,
+          layout: 'month_view',
+        });
+        Cal('modal', { calLink: 'gian-trotta-wysuez/15min' });
+      },
+      { once: true }
+    );
+  </script>
 </Base>

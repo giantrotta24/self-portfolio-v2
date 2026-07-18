@@ -17,33 +17,19 @@ const current = Astro.url.pathname;
     <button
       id="nav-toggle"
       type="button"
-      class="group -mr-2 p-2 md:hidden"
+      class="-mr-2 p-2 md:hidden"
       aria-expanded="false"
       aria-controls="site-nav"
     >
       <span class="sr-only">Menu</span>
-      <svg
-        class="h-6 w-6 group-aria-expanded:hidden"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
+      <span
+        class="nav-icon relative block h-6 w-6"
         aria-hidden="true"
       >
-        <path d="M4 7h16M4 12h16M4 17h16"></path>
-      </svg>
-      <svg
-        class="hidden h-6 w-6 group-aria-expanded:block"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        aria-hidden="true"
-      >
-        <path d="M6 6l12 12M18 6L6 18"></path>
-      </svg>
+        <span class="nav-icon-bar absolute left-1 top-[5px] h-0.5 w-4 rounded-full bg-current"></span>
+        <span class="nav-icon-bar absolute left-1 top-[11px] h-0.5 w-4 rounded-full bg-current"></span>
+        <span class="nav-icon-bar absolute left-1 top-[17px] h-0.5 w-4 rounded-full bg-current"></span>
+      </span>
     </button>
 
     <nav
@@ -79,6 +65,34 @@ const current = Astro.url.pathname;
     </nav>
   </div>
 </header>
+
+<style>
+  .nav-icon-bar {
+    transform-origin: center;
+    transition:
+      transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms ease;
+  }
+
+  #nav-toggle[aria-expanded='true'] .nav-icon-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  #nav-toggle[aria-expanded='true'] .nav-icon-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  #nav-toggle[aria-expanded='true'] .nav-icon-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-icon-bar {
+      transition: none;
+    }
+  }
+</style>
 
 <script>
   const toggle = document.getElementById('nav-toggle');

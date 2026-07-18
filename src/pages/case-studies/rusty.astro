@@ -1,0 +1,260 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const metrics = [
+  { label: 'Platform fee', value: '$0', note: 'was $400/yr' },
+  { label: 'Google speed', value: '98', note: 'mobile score' },
+  { label: 'Page weight', value: '193 KB', note: 'mobile home' },
+  { label: 'Search setup', value: 'Live', note: 'sitemap + Console' },
+];
+---
+
+<Base
+  title="Case study: Rusty the Raccoon — Gian Trotta"
+  description="How a children's book author escaped a $400/yr Wix bill, got a fast site Google can actually read, and kept every activity download working."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
+    <p class="font-utility text-xs uppercase tracking-widest text-flare">Website Rescue · Case study</p>
+    <h1 class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+      Rusty the Raccoon
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-mist">
+      A children's book author was paying $400 a year for a site that told Google its name was
+      "My Site." We rebuilt it in a day — same content, zero platform fee, and pages that load before
+      you finish blinking.
+    </p>
+    <p class="mt-6">
+      <a
+        href="https://www.rustytheraccoon.com/"
+        class="font-semibold text-steel underline"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        See the live site →
+      </a>
+    </p>
+  </section>
+
+  <!-- Proof strip -->
+  <section class="border-y border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-10">
+      <p class="font-utility text-xs uppercase tracking-widest text-mist">At a glance</p>
+      <dl class="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        {
+          metrics.map(({ label, value, note }) => (
+            <div class="bg-white p-5">
+              <dt class="font-utility text-xs uppercase tracking-widest text-mist">{label}</dt>
+              <dd class="mt-2 font-utility text-2xl font-bold text-steel">{value}</dd>
+              <dd class="mt-1 font-utility text-xs text-mist">{note}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-4 max-w-3xl text-sm text-mist">
+        Speed scores measured 2026-07-17 on the live site. No before scores exist — the Wix site was
+        gone before we could run a comparison.
+      </p>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <p class="font-utility text-xs uppercase tracking-widest text-flare">The problem</p>
+    <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">Paying rent on a site Google ignored</h2>
+    <div class="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed text-mist">
+      <p>
+        Michelle Trotta wrote and published <em>Rusty the Raccoon is Scared of the Dark</em>, a
+        picture book for kids who are nervous about the dark. Her site had seven pages — book info,
+        author bio, free activity downloads, resource links, and videos. Nothing fancy. Just the
+        kind of site a small publisher needs.
+      </p>
+      <p>
+        The catch: it lived on Wix, and the annual bill was <strong class="text-ink">$400</strong>.
+        The renewal was due August 3, 2026. Cancel the plan and the whole site disappears August 22.
+      </p>
+      <p>
+        Worse, nobody had ever set up the basics for search. Every page title on the old site said
+        <strong class="text-ink">"My Site."</strong> Not the book name. Not the author. Just "My Site,"
+        on every single page. Google had almost nothing useful to work with.
+      </p>
+      <p>
+        Michelle didn't want to change her content — she wanted the same words, the same downloads,
+        the same look and feel. She just wanted to stop paying platform rent for a site that wasn't
+        pulling its weight.
+      </p>
+    </div>
+  </section>
+
+  <!-- What we did -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <p class="font-utility text-xs uppercase tracking-widest text-flare">What we did</p>
+      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">Rescue the content, then rebuild</h2>
+      <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <article class="border border-line bg-porcelain p-6">
+          <h3 class="font-display text-xl font-semibold">1. Archive everything first</h3>
+          <p class="mt-3 text-mist">
+            Before touching the builder or the DNS, we downloaded every page, all 24 images, and
+            all 11 activity PDFs. Once the content was safe on disk, the Wix deadline stopped being
+            a hostage situation.
+          </p>
+        </article>
+        <article class="border border-line bg-porcelain p-6">
+          <h3 class="font-display text-xl font-semibold">2. Rebuild by hand</h3>
+          <p class="mt-3 text-mist">
+            Seven pages rebuilt as a lightweight static site — no monthly platform, no bloated page
+            builder. Same copy, cleaner URLs, and real page titles that describe what's actually on
+            the page.
+          </p>
+        </article>
+        <article class="border border-line bg-porcelain p-6">
+          <h3 class="font-display text-xl font-semibold">3. Make Google understand the book</h3>
+          <p class="mt-3 text-mist">
+            Unique titles and descriptions on every page. A sitemap. Structured data so search engines
+            know this is a book by a real author with an Amazon link. Google Search Console registered
+            and the sitemap submitted — all on launch day.
+          </p>
+        </article>
+        <article class="border border-line bg-porcelain p-6">
+          <h3 class="font-display text-xl font-semibold">4. Keep the old links working</h3>
+          <p class="mt-3 text-mist">
+            Old Wix URLs still floating around on bookmarks and search results? Redirected. The
+            activity PDFs people had linked to on the old file server? They still download. Michelle
+            reviewed the preview and signed off before we touched the domain.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <p class="font-utility text-xs uppercase tracking-widest text-flare">Results</p>
+    <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">The numbers</h2>
+
+    <div class="mt-10 grid items-start gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <div class="space-y-8">
+          <article>
+            <h3 class="font-display text-xl font-semibold">$400/year → $0 hosting</h3>
+            <p class="mt-2 text-mist">
+              The Wix site plan was cancelled before the August renewal. Hosting is free. The only
+              recurring cost left is domain registration through Wix until the contract ends in 2027.
+            </p>
+          </article>
+          <article>
+            <h3 class="font-display text-xl font-semibold">"My Site" → real page titles</h3>
+            <p class="mt-2 text-mist">
+              The home page now opens with <em>Rusty the Raccoon is Scared of the Dark</em> — the
+              actual book name. Every page has its own title and description. That's table stakes,
+              but the old site never had it.
+            </p>
+          </article>
+          <article>
+            <h3 class="font-display text-xl font-semibold">Sub-second loads, tiny pages</h3>
+            <p class="mt-2 text-mist">
+              On a phone, the home page weighs about 193 KB and scores 98/100 on Google's speed test.
+              On desktop: 100/100, with the main content visible in under a third of a second. The
+              server responds in about 30 milliseconds.
+            </p>
+          </article>
+          <article>
+            <h3 class="font-display text-xl font-semibold">Registered with Google</h3>
+            <p class="mt-2 text-mist">
+              Search Console verified on launch day. Sitemap submitted. The site is set up to be
+              crawled and indexed — a step the old Wix site never took.
+            </p>
+          </article>
+        </div>
+
+        <blockquote class="mt-10 border-l-4 border-flare pl-6">
+          <p class="text-lg italic text-ink">
+            Michelle reviewed the preview before we flipped the domain. Her verdict: she loves it.
+          </p>
+        </blockquote>
+      </div>
+
+      <!-- Receipt-style scoreboard -->
+      <aside
+        class="receipt-wrap lg:col-span-5 lg:rotate-1 motion-reduce:rotate-0"
+        aria-label="Measured results from the live site"
+      >
+        <div class="receipt-paper px-7 py-9 font-utility">
+          <p class="text-xs uppercase tracking-widest text-mist">Site checkup · rustytheraccoon.com</p>
+          <p class="mt-1 text-xs text-mist">Measured 2026-07-17</p>
+          <dl class="mt-5 space-y-3 text-sm">
+            <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
+              <dt>Mobile speed score</dt>
+              <dd class="font-bold text-steel">98 / 100</dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
+              <dt>Desktop speed score</dt>
+              <dd class="font-bold text-steel">100 / 100</dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
+              <dt>Mobile page weight</dt>
+              <dd class="font-bold text-steel">193 KB</dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
+              <dt>Server response</dt>
+              <dd class="font-bold text-steel">30 ms</dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
+              <dt>Accessibility</dt>
+              <dd class="font-bold text-steel">100 / 100</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt>Monthly platform fee</dt>
+              <dd class="font-bold text-flare">$0</dd>
+            </div>
+          </dl>
+          <p class="mt-6 border-t border-dashed border-line pt-4 text-xs leading-relaxed text-mist">
+            Before scores unavailable — the Wix site was removed before we could benchmark it. Cost
+            savings and search setup are documented from the migration itself.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Timeline note -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-12">
+      <p class="font-utility text-xs uppercase tracking-widest text-mist">Timeline</p>
+      <p class="mt-3 max-w-3xl text-mist">
+        The whole project — scrape, rebuild, design review, search setup, DNS cutover, and Wix
+        cancellation — happened in one day: July 12, 2026. Michelle had a preview to approve before
+        anything went live on her domain.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <div class="border-2 border-dashed border-ink bg-white p-8 sm:p-10">
+      <p class="font-utility text-xs uppercase tracking-widest text-flare">Sound familiar?</p>
+      <h2 class="mt-3 font-display text-2xl font-bold sm:text-3xl">
+        Paying monthly for a slow site that Google barely knows exists?
+      </h2>
+      <p class="mt-4 max-w-2xl text-mist">
+        Start with a free 15-minute call or a fixed-price Site Checkup. You'll leave knowing what
+        your site needs — whether or not we work together.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          href="/contact/"
+          class="rounded-md bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
+        >
+          Book a free call
+        </a>
+        <a
+          href="/services/"
+          class="rounded-md border border-ink px-6 py-3 font-semibold hover:bg-ink hover:text-porcelain"
+        >
+          See services
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

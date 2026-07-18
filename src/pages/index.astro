@@ -5,19 +5,21 @@ import AvailabilityBadge from '../components/AvailabilityBadge.astro';
 const doors = [
   {
     name: 'New Website Build',
-    blurb: 'Starting from zero? Same result, built right the first time.',
+    blurb: 'Starting from zero, built right the first time.',
     meta: 'Fixed price',
+    icon: 'build',
   },
   {
     name: 'Site Checkup',
-    blurb:
-      'A fixed-price audit of your speed, Google visibility, and AI visibility — with a plain-English report.',
+    blurb: 'A fixed-price audit of speed and Google visibility, in plain English.',
     meta: 'Fixed price',
+    icon: 'checkup',
   },
   {
     name: 'Care Plan',
-    blurb: 'Monthly updates, monitoring, and small changes, so your site never rots again.',
+    blurb: 'Monthly updates and monitoring, so your site never rots again.',
     meta: 'Monthly retainer',
+    icon: 'care',
   },
 ];
 ---
@@ -108,13 +110,25 @@ const doors = [
           class="group flex flex-col justify-between bg-ink p-8 text-porcelain transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
         >
           <div>
-            <p class="font-utility text-xs uppercase tracking-widest text-flare">
+            <svg
+              class="h-9 w-9 text-flare"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M2.5 12h4l1.8-4.5L11 16l2.2-8 1.5 4.5h6.8" />
+            </svg>
+            <p class="mt-4 font-utility text-xs uppercase tracking-widest text-flare">
               Most rescues start here
             </p>
             <h3 class="mt-4 font-display text-3xl font-bold tracking-tight">Website Rescue</h3>
             <p class="mt-4 max-w-md text-porcelain/80">
-              Stuck on Wix or Squarespace, paying every month for a slow site? I rebuild it fast,
-              findable, and fee-free — and the subscription goes away for good.
+              Stuck on a slow Wix or Squarespace site? I rebuild it fast and fee-free —
+              subscription cancelled for good.
             </p>
             <dl class="mt-8 max-w-md space-y-3 font-utility text-sm">
               <div class="flex justify-between gap-4 border-b border-dotted border-porcelain/25 pb-3">
@@ -143,13 +157,40 @@ const doors = [
 
         <div class="flex flex-col gap-6">
           {
-            doors.map(({ name, blurb, meta }) => (
+            doors.map(({ name, blurb, meta, icon }) => (
               <a
                 href="/services/"
                 class="group flex flex-1 flex-col justify-between border border-line bg-porcelain p-6 transition-colors hover:border-ink"
               >
                 <div>
-                  <h3 class="font-display text-xl font-semibold">{name}</h3>
+                  <svg
+                    class="h-7 w-7 text-flare"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    {icon === 'build' && (
+                      <>
+                        <rect x="4.5" y="3" width="15" height="18" rx="1.5" />
+                        <path d="M9 12h6M12 9v6" />
+                      </>
+                    )}
+                    {icon === 'checkup' && (
+                      <>
+                        <circle cx="10.5" cy="10.5" r="6.5" />
+                        <path d="M15.3 15.3 20.5 20.5" />
+                        <path d="M7.3 10.5h1.3l1-2.2 1.3 4.4 1-2.2h1.3" />
+                      </>
+                    )}
+                    {icon === 'care' && (
+                      <path d="M12 19.5s-7-4.2-9-8.1C1.4 8 2.6 4.8 5.8 4.8c1.9 0 3.2 1.1 3.9 2.1.7-1 2-2.1 3.9-2.1 3.2 0 4.4 3.2 2.8 6.6-2 3.9-9 8.1-9 8.1z" />
+                    )}
+                  </svg>
+                  <h3 class="mt-3 font-display text-xl font-semibold">{name}</h3>
                   <p class="mt-2 text-mist">{blurb}</p>
                 </div>
                 <p class="mt-4 font-utility text-xs uppercase tracking-widest text-mist group-hover:text-ink">

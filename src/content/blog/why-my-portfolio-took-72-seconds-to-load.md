@@ -2,7 +2,7 @@
 title: 'How one image made my website take 72 seconds to load'
 description: "My old portfolio scored 65 on Google's speed test and took 72 seconds to show its main content on a phone. The culprit: a single 23.5 MB image. Here's what that means for your site."
 pubDate: 2026-07-17
-draft: true
+draft: false
 ---
 
 I get paid to keep a site fast for millions of people every day. Meanwhile, my own portfolio took

@@ -8,33 +8,41 @@ const links = [
 const current = Astro.url.pathname;
 ---
 
-<header class="relative border-b border-line">
+<header class="relative z-20 border-b border-line">
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-6 py-5">
     <a href="/" class="font-display text-lg font-bold tracking-tight">
       Gian Trotta<span class="text-flare">.</span>
     </a>
 
-    <button
+    <input
+      type="checkbox"
       id="nav-toggle"
-      type="button"
-      class="-mr-2 p-2 md:hidden"
-      aria-expanded="false"
+      class="peer sr-only"
       aria-controls="site-nav"
+    />
+
+    <label
+      for="nav-toggle"
+      class="nav-toggle-btn -mr-2 cursor-pointer p-2 md:hidden"
     >
       <span class="sr-only">Menu</span>
-      <span
-        class="nav-icon relative block h-6 w-6"
-        aria-hidden="true"
-      >
+      <span class="nav-icon relative block h-6 w-6" aria-hidden="true">
         <span class="nav-icon-bar absolute left-1 top-[5px] h-0.5 w-4 rounded-full bg-current"></span>
         <span class="nav-icon-bar absolute left-1 top-[11px] h-0.5 w-4 rounded-full bg-current"></span>
         <span class="nav-icon-bar absolute left-1 top-[17px] h-0.5 w-4 rounded-full bg-current"></span>
       </span>
-    </button>
+    </label>
+
+    <!-- Full-viewport dismiss target: clicking unchecks #nav-toggle via the label -->
+    <label
+      for="nav-toggle"
+      class="nav-dismiss fixed inset-0 z-10 hidden cursor-default max-md:peer-checked:block"
+      aria-hidden="true"
+    ></label>
 
     <nav
       id="site-nav"
-      class="absolute inset-x-0 top-full z-20 hidden border-b border-line bg-porcelain px-6 pb-6 shadow-lg md:static md:z-auto md:block md:border-0 md:bg-transparent md:p-0 md:shadow-none"
+      class="absolute inset-x-0 top-full z-20 hidden border-b border-line bg-porcelain px-6 pb-6 shadow-lg max-md:peer-checked:block md:static md:z-auto md:block md:border-0 md:bg-transparent md:p-0 md:shadow-none"
       aria-label="Main"
     >
       <ul
@@ -74,16 +82,16 @@ const current = Astro.url.pathname;
       opacity 200ms ease;
   }
 
-  #nav-toggle[aria-expanded='true'] .nav-icon-bar:nth-child(1) {
+  #nav-toggle:checked + .nav-toggle-btn .nav-icon-bar:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
 
-  #nav-toggle[aria-expanded='true'] .nav-icon-bar:nth-child(2) {
+  #nav-toggle:checked + .nav-toggle-btn .nav-icon-bar:nth-child(2) {
     opacity: 0;
     transform: scaleX(0);
   }
 
-  #nav-toggle[aria-expanded='true'] .nav-icon-bar:nth-child(3) {
+  #nav-toggle:checked + .nav-toggle-btn .nav-icon-bar:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
   }
 
@@ -95,21 +103,11 @@ const current = Astro.url.pathname;
 </style>
 
 <script>
-  const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('site-nav');
-
-  const setOpen = (open: boolean) => {
-    toggle?.setAttribute('aria-expanded', String(open));
-    nav?.classList.toggle('hidden', !open);
-  };
-
-  toggle?.addEventListener('click', () => {
-    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
-  });
+  const toggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
-      setOpen(false);
+    if (e.key === 'Escape' && toggle?.checked) {
+      toggle.checked = false;
       toggle.focus();
     }
   });

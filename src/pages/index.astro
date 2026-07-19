@@ -101,7 +101,9 @@ const doors = [
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-6xl px-6 py-20">
       <p class="font-utility text-xs uppercase tracking-widest text-mist">Services</p>
-      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">Four ways in</h2>
+      <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        Four ways in
+      </h2>
 
       <div class="mt-10 grid gap-6 lg:grid-cols-2">
         <!-- The flagship door gets the weight -->
@@ -160,7 +162,7 @@ const doors = [
             doors.map(({ name, blurb, meta, icon }) => (
               <a
                 href="/services/"
-                class="group flex flex-1 flex-col justify-between border border-line bg-porcelain p-6 transition-colors hover:border-ink"
+                class="group flex flex-1 flex-col justify-between border border-line bg-porcelain p-6 transition-all duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg motion-reduce:hover:translate-y-0"
               >
                 <div>
                   <svg
@@ -202,8 +204,8 @@ const doors = [
         </div>
       </div>
 
-      <a href="/services/" class="mt-10 inline-block font-semibold text-steel underline">
-        Details →
+      <a href="/services/" class="group mt-10 inline-block font-semibold text-steel underline">
+        Details <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
       </a>
     </div>
   </section>
@@ -211,7 +213,9 @@ const doors = [
   <!-- Proof strip -->
   <section class="mx-auto max-w-6xl px-6 py-20">
     <p class="font-utility text-xs uppercase tracking-widest text-mist">Case study</p>
-    <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">Recent rescue</h2>
+    <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      Recent rescue
+    </h2>
     <p class="mt-4 max-w-2xl text-mist">
       A children's book author was paying monthly for a slow Wix site. I rebuilt it: loads in under
       a second, found on Google, and the platform fee went to zero.
@@ -232,8 +236,9 @@ const doors = [
       </div>
     </dl>
 
-    <a href="/case-studies/rusty/" class="mt-8 inline-block font-semibold text-steel underline">
-      Read the case study →
+    <a href="/case-studies/rusty/" class="group mt-8 inline-block font-semibold text-steel underline">
+      Read the case study
+      <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
     </a>
   </section>
 
@@ -241,7 +246,7 @@ const doors = [
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-6xl px-6 py-16">
       <p class="font-utility text-xs uppercase tracking-widest text-mist">A little more context</p>
-      <h2 class="mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
+      <h2 class="section-heading mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
         Where I've been
       </h2>
 
@@ -254,7 +259,7 @@ const doors = [
             <li>
               <a
                 href="/case-studies/rusty/"
-                class="font-display text-lg font-semibold tracking-tight hover:text-flare"
+                class="inline-block font-display text-lg font-semibold tracking-tight transition-transform duration-150 hover:translate-x-1 hover:text-flare motion-reduce:hover:translate-x-0"
               >
                 Rusty the Raccoon
               </a>
@@ -262,7 +267,7 @@ const doors = [
             <li>
               <a
                 href="/case-studies/fresh-beginnings/"
-                class="font-display text-lg font-semibold tracking-tight hover:text-flare"
+                class="inline-block font-display text-lg font-semibold tracking-tight transition-transform duration-150 hover:translate-x-1 hover:text-flare motion-reduce:hover:translate-x-0"
               >
                 Fresh Beginnings Publishing
               </a>
@@ -278,7 +283,7 @@ const doors = [
             <li>
               <a
                 href="https://edhlab.gg"
-                class="font-display text-lg font-semibold tracking-tight hover:text-flare"
+                class="inline-block font-display text-lg font-semibold tracking-tight transition-transform duration-150 hover:translate-x-1 hover:text-flare motion-reduce:hover:translate-x-0"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -288,7 +293,7 @@ const doors = [
             <li>
               <a
                 href="https://clockwork9.com"
-                class="font-display text-lg font-semibold tracking-tight hover:text-flare"
+                class="inline-block font-display text-lg font-semibold tracking-tight transition-transform duration-150 hover:translate-x-1 hover:text-flare motion-reduce:hover:translate-x-0"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -304,7 +309,7 @@ const doors = [
             <li>
               <a
                 href="https://rvshare.com"
-                class="font-display text-lg font-semibold tracking-tight hover:text-flare"
+                class="inline-block font-display text-lg font-semibold tracking-tight transition-transform duration-150 hover:translate-x-1 hover:text-flare motion-reduce:hover:translate-x-0"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -337,5 +342,13 @@ const doors = [
       border-bottom-color: var(--color-flare);
       animation: none;
     }
+  }
+
+  /* Small recurring signature: every section heading gets the same short
+     orange rule underneath, tying the sections together visually. */
+  .section-heading {
+    display: inline-block;
+    padding-bottom: 0.15em;
+    border-bottom: 4px solid var(--color-flare);
   }
 </style>

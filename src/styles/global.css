@@ -96,3 +96,61 @@ html {
   padding-bottom: 0.15em;
   border-bottom: 4px solid var(--color-flare);
 }
+
+/* Small uppercase label used above headings throughout the site. */
+.eyebrow {
+  font-family: var(--font-utility);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mist);
+}
+
+.eyebrow-accent {
+  color: var(--color-flare-deep);
+}
+
+/* Shared button treatments — homepage hero primary/secondary CTAs. */
+.btn-primary {
+  background-color: var(--color-flare-deep);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: var(--color-porcelain);
+  transition: transform 150ms;
+}
+
+.btn-primary:hover {
+  transform: translateY(-0.125rem);
+  background-color: var(--color-flare);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-ink);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: transform 150ms;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-0.125rem);
+  background-color: var(--color-ink);
+  color: var(--color-porcelain);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-secondary:hover {
+    transform: translateY(0);
+  }
+}

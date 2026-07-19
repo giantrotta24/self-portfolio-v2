@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import StatGrid from '../../components/StatGrid.astro';
 
 const metrics = [
   { label: 'Platform fee', value: '$0', note: 'was $400/yr' },
@@ -15,7 +16,7 @@ const metrics = [
 >
   <!-- Hero -->
   <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
-    <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Website Rescue · Case study</p>
+    <p class="eyebrow eyebrow-accent">Website Rescue · Case study</p>
     <h1 class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
       Rusty the Raccoon
     </h1>
@@ -39,18 +40,10 @@ const metrics = [
   <!-- Proof strip -->
   <section class="border-y border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-10">
-      <p class="font-utility text-xs uppercase tracking-widest text-mist">At a glance · before → after</p>
-      <dl class="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-        {
-          metrics.map(({ label, value, note }) => (
-            <div class="bg-white p-5">
-              <dt class="font-utility text-xs uppercase tracking-widest text-mist">{label}</dt>
-              <dd class="mt-2 font-utility text-xl font-bold text-steel sm:text-2xl">{value}</dd>
-              <dd class="mt-1 font-utility text-xs text-mist">{note}</dd>
-            </div>
-          ))
-        }
-      </dl>
+      <p class="eyebrow">At a glance · before → after</p>
+      <div class="mt-6">
+        <StatGrid stats={metrics} cols={4} noteClass="mt-1 font-utility text-xs" />
+      </div>
       <p class="mt-4 max-w-3xl text-sm text-mist">
         Before measured 2026-07-17 against the still-live Wix copy at michelletrotta20.wixsite.com/my-site.
         After measured the same day on rustytheraccoon.com.
@@ -60,7 +53,7 @@ const metrics = [
 
   <!-- Problem -->
   <section class="mx-auto max-w-5xl px-6 py-16">
-    <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">The problem</p>
+    <p class="eyebrow eyebrow-accent">The problem</p>
     <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">Paying rent on a site Google ignored</h2>
     <div class="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed text-mist">
       <p>
@@ -89,7 +82,7 @@ const metrics = [
   <!-- What we did -->
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">What we did</p>
+      <p class="eyebrow eyebrow-accent">What we did</p>
       <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">Rescue the content, then rebuild</h2>
       <div class="mt-8 grid gap-8 lg:grid-cols-2">
         <article class="border border-line bg-porcelain p-6">
@@ -129,7 +122,7 @@ const metrics = [
 
   <!-- Results -->
   <section class="mx-auto max-w-5xl px-6 py-16">
-    <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Results</p>
+    <p class="eyebrow eyebrow-accent">Results</p>
     <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">The numbers</h2>
 
     <div class="mt-10 grid items-start gap-10 lg:grid-cols-12">
@@ -181,7 +174,7 @@ const metrics = [
         aria-label="Before and after measured results"
       >
         <div class="receipt-paper px-7 py-9 font-utility">
-          <p class="text-xs uppercase tracking-widest text-mist">Site checkup · before → after</p>
+          <p class="eyebrow">Site checkup · before → after</p>
           <p class="mt-1 text-xs text-mist">Measured 2026-07-17 · mobile</p>
           <dl class="mt-5 space-y-3 text-sm">
             <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
@@ -245,7 +238,7 @@ const metrics = [
   <!-- Timeline note -->
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-12">
-      <p class="font-utility text-xs uppercase tracking-widest text-mist">Timeline</p>
+      <p class="eyebrow">Timeline</p>
       <p class="mt-3 max-w-3xl text-mist">
         The whole project happened in one day: July 12, 2026. Scrape, rebuild, design review, search
         setup, DNS cutover, and Wix cancellation. Michelle had a preview to approve before anything
@@ -258,7 +251,7 @@ const metrics = [
   <!-- CTA -->
   <section class="mx-auto max-w-5xl px-6 py-16">
     <div class="border-2 border-dashed border-ink bg-white p-8 sm:p-10">
-      <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Sound familiar?</p>
+      <p class="eyebrow eyebrow-accent">Sound familiar?</p>
       <h2 class="mt-3 font-display text-2xl font-bold sm:text-3xl">
         Paying monthly for a slow site Google barely knows exists?
       </h2>
@@ -267,16 +260,10 @@ const metrics = [
         your site needs, whether or not we work together.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
-        <a
-          href="/contact/"
-          class="bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
-        >
+        <a href="/contact/" class="btn-primary">
           Book a free call
         </a>
-        <a
-          href="/services/"
-          class="border border-ink px-6 py-3 font-semibold hover:bg-ink hover:text-porcelain"
-        >
+        <a href="/services/" class="btn-secondary">
           See services
         </a>
       </div>

@@ -1,5 +1,29 @@
 ---
 import Base from '../../layouts/Base.astro';
+import StatGrid from '../../components/StatGrid.astro';
+
+const resultsStats = [
+  {
+    label: 'Search setup',
+    value: '0 → complete',
+    note: 'Sitemap, robots file, link previews, structured data, and AI-readable site summary added.',
+  },
+  {
+    label: 'Google Search Console',
+    value: 'Live',
+    note: 'Property verified and sitemap processed the day the new site shipped.',
+  },
+  {
+    label: 'Best-practices score',
+    value: '96 → 100',
+    note: 'Fixed a broken favicon request and cleaned up leftover placeholder pages.',
+  },
+  {
+    label: 'Mobile load time',
+    value: '0.9 s',
+    note: 'Still under a second on a phone. Page weight dropped from 28 KiB to 25 KiB.',
+  },
+];
 ---
 
 <Base
@@ -8,7 +32,7 @@ import Base from '../../layouts/Base.astro';
 >
   <!-- Hero -->
   <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
-    <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Case study · Site refresh</p>
+    <p class="eyebrow eyebrow-accent">Case study · Site refresh</p>
     <h1 class="mt-3 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
       Fresh Beginnings Publishing — already fast, made findable
     </h1>
@@ -36,7 +60,7 @@ import Base from '../../layouts/Base.astro';
     <div class="mx-auto max-w-5xl px-6 py-10">
       <div class="receipt-wrap mx-auto max-w-2xl">
         <div class="receipt-paper px-7 py-8 font-utility">
-          <p class="text-xs uppercase tracking-widest text-mist">Site checkup · before → after</p>
+          <p class="eyebrow">Site checkup · before → after</p>
           <dl class="mt-5 space-y-3 text-sm">
             <div class="flex justify-between gap-4 border-b border-dotted border-line pb-3">
               <dt>Search setup</dt>
@@ -74,7 +98,7 @@ import Base from '../../layouts/Base.astro';
 
   <!-- Problem -->
   <section class="mx-auto max-w-5xl px-6 py-16">
-    <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">The problem</p>
+    <p class="eyebrow eyebrow-accent">The problem</p>
     <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
       Perfect speed scores hid a bigger gap
     </h2>
@@ -102,7 +126,7 @@ import Base from '../../layouts/Base.astro';
   <!-- What we did -->
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">What I did</p>
+      <p class="eyebrow eyebrow-accent">What I did</p>
       <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
         Built the findability layer, then refreshed the look
       </h2>
@@ -146,7 +170,7 @@ import Base from '../../layouts/Base.astro';
 
       <!-- Before / after screenshots -->
       <figure class="mt-12 border border-line bg-porcelain p-4 sm:p-6">
-        <figcaption class="font-utility text-xs uppercase tracking-widest text-mist">
+        <figcaption class="eyebrow">
           Homepage · before and after
         </figcaption>
         <div class="mt-4 grid gap-4 sm:grid-cols-2">
@@ -181,7 +205,7 @@ import Base from '../../layouts/Base.astro';
 
   <!-- Results -->
   <section class="mx-auto max-w-5xl px-6 py-16">
-    <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Results</p>
+    <p class="eyebrow eyebrow-accent">Results</p>
     <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
       Measurable, not just nicer
     </h2>
@@ -190,36 +214,9 @@ import Base from '../../layouts/Base.astro';
       after on July 17. Speed was already fine going in. The wins here are findability and polish.
     </p>
 
-    <dl class="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-      <div class="bg-white p-5">
-        <dt class="font-utility text-xs uppercase tracking-widest text-mist">Search setup</dt>
-        <dd class="mt-2 font-utility text-xl font-bold text-flare">0 → complete</dd>
-        <dd class="mt-2 text-sm text-mist">
-          Sitemap, robots file, link previews, structured data, and AI-readable site summary added.
-        </dd>
-      </div>
-      <div class="bg-white p-5">
-        <dt class="font-utility text-xs uppercase tracking-widest text-mist">Google Search Console</dt>
-        <dd class="mt-2 font-utility text-xl font-bold text-steel">Live</dd>
-        <dd class="mt-2 text-sm text-mist">
-          Property verified and sitemap processed the day the new site shipped.
-        </dd>
-      </div>
-      <div class="bg-white p-5">
-        <dt class="font-utility text-xs uppercase tracking-widest text-mist">Best-practices score</dt>
-        <dd class="mt-2 font-utility text-xl font-bold text-steel">96 → 100</dd>
-        <dd class="mt-2 text-sm text-mist">
-          Fixed a broken favicon request and cleaned up leftover placeholder pages.
-        </dd>
-      </div>
-      <div class="bg-white p-5">
-        <dt class="font-utility text-xs uppercase tracking-widest text-mist">Mobile load time</dt>
-        <dd class="mt-2 font-utility text-xl font-bold text-steel">0.9 s</dd>
-        <dd class="mt-2 text-sm text-mist">
-          Still under a second on a phone. Page weight dropped from 28 KiB to 25 KiB.
-        </dd>
-      </div>
-    </dl>
+    <div class="mt-10">
+      <StatGrid stats={resultsStats} cols={4} valueClass="text-xl" />
+    </div>
 
     <div class="mt-10 overflow-x-auto border border-line bg-white">
       <table class="w-full min-w-[32rem] text-left text-sm">
@@ -272,7 +269,7 @@ import Base from '../../layouts/Base.astro';
   <!-- Fit + CTA -->
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Sound familiar?</p>
+      <p class="eyebrow eyebrow-accent">Sound familiar?</p>
       <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
         Your site might be fast and still invisible
       </h2>
@@ -289,13 +286,10 @@ import Base from '../../layouts/Base.astro';
         </p>
       </div>
       <div class="mt-10 flex flex-wrap gap-4">
-        <a
-          href="/contact/"
-          class="bg-flare-deep px-6 py-3 font-semibold text-porcelain hover:bg-flare"
-        >
+        <a href="/contact/" class="btn-primary">
           Book a free 15-minute call
         </a>
-        <a href="/services/" class="border border-ink px-6 py-3 font-semibold hover:bg-ink hover:text-porcelain">
+        <a href="/services/" class="btn-secondary">
           See services
         </a>
       </div>

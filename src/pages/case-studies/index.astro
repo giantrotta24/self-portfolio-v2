@@ -1,5 +1,22 @@
 ---
 import Base from '../../layouts/Base.astro';
+
+const caseStudies = [
+  {
+    href: '/case-studies/rusty/',
+    kicker: 'Website Rescue',
+    title: "Rusty the Raccoon — a children's book site, off Wix",
+    description:
+      'A children\'s book author was paying $400 a year for a Wix site that told Google its name was "My Site." Now it costs nothing to host, loads in under 2 seconds instead of over 6, and Google actually knows what it is.',
+  },
+  {
+    href: '/case-studies/fresh-beginnings/',
+    kicker: 'Site refresh',
+    title: 'Fresh Beginnings Publishing — already fast, made findable',
+    description:
+      "A publisher's site loaded fast, but search engines and AI assistants barely knew it existed. Now it shows up in Google, is verified with Google Search Console, and got a visual refresh too.",
+  },
+];
 ---
 
 <Base
@@ -12,36 +29,18 @@ import Base from '../../layouts/Base.astro';
       Before-and-after, with real numbers.
     </p>
 
-    <a
-      href="/case-studies/rusty/"
-      class="mt-12 block border border-line bg-white p-8 transition-colors hover:border-ink"
-    >
-      <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Website Rescue</p>
-      <h2 class="mt-2 font-display text-2xl font-bold">
-        Rusty the Raccoon — a children's book site, off Wix
-      </h2>
-      <p class="mt-3 max-w-3xl text-mist">
-        A children's book author was paying $400 a year for a Wix site that told Google its name
-        was "My Site." Now it costs nothing to host, loads in under 2 seconds instead of over 6,
-        and Google actually knows what it is.
-      </p>
-      <p class="mt-4 font-semibold text-steel">Read the case study →</p>
-    </a>
-
-    <a
-      href="/case-studies/fresh-beginnings/"
-      class="mt-6 block border border-line bg-white p-8 transition-colors hover:border-ink"
-    >
-      <p class="font-utility text-xs uppercase tracking-widest text-flare-deep">Site refresh</p>
-      <h2 class="mt-2 font-display text-2xl font-bold">
-        Fresh Beginnings Publishing — already fast, made findable
-      </h2>
-      <p class="mt-3 max-w-3xl text-mist">
-        A publisher's site loaded fast, but search engines and AI assistants barely knew it
-        existed. Now it shows up in Google, is verified with Google Search Console, and got a
-        visual refresh too.
-      </p>
-      <p class="mt-4 font-semibold text-steel">Read the case study →</p>
-    </a>
+    {
+      caseStudies.map(({ href, kicker, title, description }, i) => (
+        <a
+          href={href}
+          class={`${i === 0 ? 'mt-12' : 'mt-6'} block border border-line bg-white p-8 transition-colors hover:border-ink`}
+        >
+          <p class="eyebrow eyebrow-accent">{kicker}</p>
+          <h2 class="mt-2 font-display text-2xl font-bold">{title}</h2>
+          <p class="mt-3 max-w-3xl text-mist">{description}</p>
+          <p class="mt-4 font-semibold text-steel">Read the case study →</p>
+        </a>
+      ))
+    }
   </section>
 </Base>

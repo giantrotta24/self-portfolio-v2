@@ -1,10 +1,5 @@
 ---
-const links = [
-  { href: '/services/', label: 'Services' },
-  { href: '/case-studies/', label: 'Case studies' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/about/', label: 'About' },
-];
+import { navLinks as links } from '../data/nav-links';
 const current = Astro.url.pathname;
 ---
 
@@ -14,6 +9,11 @@ const current = Astro.url.pathname;
       Gian Trotta<span class="text-flare">.</span>
     </a>
 
+    <!--
+      This checkbox must remain a previous sibling of the dismiss label below
+      and of #site-nav — the peer-checked CSS selectors (here and in the
+      <style> block) depend on DOM order. Do not reorder these elements.
+    -->
     <input
       type="checkbox"
       id="nav-toggle"

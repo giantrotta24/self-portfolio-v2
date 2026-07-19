@@ -64,3 +64,35 @@ html {
     conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 22px 51%
       repeat-x;
 }
+
+/* Homepage hero: single orange underline under the closing phrase, drawn in
+   on load. border-bottom (not a background/transform trick) so it still
+   renders correctly per line if the phrase ever wraps across two lines.
+   Lives here (not a page-level <style>) so it lands in the bundled external
+   stylesheet — Astro inlines page-level <style> blocks directly into the
+   HTML, which the CSP's `style-src 'self'` (no 'unsafe-inline') blocks. */
+.hero-underline {
+  border-bottom: 6px solid transparent;
+  animation: hero-underline-draw 500ms 300ms ease-out forwards;
+}
+
+@keyframes hero-underline-draw {
+  to {
+    border-bottom-color: var(--color-flare);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-underline {
+    border-bottom-color: var(--color-flare);
+    animation: none;
+  }
+}
+
+/* Small recurring signature: every section heading gets the same short
+   orange rule underneath, tying the sections together visually. */
+.section-heading {
+  display: inline-block;
+  padding-bottom: 0.15em;
+  border-bottom: 4px solid var(--color-flare);
+}

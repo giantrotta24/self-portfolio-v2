@@ -8,6 +8,42 @@ const metrics = [
   { label: 'Page weight', value: '1.7 MB → 193 KB', note: 'mobile home' },
   { label: 'Largest paint', value: '6.5 s → 1.8 s', note: 'mobile LCP' },
 ];
+
+const pageTour = [
+  {
+    slug: 'home',
+    label: 'Home',
+    beforeAlt:
+      'The old rustytheraccoon.com homepage on Wix — generic template nav, no real page title, Amazon buy button',
+    afterAlt:
+      'The rebuilt rustytheraccoon.com homepage — cleaner layout, full nav, and the same book cover front and center',
+  },
+  {
+    slug: 'about',
+    label: 'About',
+    beforeAlt:
+      'The old About page — low-contrast script heading on teal, centered body text',
+    afterAlt: 'The rebuilt About page — clear heading, left-aligned copy, and matching illustration',
+  },
+  {
+    slug: 'activities',
+    label: 'Activities',
+    beforeAlt: 'The old Activities page — hard-to-read drop-shadow heading over a sage background',
+    afterAlt: 'The rebuilt Activities page — legible heading and a clean grid of downloadable activities',
+  },
+  {
+    slug: 'resources',
+    label: 'Resources',
+    beforeAlt: 'The old Resources page — pale script heading, dense teal link boxes',
+    afterAlt: 'The rebuilt Resources page — plain heading and airy cards with a clear "Visit site" action',
+  },
+  {
+    slug: 'videos',
+    label: 'Videos',
+    beforeAlt: 'The old Videos page — a dark grid of video thumbnails with tight captions',
+    afterAlt: 'The rebuilt Videos page — one embedded video at a time with room to breathe',
+  },
+];
 ---
 
 <Base
@@ -117,6 +153,55 @@ const metrics = [
             off before I touched the domain.
           </p>
         </article>
+      </div>
+
+      <!-- Before / after screenshots: the whole site, not just the homepage -->
+      <div class="mt-12">
+        <p class="eyebrow">Site tour · before and after</p>
+        <p class="mt-2 max-w-2xl text-mist">
+          Every page got the same treatment, not just the front door.
+        </p>
+        <div class="mt-6 space-y-10">
+          {
+            pageTour.map(({ slug, label, beforeAlt, afterAlt }) => (
+              <figure class="border border-line bg-porcelain p-4 sm:p-6">
+                <figcaption class="eyebrow eyebrow-accent">{label}</figcaption>
+                <div class="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <p class="mb-2 font-utility text-sm font-bold text-ink">Before</p>
+                    <picture>
+                      <source srcset={`/case-studies/rusty/${slug}-before.webp`} type="image/webp" />
+                      <img
+                        src={`/case-studies/rusty/${slug}-before.png`}
+                        alt={beforeAlt}
+                        width="1440"
+                        height="900"
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full border border-line"
+                      />
+                    </picture>
+                  </div>
+                  <div>
+                    <p class="mb-2 font-utility text-sm font-bold text-ink">After</p>
+                    <picture>
+                      <source srcset={`/case-studies/rusty/${slug}-after.webp`} type="image/webp" />
+                      <img
+                        src={`/case-studies/rusty/${slug}-after.png`}
+                        alt={afterAlt}
+                        width="1440"
+                        height="900"
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full border border-line"
+                      />
+                    </picture>
+                  </div>
+                </div>
+              </figure>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>

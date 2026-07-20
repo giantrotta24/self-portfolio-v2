@@ -48,7 +48,7 @@ const services = [
     <div class="mt-12 space-y-8">
       {
         services.map(({ name, tagline, description, engagement }) => (
-          <article class="border border-line bg-white p-8">
+          <article class="border border-line bg-white p-8 transition-all duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg motion-reduce:hover:translate-y-0">
             <div class="flex flex-wrap items-baseline justify-between gap-2">
               <h2 class="font-display text-2xl font-bold">{name}</h2>
               <p class="font-utility text-sm text-flare-deep">{engagement}</p>
@@ -61,7 +61,7 @@ const services = [
     </div>
 
     <div class="mt-12">
-      <h2 class="font-display text-2xl font-bold">Where I work</h2>
+      <h2 class="section-heading font-display text-2xl font-bold">Where I work</h2>
       <p class="mt-2 max-w-2xl text-mist">
         Based in Cleveland, Ohio, working with small businesses across Northeast Ohio — Cleveland,
         Akron, Parma, Lakewood, and the surrounding suburbs. Remote-friendly for the build itself;
@@ -70,7 +70,7 @@ const services = [
     </div>
 
     <div class="mt-12 border-2 border-dashed border-ink bg-white p-8">
-      <h2 class="font-display text-2xl font-bold">Not sure which fits?</h2>
+      <h2 class="section-heading font-display text-2xl font-bold">Not sure which fits?</h2>
       <p class="mt-2 max-w-2xl text-mist">
         Start with a free 15-minute call. You'll leave knowing what your site needs, whether or not
         we work together.

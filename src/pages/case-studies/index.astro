@@ -33,12 +33,15 @@ const caseStudies = [
       caseStudies.map(({ href, kicker, title, description }, i) => (
         <a
           href={href}
-          class={`${i === 0 ? 'mt-12' : 'mt-6'} block border border-line bg-white p-8 transition-colors hover:border-ink`}
+          class={`group ${i === 0 ? 'mt-12' : 'mt-6'} block border border-line bg-white p-8 transition-all duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg motion-reduce:hover:translate-y-0`}
         >
           <p class="eyebrow eyebrow-accent">{kicker}</p>
           <h2 class="mt-2 font-display text-2xl font-bold">{title}</h2>
           <p class="mt-3 max-w-3xl text-mist">{description}</p>
-          <p class="mt-4 font-semibold text-steel">Read the case study →</p>
+          <p class="mt-4 font-semibold text-steel">
+            Read the case study
+            <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+          </p>
         </a>
       ))
     }

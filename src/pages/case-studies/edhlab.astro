@@ -52,7 +52,7 @@ const steps = [
   {
     n: 3,
     name: 'Write the brief',
-    me: 'Read it. The brief is the highest-leverage artifact in the system.',
+    me: 'Read it. The brief is the most important artifact in the system.',
     ai: 'Turns the research into written instructions for the builder: what to change, what\'s out of bounds, what "done" means, and what has already been ruled out, with dates.',
     why: 'Every file the brief mentions is checked to exist before the brief is used. An instruction pointing at a file that isn\'t there sends the builder on a quiet detour.',
     note: 'A bad brief is paid for by everything downstream of it. The "already ruled out" list is dated on purpose: a stale claim the builder is told not to question becomes its blind spot.',
@@ -254,10 +254,10 @@ const loopNodes = [
         <path d="M670,358 C655,312 600,274 532,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
 
         <!-- legend -->
-        <line x1="270" y1="440" x2="300" y2="440" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></line>
-        <text x="308" y="444" font-size="11" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">work out, with written instructions</text>
-        <line x1="540" y1="440" x2="570" y2="440" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></line>
-        <text x="578" y="444" font-size="11" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">results &amp; lessons back</text>
+        <line x1="180" y1="440" x2="210" y2="440" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></line>
+        <text x="218" y="444" font-size="11" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">work out, with written instructions</text>
+        <line x1="495" y1="440" x2="525" y2="440" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></line>
+        <text x="533" y="444" font-size="11" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">results &amp; lessons back</text>
       </svg>
       <figcaption class="mt-4 font-utility text-sm text-mist">
         Work goes out with written instructions; results and lessons come back and get filed. The
@@ -405,8 +405,8 @@ const loopNodes = [
         </svg>
         <figcaption class="mt-4 font-utility text-sm text-mist">
           Two human checkpoints sit inside the loop: agreeing on the problem (1) before any work
-          starts, and the pull request (7) before anything ships. Everything between them is
-          delegated. The checkpoints are where judgment stays.
+          starts, and the pull request (7) before anything ships. I delegate everything
+          between them. The checkpoints are where judgment stays.
         </figcaption>
       </figure>
     </div>
@@ -475,7 +475,7 @@ const loopNodes = [
                   The reviewer was right about the math and wrong about the screen.
                 </h4>
                 <p class="mt-2 text-sm text-mist">
-                  One reviewer flagged a spacing change: by its arithmetic, the change ate the
+                  One reviewer flagged a spacing change. By its arithmetic, the change ate the
                   entire safety margin around an element, leaving zero clearance. The numbers
                   checked out. The finding still died, because the attack pass asked the question
                   the reviewer hadn't: <strong class="text-ink">what does the layout actually do

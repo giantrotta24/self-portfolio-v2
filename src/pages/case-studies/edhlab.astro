@@ -1,0 +1,630 @@
+---
+import Base from '../../layouts/Base.astro';
+import StatGrid from '../../components/StatGrid.astro';
+
+const metrics = [
+  { label: 'Issues run', value: '40+', note: 'bug report to reviewed fix, since mid-August 2026' },
+  { label: 'Fixes merged & live', value: '20+', note: 'reviewed, approved, in the product now' },
+  { label: 'Correct no-ships', value: '6', note: 'the right answer was to ship nothing' },
+];
+
+const foundations = [
+  {
+    k: 'Rules',
+    title: 'Standing instructions',
+    body: 'Conventions that always apply: how work gets briefed, what gets written down, what an agent may never do. They hold without being repeated each time.',
+  },
+  {
+    k: 'Recipes',
+    title: 'Workflows, written once',
+    body: 'The whole loop below is a named, step-by-step recipe. Run it on a one-line fix or a gnarly bug; the steps and the safety checks are the same either way.',
+  },
+  {
+    k: 'Memory',
+    title: 'Write everything down',
+    body: 'Wins, decisions, and especially dead ends. "We checked this and it wasn\'t the cause" is the cheapest note to write and the most expensive one to skip.',
+  },
+  {
+    k: 'Gates',
+    title: 'Two human checkpoints',
+    body: 'Nothing starts without me agreeing on the problem, and nothing goes out for review without me approving it. Everything in between is delegated.',
+  },
+];
+
+const steps = [
+  {
+    n: 1,
+    name: 'Agree on the problem',
+    gate: 'Checkpoint 1',
+    me: 'Answer five questions before anything runs: why this issue, what\'s in scope, do we already know the cause, one fix or several, does it need a live playtest.',
+    ai: 'Gathers the issue, the screenshots, and the related history, and puts the questions in front of me.',
+    why: 'The most expensive bug in AI-assisted work is a perfect fix for the wrong problem. Five minutes here is the cheapest insurance in the whole loop.',
+    note: 'This step exists because skipping it was tried. Early fixes were technically correct and still wrong: the wrong scope, or a "bug" the client didn\'t consider a bug. Nothing downstream can recover from a bad answer here.',
+  },
+  {
+    n: 2,
+    name: 'Find the real cause',
+    me: 'Read the findings; decide whether they hold up.',
+    ai: 'A research agent traces the bug to its root cause in the code, with evidence, before anyone writes a fix.',
+    why: 'This step is allowed to end the loop. One issue turned out to be already fixed by the client. Another needed proof it wasn\'t a bug, not a patch. Both times the loop stopped, on purpose.',
+    note: '"Don\'t ship" as a success state is the most counterintuitive part of the pipeline and the part I trust most. Six issues have ended this way. Each one is a fix that didn\'t get made to code that didn\'t need it.',
+  },
+  {
+    n: 3,
+    name: 'Write the brief',
+    me: 'Read it. The brief is the most important artifact in the system.',
+    ai: 'Turns the research into written instructions for the builder: what to change, what\'s out of bounds, what "done" means, and what has already been ruled out, with dates.',
+    why: 'Every file the brief mentions is checked to exist before the brief is used. An instruction pointing at a file that isn\'t there sends the builder on a quiet detour.',
+    note: 'A bad brief is paid for by everything downstream of it. The "already ruled out" list is dated on purpose: a stale claim the builder is told not to question becomes its blind spot.',
+  },
+  {
+    n: 4,
+    name: 'Build it, test-first',
+    me: 'Steer when asked; otherwise stay out of the way.',
+    ai: 'Writes a test that fails because of the bug, then the fix that makes it pass. If the game\'s core logic changes, a mirrored check runs against the mobile app so web and mobile can\'t drift apart.',
+    why: 'A test that failed first is proof the test can fail. A test written after the fix might be agreeing with it.',
+    note: 'The branch gets pushed at this point, but no pull request opens. That\'s deliberate: nothing looks "done" before it has survived the proof and review steps.',
+  },
+  {
+    n: 5,
+    name: 'Prove it on screen',
+    me: 'Look at the actual before and after with my own eyes.',
+    ai: 'Runs the app twice, once without the fix and once with it, through the same flow, and captures both.',
+    why: '"A render test proves an element exists, not that it lands anywhere sensible." On one issue, three green tests and a clean build missed three visual problems: buttons covering the header, dead space, a wrong font size. The screenshots caught all three.',
+    note: 'This lesson cost a real afternoon and is now a permanent step. Passing tests are necessary, never sufficient. If the last change landed after the screenshot, the screenshot is stale and gets retaken.',
+  },
+  {
+    n: 6,
+    name: 'Review it hard',
+    me: 'Decide anything about scope or how the product should behave. Those never get auto-applied.',
+    ai: 'Five reviewers look at the change independently, each with a different specialty. Then every finding is attacked: a second pass tries to prove each one wrong before it reaches me.',
+    why: 'Only fixes that are mechanically unambiguous, change nothing on screen, and are trivially reversible get applied automatically. Everything else comes to a human.',
+    note: 'The five specialties come from this project\'s own history: what the issue actually asked for, this codebase\'s known traps, its conventions, test quality, and a generalist pass. The review hunts for the exact failures that already happened once.',
+    exhibit: true,
+  },
+  {
+    n: 7,
+    name: 'Open the pull request',
+    gate: 'Checkpoint 2',
+    me: 'Approve the summary, open the request. The AI never merges. Ever.',
+    ai: 'Assembles the change, the proof, and the review results into one reviewable package, written in my voice, not a robot\'s.',
+    why: 'Releasing to real users is a human decision by design, not a limitation. The client merges when the client is ready.',
+    note: 'An agent reporting "done" is a claim, not a fact, and definitely not my approval. The pipeline treats its own output with the same suspicion it applies to everything else.',
+  },
+  {
+    n: 8,
+    name: 'Write it down',
+    tag: '↻ back to 1',
+    me: 'Confirm the outcome.',
+    ai: 'Files the result, the evidence, and any new lesson back into the wiki, including what was ruled out and why.',
+    why: 'This is why the loop gets better instead of just faster. The visual-proof lesson, the review specialties, the known traps: all of them are step-8 notes from earlier issues.',
+    note: 'The loop only compounds if this step actually happens. Every guardrail on this page started life as a note written here after something went wrong.',
+  },
+];
+
+const rails = [
+  {
+    g: '01',
+    title: 'Two human checkpoints',
+    body: 'Agree on the problem before anything runs; approve the result before it goes out. Everything between is delegated. Judgment stays at the edges.',
+  },
+  {
+    g: '02',
+    title: '"No fix" is a success',
+    body: 'Six issues ended with no code shipped, correctly. A pipeline that can only say yes is a liability.',
+  },
+  {
+    g: '03',
+    title: 'Green tests aren\'t proof',
+    body: 'Tests prove the logic; only looking at the screen proves the experience. Every fix carries a before-and-after from the running app.',
+  },
+  {
+    g: '04',
+    title: 'Attack every finding',
+    body: 'Review findings are guilty until proven innocent. Each one survives a deliberate attempt to disprove it, or it dies before it reaches me.',
+  },
+  {
+    g: '05',
+    title: 'Write down the dead ends',
+    body: '"We checked, it\'s not that" saves the next investigation from paying for the same conclusion twice. Dated, with evidence.',
+  },
+  {
+    g: '06',
+    title: 'The AI never releases',
+    body: 'It can research, build, prove, and review. It cannot merge, and it cannot decide that users should get the change. Those are mine and the client\'s.',
+  },
+];
+
+const misses = [
+  {
+    h: 'Miss → rule · shipping without the review gate',
+    body: 'Before the review step existed, three changes went out with problems no test would catch: wrong scope, a "fix" for a non-bug, sloppy formatting in the write-up. None failed on code quality. The five-reviewer gate was built directly from those three misses.',
+  },
+  {
+    h: 'Miss → rule · trusting green tests',
+    body: 'Three passing tests and a clean build missed buttons covering the header, dead space, and a wrong font size. On-screen proof became a mandatory step, not a nice-to-have.',
+  },
+  {
+    h: 'Miss → rule · the silent side effect',
+    body: 'Rebasing one change on top of another silently broke a neighboring component; only the type checker caught it. Stacked changes now get checked at every layer, not just the top.',
+  },
+];
+
+const loopNodes = [
+  { n: '01', x: 420, y: 115, gate: true, label: 'Agree on the problem', lx: 420, ly: 78, anchor: 'middle' },
+  { n: '02', x: 558, y: 172, label: 'Find the real cause', lx: 596, ly: 178, anchor: 'start' },
+  { n: '03', x: 615, y: 310, label: 'Write the brief', lx: 653, ly: 316, anchor: 'start' },
+  { n: '04', x: 558, y: 448, label: 'Build it, test-first', lx: 596, ly: 454, anchor: 'start' },
+  { n: '05', x: 420, y: 505, label: 'Prove it on screen', lx: 420, ly: 568, anchor: 'middle' },
+  { n: '06', x: 282, y: 448, label: 'Review it hard', lx: 244, ly: 454, anchor: 'end' },
+  { n: '07', x: 225, y: 310, gate: true, label: 'Open the pull request', lx: 187, ly: 316, anchor: 'end' },
+  { n: '08', x: 282, y: 172, label: 'Write it down', lx: 244, ly: 178, anchor: 'end' },
+];
+---
+
+<Base
+  title="Case study: EDHLAB, how I ship with AI | Gian Trotta"
+  description="The AI development pipeline behind 20+ merged fixes on a live multiplayer game platform: one loop, two human checkpoints, and guardrails built from real misses."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
+    <p class="eyebrow eyebrow-accent">Client work · EDHLAB</p>
+    <h1 class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+      How I ship with AI
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-mist">
+      This is the process behind 20+ merged fixes on a live multiplayer game platform. AI does
+      most of the typing and none of the deciding. Every number below comes from real work on a
+      real product with real users.
+    </p>
+  </section>
+
+  <!-- Stats strip -->
+  <section class="border-y border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-10">
+      <p class="eyebrow">The scoreboard · since mid-August 2026</p>
+      <div class="mt-6">
+        <StatGrid stats={metrics} cols={3} noteClass="mt-1 font-utility text-xs" />
+      </div>
+    </div>
+  </section>
+
+  <!-- The setup -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <p class="eyebrow eyebrow-accent">The setup · the ground it runs on</p>
+    <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight">
+      A notes system is the control room
+    </h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
+      The pipeline doesn't live in the code. It lives in my personal wiki, where every issue gets
+      a plan, work is sent out to AI agents with written instructions, and every result comes back
+      and gets written down. The code changes elsewhere; the memory stays here.
+    </p>
+
+    <figure class="mt-8 border border-line bg-white p-4 sm:p-6">
+      <svg
+        viewBox="0 0 820 470"
+        class="h-auto w-full"
+        role="img"
+        aria-label="A wiki hub at the center dispatches work outward to AI agents and three code repositories, and captures results and lessons back in."
+      >
+        <defs>
+          <marker id="ah-steel" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#35586c"></path>
+          </marker>
+          <marker id="ah-flare" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c03e10"></path>
+          </marker>
+        </defs>
+
+        <!-- hub -->
+        <rect x="290" y="178" width="240" height="114" fill="#f6f5f1" stroke="#35586c" stroke-width="2"></rect>
+        <text x="410" y="212" text-anchor="middle" font-size="15" font-weight="700" fill="#1e2a32" font-family="ui-monospace, Menlo, monospace">MY WIKI</text>
+        <text x="410" y="234" text-anchor="middle" font-size="11.5" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">one plan per issue</text>
+        <text x="410" y="254" text-anchor="middle" font-size="11.5" fill="#35586c" font-weight="600" font-family="ui-monospace, Menlo, monospace">rules · recipes · lessons</text>
+        <text x="410" y="276" text-anchor="middle" font-size="10.5" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">holds the plan · sends work out</text>
+
+        <!-- nodes -->
+        <rect x="40" y="54" width="176" height="58" fill="#ffffff" stroke="#5c6b73" stroke-width="1.5"></rect>
+        <text x="128" y="80" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e2a32" font-family="ui-monospace, Menlo, monospace">AI agents</text>
+        <text x="128" y="98" text-anchor="middle" font-size="10" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">research · build · review</text>
+
+        <rect x="604" y="54" width="176" height="58" fill="#ffffff" stroke="#5c6b73" stroke-width="1.5"></rect>
+        <text x="692" y="80" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e2a32" font-family="ui-monospace, Menlo, monospace">Web app</text>
+        <text x="692" y="98" text-anchor="middle" font-size="10" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">what players see</text>
+
+        <rect x="40" y="358" width="176" height="58" fill="#ffffff" stroke="#5c6b73" stroke-width="1.5"></rect>
+        <text x="128" y="384" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e2a32" font-family="ui-monospace, Menlo, monospace">Backend</text>
+        <text x="128" y="402" text-anchor="middle" font-size="10" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">data &amp; game state</text>
+
+        <rect x="604" y="358" width="176" height="58" fill="#ffffff" stroke="#5c6b73" stroke-width="1.5"></rect>
+        <text x="692" y="384" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e2a32" font-family="ui-monospace, Menlo, monospace">Mobile app</text>
+        <text x="692" y="402" text-anchor="middle" font-size="10" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">kept in step with the web</text>
+
+        <!-- dispatch out (solid steel) -->
+        <path d="M300,196 C245,150 210,120 190,114" fill="none" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></path>
+        <path d="M520,196 C575,150 610,120 630,114" fill="none" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></path>
+        <path d="M300,274 C245,320 210,352 190,358" fill="none" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></path>
+        <path d="M520,274 C575,320 610,352 630,358" fill="none" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></path>
+
+        <!-- capture back (dashed flare) -->
+        <path d="M150,112 C165,160 220,196 288,214" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path d="M670,112 C655,160 600,196 532,214" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path d="M150,358 C165,312 220,274 288,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path d="M670,358 C655,312 600,274 532,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+
+        <!-- legend -->
+        <line x1="180" y1="440" x2="210" y2="440" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></line>
+        <text x="218" y="444" font-size="11" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">work out, with written instructions</text>
+        <line x1="495" y1="440" x2="525" y2="440" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></line>
+        <text x="533" y="444" font-size="11" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">results &amp; lessons back</text>
+      </svg>
+      <figcaption class="mt-4 font-utility text-sm text-mist">
+        Work goes out with written instructions; results and lessons come back and get filed. The
+        next issue starts with everything the last one learned.
+      </figcaption>
+    </figure>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        foundations.map(({ k, title, body }) => (
+          <article class="border border-line bg-white p-5">
+            <h3 class="font-display text-base font-semibold">
+              <span class="eyebrow eyebrow-accent mr-2">{k}</span>
+              {title}
+            </h3>
+            <p class="mt-3 text-sm text-mist">{body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- The client -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <p class="eyebrow eyebrow-accent">The client · where it runs for real</p>
+      <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight">
+        EDHLAB: a live game platform
+      </h2>
+      <div class="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed text-mist">
+        <p>
+          <strong class="text-ink">EDHLAB (edhlab.gg) is an online platform for playing Commander</strong>,
+          a popular format of Magic: The Gathering. I work on it as a freelance developer: real
+          users, real games in progress, a real cost when a fix breaks something.
+        </p>
+        <p>
+          That's exactly why it's the right proving ground. A method that only works on toy
+          projects isn't a method. Everything on this page ran against a production app where a
+          bad change is visible to players the same day.
+        </p>
+        <p>
+          One honest boundary: <strong class="text-ink">the code belongs to the client.</strong>
+          What you'll see here is the method, the numbers, and the lessons. Never the code itself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof panel -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <div class="grid items-center gap-6 border border-line bg-white p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-8">
+      <div class="text-center">
+        <p class="font-display text-5xl font-bold text-steel sm:text-6xl">20+</p>
+        <p class="eyebrow mt-2">fixes merged &amp; live</p>
+      </div>
+      <div class="space-y-3 text-mist">
+        <p>
+          <strong class="text-ink">This isn't a demo. The loop has been running for weeks.</strong>
+          More than forty issues have gone through it; over twenty fixes were reviewed, approved
+          by the client, and merged into the live app. The newest ones went from bug report to a
+          review-ready fix in a single sitting.
+        </p>
+        <p>
+          And the loop is getting cleaner as it learns. The most recent runs landed with
+          <strong class="text-ink">zero review findings</strong>: five independent reviewers looked
+          and had nothing to change. Meanwhile six issues correctly ended with no code at all,
+          because the honest answer was "this is already fixed," "this isn't a bug," or "this
+          needs a design decision first."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The shape of the loop -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <p class="eyebrow eyebrow-accent">The shape</p>
+      <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight">
+        One loop, two human checkpoints
+      </h2>
+
+      <figure class="mt-8 border border-line bg-porcelain p-4 sm:p-6">
+        <svg
+          viewBox="0 0 840 600"
+          class="h-auto w-full"
+          role="img"
+          aria-label="Eight numbered steps arranged in a clockwise circle. Steps 1, agree on the problem, and 7, open the pull request, are highlighted in orange as the two human checkpoints."
+        >
+          <defs>
+            <marker id="loop-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#35586c"></path>
+            </marker>
+          </defs>
+
+          <text x="420" y="32" text-anchor="middle" font-size="14" font-weight="600" letter-spacing="2" fill="#35586c" font-family="ui-monospace, Menlo, monospace">THE LOOP · RUNS ONCE PER ISSUE ↻</text>
+
+          <!-- dashed cycle -->
+          <circle cx="420" cy="310" r="195" fill="none" stroke="#35586c" stroke-width="1.5" stroke-dasharray="6 7" opacity="0.55"></circle>
+
+          <!-- clockwise flow accents -->
+          <path d="M460.6,119.3 A195,195 0 0 1 523.3,144.6" fill="none" stroke="#35586c" stroke-width="2.5" marker-end="url(#loop-ah)"></path>
+          <path d="M379.4,500.7 A195,195 0 0 1 316.7,475.4" fill="none" stroke="#35586c" stroke-width="2.5" marker-end="url(#loop-ah)"></path>
+
+          {
+            loopNodes.map(({ n, x, y, gate, label, lx, ly, anchor }) => (
+              <>
+                <rect
+                  x={x - 23}
+                  y={y - 23}
+                  width="46"
+                  height="46"
+                  fill={gate ? '#e8531f' : '#f6f5f1'}
+                  stroke={gate ? '#c03e10' : '#35586c'}
+                  stroke-width="2"
+                />
+                <text
+                  x={x}
+                  y={y + 6}
+                  text-anchor="middle"
+                  font-size="17"
+                  font-weight="700"
+                  fill={gate ? '#f6f5f1' : '#1e2a32'}
+                  font-family="ui-monospace, Menlo, monospace"
+                >
+                  {n}
+                </text>
+                <text
+                  x={lx}
+                  y={ly}
+                  text-anchor={anchor}
+                  font-size="15"
+                  fill={gate ? '#c03e10' : '#5c6b73'}
+                  font-weight={gate ? '600' : '400'}
+                  font-family="ui-monospace, Menlo, monospace"
+                >
+                  {label}
+                </text>
+              </>
+            ))
+          }
+
+          <!-- legend -->
+          <rect x="40" y="556" width="14" height="14" fill="#e8531f" stroke="#c03e10" stroke-width="1.5"></rect>
+          <text x="62" y="568" font-size="13" fill="#5c6b73" font-family="ui-monospace, Menlo, monospace">= human checkpoint</text>
+        </svg>
+        <figcaption class="mt-4 font-utility text-sm text-mist">
+          Two human checkpoints sit inside the loop: agreeing on the problem (1) before any work
+          starts, and the pull request (7) before anything ships. I delegate everything
+          between them. The checkpoints are where judgment stays.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- The loop, step by step -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <p class="eyebrow eyebrow-accent">The loop · once per issue</p>
+    <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight">
+      Eight steps, two checkpoints
+    </h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
+      Every issue, from a typo to a game-logic bug, runs the same loop. AI does the reading, the
+      building, and the first rounds of review. I make the two decisions that matter: what we're
+      actually fixing, and whether it goes out.
+    </p>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
+      {
+        steps.map(({ n, name, gate, tag, me, ai, why, note, exhibit }) => (
+          <article
+            class={`border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit ? 'md:col-span-2' : ''}`}
+          >
+            <div class="flex flex-wrap items-center gap-3">
+              <span
+                class={`grid h-8 w-8 flex-none place-items-center font-display text-base font-bold ${gate ? 'bg-flare-deep text-porcelain' : 'bg-steel text-porcelain'}`}
+              >
+                {n}
+              </span>
+              <h3 class="font-display text-lg font-semibold">{name}</h3>
+              {gate && (
+                <span class="border border-flare-deep px-2 py-0.5 font-utility text-xs font-semibold uppercase tracking-wider text-flare-deep">
+                  {gate}
+                </span>
+              )}
+              {tag && (
+                <span class="border border-line px-2 py-0.5 font-utility text-xs uppercase tracking-wider text-mist">
+                  {tag}
+                </span>
+              )}
+            </div>
+            <dl class="mt-4 space-y-3 text-sm">
+              <div>
+                <dt class="eyebrow">Me</dt>
+                <dd class="mt-1 text-mist">{me}</dd>
+              </div>
+              <div>
+                <dt class="eyebrow">The AI</dt>
+                <dd class="mt-1 text-mist">{ai}</dd>
+              </div>
+              <div>
+                <dt class="eyebrow">Why</dt>
+                <dd class="mt-1 text-ink">{why}</dd>
+              </div>
+            </dl>
+            <details class="field-note mt-4 border-t border-dashed border-line pt-3">
+              <summary class="font-utility text-xs font-semibold uppercase tracking-wider text-steel">
+                Field note
+              </summary>
+              <p class="mt-2 border-l-2 border-line pl-3 text-sm text-mist">{note}</p>
+            </details>
+            {exhibit && (
+              <div class="mt-5 border border-flare-deep border-l-4 bg-porcelain p-5">
+                <p class="eyebrow eyebrow-accent">Exhibit · why findings get attacked</p>
+                <h4 class="mt-2 font-display text-lg font-semibold">
+                  The reviewer was right about the math and wrong about the screen.
+                </h4>
+                <p class="mt-2 text-sm text-mist">
+                  One reviewer flagged a spacing change. By its arithmetic, the change ate the
+                  entire safety margin around an element, leaving zero clearance. The numbers
+                  checked out. The finding still died, because the attack pass asked the question
+                  the reviewer hadn't: <strong class="text-ink">what does the layout actually do
+                  with those numbers?</strong> A neighboring rule canceled the change out. The
+                  real clearance was fine.
+                </p>
+                <p class="mt-2 text-sm text-mist">
+                  A confident, numerically correct finding was wrong about the thing that matters,
+                  what users see. That's why no finding reaches me without surviving an attempt to
+                  kill it.
+                </p>
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Guardrails -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <p class="eyebrow eyebrow-accent">The layer underneath · hard-won rules</p>
+      <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight">
+        Guardrails, and the misses that made them
+      </h2>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
+        None of these are theory. Each one exists because something got through without it.
+      </p>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          rails.map(({ g, title, body }) => (
+            <article class="border border-line bg-porcelain p-5">
+              <h3 class="font-display text-base font-semibold">
+                <span class="mr-2 font-utility text-xs text-steel">{g}</span>
+                {title}
+              </h3>
+              <p class="mt-2 text-sm text-mist">{body}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-8 grid gap-4 lg:grid-cols-3">
+        {
+          misses.map(({ h, body }) => (
+            <article class="border border-line border-l-4 border-l-flare bg-white p-5">
+              <p class="eyebrow eyebrow-accent">{h}</p>
+              <p class="mt-3 text-sm text-mist">{body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Takeaways -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <p class="eyebrow eyebrow-accent">The close · what transfers</p>
+    <h2 class="section-heading mt-3 font-display text-3xl font-bold tracking-tight">
+      The method is the product
+    </h2>
+
+    <div class="mt-8 border-2 border-dashed border-ink bg-white p-8 sm:p-10">
+      <p class="max-w-3xl text-mist">
+        <strong class="text-ink">None of this depends on the project being a game, or on any
+        particular AI tool.</strong> It depends on three habits that transfer to any codebase,
+        with or without AI. If you take anything from this page, take these:
+      </p>
+      <ul class="mt-6 max-w-3xl space-y-3">
+        <li class="relative pl-7 text-mist before:absolute before:left-0 before:font-bold before:text-flare-deep before:content-['→']">
+          <strong class="text-ink">Put humans at the two moments that matter.</strong> Agree on
+          the problem before work starts; approve the result before it ships. Delegate everything
+          in between without guilt.
+        </li>
+        <li class="relative pl-7 text-mist before:absolute before:left-0 before:font-bold before:text-flare-deep before:content-['→']">
+          <strong class="text-ink">Demand proof you can see.</strong> A green checkmark says the
+          logic holds. A before-and-after of the real screen says the product works. They are not
+          the same claim.
+        </li>
+        <li class="relative pl-7 text-mist before:absolute before:left-0 before:font-bold before:text-flare-deep before:content-['→']">
+          <strong class="text-ink">Write down what didn't work.</strong> The loop got faster and
+          cleaner in weeks. The AI didn't improve; the notes did. Every miss became a rule the
+          next run inherits.
+        </li>
+      </ul>
+      <p class="mt-6 max-w-3xl text-sm text-mist">
+        And one meta-lesson: <strong class="text-ink">build the pipeline from your own failures,
+        not from best-practice lists.</strong> Every guardrail above is a specific miss, dated,
+        with a name. That's why they hold.
+      </p>
+    </div>
+  </section>
+
+  <!-- Honesty legend + colophon -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-12">
+      <p class="eyebrow">Honesty legend</p>
+      <ul class="mt-4 space-y-3 text-sm text-mist">
+        <li class="flex flex-wrap items-baseline gap-2">
+          <span class="inline-flex items-center gap-2 font-utility text-xs font-semibold uppercase tracking-wider text-open">
+            <span class="h-2 w-2 rounded-full bg-open"></span>shipped
+          </span>
+          real and done: 20+ merged fixes, the review gate, the visual-proof step, the loop itself
+        </li>
+        <li class="flex flex-wrap items-baseline gap-2">
+          <span class="inline-flex items-center gap-2 font-utility text-xs font-semibold uppercase tracking-wider text-flare-deep">
+            <span class="h-2 w-2 rounded-full border-2 border-flare-deep"></span>in progress
+          </span>
+          the newest fixes are open and awaiting the client's merge; counts move weekly
+        </li>
+        <li class="flex flex-wrap items-baseline gap-2">
+          <span class="inline-flex items-center gap-2 font-utility text-xs font-semibold uppercase tracking-wider text-mist">
+            <span class="h-2 w-2 rounded-full border border-dashed border-mist"></span>vision
+          </span>
+          running the same loop fully hands-off is designed, not built
+        </li>
+      </ul>
+      <p class="mt-8 max-w-3xl text-sm leading-relaxed text-mist">
+        <strong class="text-ink">What this page is:</strong> a faithful picture of a working
+        method, drawn from my own project records as of 2026-08-29. Counts are as recorded in my
+        notes; the live repositories may have moved since.
+        <strong class="text-ink">What it is not:</strong> the client's code, which stays the
+        client's, or a claim that any of this is hands-off. Two humans still sit at the gates on
+        every single issue.
+      </p>
+      <p class="mt-3 max-w-3xl font-utility text-xs text-mist">
+        Built from the real workflow in my wiki: the engagement doc, the per-issue project docs,
+        the two pipeline recipes, and their post-mortems.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <div class="border-2 border-dashed border-ink bg-white p-8 sm:p-10">
+      <p class="eyebrow eyebrow-accent">Want this rigor on your project?</p>
+      <h2 class="section-heading mt-3 font-display text-2xl font-bold sm:text-3xl">
+        The loop works on any codebase
+      </h2>
+      <p class="mt-4 max-w-2xl text-mist">
+        Start with a free 15-minute call. You'll leave knowing what your project needs, whether
+        or not we work together.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/contact/" class="btn-primary">Book a free call</a>
+        <a href="/services/" class="btn-secondary">See services</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -149,6 +149,70 @@ html {
   }
 }
 
+/* Case-study micro-motion. Scroll reveals use CSS scroll-driven animations
+   (no JS — the CSP's Trusted Types policy makes external CSS the cheapest
+   home for motion). Browsers without animation-timeline render statically. */
+.card-lift {
+  transition:
+    transform 150ms,
+    box-shadow 150ms;
+}
+
+.card-lift:hover {
+  transform: translateY(-0.125rem);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.08),
+    0 4px 6px -4px rgb(0 0 0 / 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift:hover {
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+/* Dash-flow for the two diagrams: the loop circle's dashes crawl clockwise,
+   the hub's capture-back arrows crawl toward the hub. Offsets match each
+   stroke's dasharray period (6+7 and 5+5) so the cycle loops seamlessly. */
+@keyframes dash-flow-13 {
+  to {
+    stroke-dashoffset: -13;
+  }
+}
+
+@keyframes dash-flow-10 {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loop-cycle {
+    animation: dash-flow-13 1.8s linear infinite;
+  }
+
+  .capture-flow {
+    animation: dash-flow-10 1.8s linear infinite;
+  }
+}
+
 .btn-secondary {
   border: 1px solid var(--color-ink);
   padding: 0.75rem 1.5rem;

@@ -193,7 +193,7 @@ const loopNodes = [
       and gets written down. The code changes elsewhere; the memory stays here.
     </p>
 
-    <figure class="mt-8 border border-line bg-white p-4 sm:p-6">
+    <figure class="reveal mt-8 border border-line bg-white p-4 sm:p-6">
       <svg
         viewBox="0 0 820 470"
         class="h-auto w-full"
@@ -240,10 +240,10 @@ const loopNodes = [
         <path d="M520,274 C575,320 610,352 630,358" fill="none" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></path>
 
         <!-- capture back (dashed flare) -->
-        <path d="M150,112 C165,160 220,196 288,214" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
-        <path d="M670,112 C655,160 600,196 532,214" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
-        <path d="M150,358 C165,312 220,274 288,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
-        <path d="M670,358 C655,312 600,274 532,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path class="capture-flow" d="M150,112 C165,160 220,196 288,214" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path class="capture-flow" d="M670,112 C655,160 600,196 532,214" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path class="capture-flow" d="M150,358 C165,312 220,274 288,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
+        <path class="capture-flow" d="M670,358 C655,312 600,274 532,258" fill="none" stroke="#c03e10" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ah-flare)"></path>
 
         <!-- legend -->
         <line x1="180" y1="440" x2="210" y2="440" stroke="#35586c" stroke-width="2" marker-end="url(#ah-steel)"></line>
@@ -260,7 +260,7 @@ const loopNodes = [
     <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
         foundations.map(({ k, title, body }) => (
-          <article class="border border-line bg-white p-5">
+          <article class="reveal card-lift border border-line bg-white p-5">
             <h3 class="font-display text-base font-semibold">
               <span class="eyebrow eyebrow-accent mr-2">{k}</span>
               {title}
@@ -331,7 +331,7 @@ const loopNodes = [
         One loop, two human checkpoints
       </h2>
 
-      <figure class="mt-8 border border-line bg-porcelain p-4 sm:p-6">
+      <figure class="reveal mt-8 border border-line bg-porcelain p-4 sm:p-6">
         <svg
           viewBox="-70 0 980 600"
           class="h-auto w-full"
@@ -347,7 +347,7 @@ const loopNodes = [
           <text x="420" y="32" text-anchor="middle" font-size="14" font-weight="600" letter-spacing="2" fill="#35586c" font-family="ui-monospace, Menlo, monospace">THE LOOP · RUNS ONCE PER ISSUE ↻</text>
 
           <!-- dashed cycle -->
-          <circle cx="420" cy="310" r="195" fill="none" stroke="#35586c" stroke-width="1.5" stroke-dasharray="6 7" opacity="0.55"></circle>
+          <circle class="loop-cycle" cx="420" cy="310" r="195" fill="none" stroke="#35586c" stroke-width="1.5" stroke-dasharray="6 7" opacity="0.55"></circle>
 
           <!-- clockwise flow accents -->
           <path d="M460.6,119.3 A195,195 0 0 1 523.3,144.6" fill="none" stroke="#35586c" stroke-width="2.5" marker-end="url(#loop-ah)"></path>
@@ -420,7 +420,7 @@ const loopNodes = [
       {
         steps.map(({ n, name, gate, tag, me, ai, why, exhibit }) => (
           <article
-            class={`border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit || n === 1 ? 'md:col-span-2' : ''}`}
+            class={`reveal card-lift border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit || n === 1 ? 'md:col-span-2' : ''}`}
           >
             <div class="flex flex-wrap items-center gap-3">
               <span
@@ -495,7 +495,7 @@ const loopNodes = [
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
           rails.map(({ g, title, body }) => (
-            <article class="border border-line bg-porcelain p-5">
+            <article class="reveal card-lift border border-line bg-porcelain p-5">
               <h3 class="font-display text-base font-semibold">
                 <span class="mr-2 font-utility text-xs text-steel">{g}</span>
                 {title}
@@ -509,7 +509,7 @@ const loopNodes = [
       <div class="mt-8 grid gap-4 lg:grid-cols-3">
         {
           misses.map(({ h, body }) => (
-            <article class="border border-line border-l-4 border-l-flare bg-white p-5">
+            <article class="reveal card-lift border border-line border-l-4 border-l-flare bg-white p-5">
               <p class="eyebrow eyebrow-accent">{h}</p>
               <p class="mt-3 text-sm text-mist">{body}</p>
             </article>

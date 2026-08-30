@@ -39,23 +39,20 @@ const steps = [
     me: 'Answer five questions before anything runs: why this issue, what\'s in scope, do we already know the cause, one fix or several, does it need a live playtest.',
     ai: 'Gathers the issue, the screenshots, and the related history, and puts the questions in front of me.',
     why: 'The most expensive bug in AI-assisted work is a perfect fix for the wrong problem. Five minutes here is the cheapest insurance in the whole loop.',
-    note: 'This step exists because skipping it was tried. Early fixes were technically correct and still wrong: the wrong scope, or a "bug" the client didn\'t consider a bug. Nothing downstream can recover from a bad answer here.',
   },
   {
     n: 2,
     name: 'Find the real cause',
     me: 'Read the findings; decide whether they hold up.',
     ai: 'A research agent traces the bug to its root cause in the code, with evidence, before anyone writes a fix.',
-    why: 'This step is allowed to end the loop. One issue turned out to be already fixed by the client. Another needed proof it wasn\'t a bug, not a patch. Both times the loop stopped, on purpose.',
-    note: '"Don\'t ship" as a success state is the most counterintuitive part of the pipeline and the part I trust most. Six issues have ended this way. Each one is a fix that didn\'t get made to code that didn\'t need it.',
+    why: 'This step is allowed to end the loop. One issue turned out to be already fixed by the client. Another needed proof it wasn\'t a bug, not a patch. Six issues have ended this way, on purpose. Each one is a fix that didn\'t get made to code that didn\'t need it.',
   },
   {
     n: 3,
     name: 'Write the brief',
-    me: 'Read it. The brief is the most important artifact in the system.',
+    me: 'Read it. The brief is the most important artifact in the system, and a bad one is paid for by everything downstream of it.',
     ai: 'Turns the research into written instructions for the builder: what to change, what\'s out of bounds, what "done" means, and what has already been ruled out, with dates.',
-    why: 'Every file the brief mentions is checked to exist before the brief is used. An instruction pointing at a file that isn\'t there sends the builder on a quiet detour.',
-    note: 'A bad brief is paid for by everything downstream of it. The "already ruled out" list is dated on purpose: a stale claim the builder is told not to question becomes its blind spot.',
+    why: 'Every file the brief mentions is checked to exist before the brief is used. And the "already ruled out" list is dated on purpose, because a stale claim the builder is told not to question becomes its blind spot.',
   },
   {
     n: 4,
@@ -63,23 +60,20 @@ const steps = [
     me: 'Steer when asked; otherwise stay out of the way.',
     ai: 'Writes a test that fails because of the bug, then the fix that makes it pass. If the game\'s core logic changes, a mirrored check runs against the mobile app so web and mobile can\'t drift apart.',
     why: 'A test that failed first is proof the test can fail. A test written after the fix might be agreeing with it.',
-    note: 'The branch gets pushed at this point, but no pull request opens. That\'s deliberate: nothing looks "done" before it has survived the proof and review steps.',
   },
   {
     n: 5,
     name: 'Prove it on screen',
     me: 'Look at the actual before and after with my own eyes.',
     ai: 'Runs the app twice, once without the fix and once with it, through the same flow, and captures both.',
-    why: '"A render test proves an element exists, not that it lands anywhere sensible." On one issue, three green tests and a clean build missed three visual problems: buttons covering the header, dead space, a wrong font size. The screenshots caught all three.',
-    note: 'This lesson cost a real afternoon and is now a permanent step. Passing tests are necessary, never sufficient. If the last change landed after the screenshot, the screenshot is stale and gets retaken.',
+    why: '"A render test proves an element exists, not that it lands anywhere sensible." On one issue, three green tests and a clean build missed three visual problems: buttons covering the header, dead space, a wrong font size. The screenshots caught all three. That lesson cost an afternoon and is now a permanent step. Passing tests are necessary, never sufficient.',
   },
   {
     n: 6,
     name: 'Review it hard',
     me: 'Decide anything about scope or how the product should behave. Those never get auto-applied.',
-    ai: 'Five reviewers look at the change independently, each with a different specialty. Then every finding is attacked: a second pass tries to prove each one wrong before it reaches me.',
+    ai: 'Five reviewers look at the change independently, each with a different specialty drawn from this project\'s own history, hunting for the exact failures that already happened once. Then every finding is attacked: a second pass tries to prove each one wrong before it reaches me.',
     why: 'Only fixes that are mechanically unambiguous, change nothing on screen, and are trivially reversible get applied automatically. Everything else comes to a human.',
-    note: 'The five specialties come from this project\'s own history: what the issue actually asked for, this codebase\'s known traps, its conventions, test quality, and a generalist pass. The review hunts for the exact failures that already happened once.',
     exhibit: true,
   },
   {
@@ -88,8 +82,7 @@ const steps = [
     gate: 'Checkpoint 2',
     me: 'Approve the summary, open the request. The AI never merges. Ever.',
     ai: 'Assembles the change, the proof, and the review results into one reviewable package, written in my voice, not a robot\'s.',
-    why: 'Releasing to real users is a human decision by design, not a limitation. The client merges when the client is ready.',
-    note: 'An agent reporting "done" is a claim, not a fact, and definitely not my approval. The pipeline treats its own output with the same suspicion it applies to everything else.',
+    why: 'Releasing to real users is a human decision by design, not a limitation. An agent reporting "done" is a claim, not a fact, and never my approval. The client merges when the client is ready.',
   },
   {
     n: 8,
@@ -98,7 +91,6 @@ const steps = [
     me: 'Confirm the outcome.',
     ai: 'Files the result, the evidence, and any new lesson back into the wiki, including what was ruled out and why.',
     why: 'This is why the loop gets better instead of just faster. The visual-proof lesson, the review specialties, the known traps: all of them are step-8 notes from earlier issues.',
-    note: 'The loop only compounds if this step actually happens. Every guardrail on this page started life as a note written here after something went wrong.',
   },
 ];
 
@@ -341,7 +333,7 @@ const loopNodes = [
 
       <figure class="mt-8 border border-line bg-porcelain p-4 sm:p-6">
         <svg
-          viewBox="0 0 840 600"
+          viewBox="-70 0 980 600"
           class="h-auto w-full"
           role="img"
           aria-label="Eight numbered steps arranged in a clockwise circle. Steps 1, agree on the problem, and 7, open the pull request, are highlighted in orange as the two human checkpoints."
@@ -426,7 +418,7 @@ const loopNodes = [
 
     <div class="mt-10 grid gap-4 md:grid-cols-2">
       {
-        steps.map(({ n, name, gate, tag, me, ai, why, note, exhibit }) => (
+        steps.map(({ n, name, gate, tag, me, ai, why, exhibit }) => (
           <article
             class={`border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit ? 'md:col-span-2' : ''}`}
           >
@@ -462,12 +454,6 @@ const loopNodes = [
                 <dd class="mt-1 text-ink">{why}</dd>
               </div>
             </dl>
-            <details class="field-note mt-4 border-t border-dashed border-line pt-3">
-              <summary class="font-utility text-xs font-semibold uppercase tracking-wider text-steel">
-                Field note
-              </summary>
-              <p class="mt-2 border-l-2 border-line pl-3 text-sm text-mist">{note}</p>
-            </details>
             {exhibit && (
               <div class="mt-5 border border-flare-deep border-l-4 bg-porcelain p-5">
                 <p class="eyebrow eyebrow-accent">Exhibit · why findings get attacked</p>

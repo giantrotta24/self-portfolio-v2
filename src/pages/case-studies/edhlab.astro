@@ -420,7 +420,7 @@ const loopNodes = [
       {
         steps.map(({ n, name, gate, tag, me, ai, why, exhibit }) => (
           <article
-            class={`border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit ? 'md:col-span-2' : ''}`}
+            class={`border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit || n === 1 ? 'md:col-span-2' : ''}`}
           >
             <div class="flex flex-wrap items-center gap-3">
               <span

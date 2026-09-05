@@ -1,15 +1,15 @@
 ---
 title: "What a homepage redesign actually changed: RVshare's 2026 relaunch by the numbers"
-description: "Before-and-after Lighthouse numbers from a real production homepage redesign at RVshare — what actually moved on SEO and accessibility."
+description: "Before-and-after Lighthouse numbers from RVshare's 2026 homepage redesign, focused on what moved for SEO and accessibility."
 pubDate: 2026-07-17
 draft: false
 ---
 
-I spend my workdays on real production websites. The kind with real visitors, real revenue, and real consequences when a page is slow, unclear, or hard to use.
+Most website redesign talk gets vague fast.
 
-Recently, I was part of the team behind a homepage redesign for RVshare, an RV rental marketplace, working on the performance, SEO, and accessibility side of it. I can't share code or internal details. That belongs to the company.
+I care more about the boring checks. Did the page get faster? Is the main action easier to find? Can Google read the page more clearly? Did accessibility improve?
 
-But I can show you what changed, and talk about the numbers.
+I was part of the team on a homepage redesign for RVshare, an RV rental marketplace. My slice was performance, SEO, and accessibility. I can't share company details. The public before-and-after numbers are enough.
 
 <figure class="my-10 border border-line bg-porcelain p-4 sm:p-6 not-prose">
   <figcaption class="font-utility text-xs uppercase tracking-widest text-mist">
@@ -49,11 +49,11 @@ But I can show you what changed, and talk about the numbers.
   </div>
 </figure>
 
-That's how I prefer to talk about website work anyway. Not "modern." Not "clean." Not "better" because it feels better. Faster load times. Less page shifting. Better SEO checks. Better accessibility checks. The stuff a business owner can actually use to judge whether the work helped.
+Those are the parts worth talking about. Speed. Clarity. Fewer small blockers between a visitor and what they came to do.
 
 ## The starting point
 
-The old RVshare homepage worked, but it had room to improve. The page was image-heavy, some search and page signals could be clearer, and a few accessibility issues had built up over time.
+The old RVshare homepage worked. It also carried some baggage: heavy imagery, a search action that could have been clearer, and accessibility issues that had piled up.
 
 Baseline Lighthouse scores from the production homepage (desktop, median of 5 runs):
 
@@ -63,15 +63,13 @@ Baseline Lighthouse scores from the production homepage (desktop, median of 5 ru
 | Accessibility | 0.72 |
 | SEO | 0.85 |
 
-The comparison matters more than any single number. Same kind of test. Same production homepage. Before and after.
+Same page. Same kind of test. Before and after.
 
 ## What changed
 
-The redesigned homepage put the main search action front and center, reduced layout shifting while the page loaded, improved the signals search engines read, and cleaned up the accessibility issues Lighthouse flagged.
+Search got harder to miss. The page jumped around less while it loaded. Search-engine signals got cleaned up. The accessibility issues Lighthouse flagged got fixed.
 
-That's the short version on purpose.
-
-For a business website, the important question isn't whether the work sounded technical. It's whether the page became faster, clearer, easier to understand, and easier to use.
+For a business site, that's most of the job: load fast, make the next step obvious, work for more people, and give Google a page it can understand.
 
 ## The results
 
@@ -87,20 +85,16 @@ Measured before and after on the live production site, desktop:
 
 \*Accessibility reached a 1.00 Lighthouse score a few days after launch, after one flagged issue was fixed.
 
-In plain English: SEO and accessibility both reached perfect Lighthouse scores, zero failing checks on either. The page also loaded about a third faster and shifted around less while loading.
+SEO and accessibility both hit 1.00 in Lighthouse, with zero failing checks. The page also loaded about a third faster and shifted less while loading.
 
-That doesn't mean the site became perfect. Lighthouse is an audit, not the whole truth. But it's a useful, repeatable check. When SEO and accessibility go from "decent" to a clean 1.00, that tells you something real changed.
+Lighthouse isn't the whole story. It is a useful, repeatable check. When the same production homepage moves from 0.85 to 1.00 on SEO and 0.72 to 1.00 on accessibility, something real got fixed.
 
 ## Why this matters for a small business site
 
-Most local business websites don't need a huge rebuild. They need someone to look at the homepage honestly and answer a few simple questions.
+Most small-business sites don't need a grand relaunch. They need someone to look at the homepage and say what's helping and what's in the way.
 
-Is it fast enough?
-Can people find the main action?
-Does Google understand the page?
-Can visitors using assistive technology get through it?
-Is anything broken, confusing, or quietly costing trust?
+Maybe it's speed. Maybe the contact button is buried. Maybe Google is missing basic signals. Maybe the site "works," but only if the visitor is patient.
 
 That's the work I care about.
 
-A good website doesn't have to be flashy. It has to load, explain, guide, and convert. If your site hasn't been checked that way, my [Site Checkup](/contact/) is built for that: real numbers, plain English, and a clear list of what to fix first.
+A business website doesn't need to impress other web designers. It needs to help someone take the next step. If yours hasn't been checked that way in a while, my [Site Checkup](/contact/) is built for it: real numbers, plain language, and a clear list of what to fix first.

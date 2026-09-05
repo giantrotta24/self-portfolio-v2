@@ -1,7 +1,7 @@
 ---
 title: "What a homepage redesign actually changed: RVshare's 2026 relaunch by the numbers"
 description: "Before-and-after Lighthouse numbers from RVshare's 2026 homepage redesign, focused on what moved for SEO and accessibility."
-pubDate: 2026-07-17
+pubDate: 2026-09-04
 draft: false
 ---
 

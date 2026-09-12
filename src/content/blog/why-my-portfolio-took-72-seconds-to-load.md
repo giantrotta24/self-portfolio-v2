@@ -12,7 +12,7 @@ That was not a typo. It also was not some slow 3G torture test. Google's speed t
 mobile connection, and the page still made people wait over a minute for the main content. The score
 was 65 out of 100. The page weighed 26.5 MB, which is ridiculous. One image did most of the damage.
 
-<figure class="my-10 border border-line bg-porcelain p-4 sm:p-6 not-prose">
+<figure class="my-10 border border-line bg-white p-4 sm:p-6 not-prose">
   <figcaption class="font-utility text-xs uppercase tracking-widest text-mist">
     giantrotta.dev · before and after
   </figcaption>
@@ -92,7 +92,7 @@ That is the setup I should have used for myself in the first place. It is also t
 rather hand to a client: unremarkable in the ways that matter, fast without a monthly ritual to keep
 it that way, and not resting on one screenshot I forgot about.
 
-If you've never checked what your own site weighs, or how long it takes to load on a phone, that's
-the point of a [Site Checkup](/contact/). I look at speed, search visibility, and AI-search
+If you've never checked what your own site weighs, or how long it takes to load on a phone,
+[book a free 15-minute call](/contact/). I look at speed, search visibility, and AI-search
 visibility, then give you the plain-English version before slow pages start costing you customers
 the way that PNG cost me seven years of page loads.

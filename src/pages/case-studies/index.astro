@@ -4,24 +4,27 @@ import Base from '../../layouts/Base.astro';
 const caseStudies = [
   {
     href: '/case-studies/rusty/',
-    kicker: 'Website Rescue',
+    kicker: 'Website Rescue · for owners',
     title: "Rusty the Raccoon — a children's book site, off Wix",
     description:
       'A children\'s book author was paying $400 a year for a Wix site that told Google its name was "My Site." Now it costs nothing to host, loads in under 2 seconds instead of over 6, and Google actually knows what it is.',
-  },
-  {
-    href: '/case-studies/edhlab/',
-    kicker: 'Client work · EDHLAB',
-    title: 'EDHLAB: how I ship with AI on a live game platform',
-    description:
-      'The development pipeline behind 20+ merged fixes on a live multiplayer Magic: The Gathering platform. One loop, two human checkpoints, and guardrails built from real misses, running against a production app with real users.',
+    proof: '6.5 s → 1.8 s · $400/yr → $0',
   },
   {
     href: '/case-studies/fresh-beginnings/',
-    kicker: 'Site refresh',
+    kicker: 'Site refresh · for owners',
     title: 'Fresh Beginnings Publishing — already fast, made findable',
     description:
       "A publisher's site loaded fast, but search engines and AI assistants barely knew it existed. Now it shows up in Google, is verified with Google Search Console, and got a visual refresh too.",
+    proof: 'Findable on Google · Search Console verified',
+  },
+  {
+    href: '/case-studies/edhlab/',
+    kicker: 'Engineering notes · process',
+    title: 'EDHLAB: how I ship with AI on a live game platform',
+    description:
+      'The development pipeline behind 20+ merged fixes on a live multiplayer Magic: The Gathering platform. One loop, two human checkpoints, and guardrails built from real misses.',
+    proof: '20+ merges · two human gates',
   },
 ];
 ---
@@ -31,13 +34,17 @@ const caseStudies = [
   description="Real before-and-after website rescues: measurable speed, search visibility, and cost results for small businesses."
 >
   <section class="mx-auto max-w-5xl px-6 py-16">
-    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Case studies</h1>
+    <p class="eyebrow eyebrow-accent">Proof on the counter</p>
+    <h1 class="section-heading mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+      Case studies
+    </h1>
     <p class="mt-4 max-w-2xl text-lg text-mist">
-      Before-and-after, with real numbers.
+      Owner rescues first — real before-and-after numbers. Engineering notes at the end for how I
+      ship.
     </p>
 
     {
-      caseStudies.map(({ href, kicker, title, description }, i) => (
+      caseStudies.map(({ href, kicker, title, description, proof }, i) => (
         <a
           href={href}
           class={`group ${i === 0 ? 'mt-12' : 'mt-6'} block border border-line bg-white p-8 transition-all duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg motion-reduce:hover:translate-y-0`}
@@ -45,6 +52,7 @@ const caseStudies = [
           <p class="eyebrow eyebrow-accent">{kicker}</p>
           <h2 class="mt-2 font-display text-2xl font-bold">{title}</h2>
           <p class="mt-3 max-w-3xl text-mist">{description}</p>
+          <p class="mt-4 font-utility text-sm font-bold text-steel">{proof}</p>
           <p class="mt-4 font-semibold text-steel">
             Read the case study
             <span class="inline-block transition-transform group-hover:translate-x-1">→</span>

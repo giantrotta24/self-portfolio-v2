@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-11T23:15:00-04:00",
+  "title": "Design System: giantrotta.dev",
+  "extensions": {
+    "colorMeta": {
+      "porcelain": {
+        "role": "neutral",
+        "displayName": "Workshop Paper",
+        "canonical": "#f6f5f1",
+        "tonalRamp": ["#262626", "#444342", "#61615f", "#7e7e7c", "#9c9b98", "#b9b8b5", "#d6d5d2", "#f3f2ee"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Harbor Ink",
+        "canonical": "#1e2a32",
+        "tonalRamp": ["#1d2830", "#3b454c", "#596268", "#787f84", "#969c9f", "#b5b9bb", "#d3d5d7", "#f2f2f3"]
+      },
+      "steel": {
+        "role": "secondary",
+        "displayName": "Lake Steel",
+        "canonical": "#35586c",
+        "tonalRamp": ["#192932", "#2c4859", "#466678", "#688291", "#8a9eaa", "#acbac3", "#ced7db", "#f0f3f4"]
+      },
+      "flare": {
+        "role": "primary",
+        "displayName": "Rescue Flare",
+        "canonical": "#e8531f",
+        "tonalRamp": ["#501d0b", "#8d3213", "#ca481b", "#ea6536", "#ef8763", "#f4aa91", "#f8cdbe", "#fdf0eb"]
+      },
+      "flare-deep": {
+        "role": "primary",
+        "displayName": "Rescue Flare Deep",
+        "canonical": "#c03e10",
+        "tonalRamp": ["#551b07", "#96300c", "#c44a1e", "#cf6b48", "#da8c71", "#e4ae9a", "#efcfc4", "#faf0ed"]
+      },
+      "flare-bright": {
+        "role": "primary",
+        "displayName": "Rescue Flare Bright",
+        "canonical": "#ff7a45",
+        "tonalRamp": ["#432012", "#753820", "#a8502d", "#db693b", "#ff8453", "#ffa885", "#ffccb7", "#ffefe9"]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Cool Mist",
+        "canonical": "#5c6b73",
+        "tonalRamp": ["#22272a", "#3b454a", "#55636a", "#738087", "#939da2", "#b2b9bd", "#d2d6d8", "#f1f2f3"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Soft Rule",
+        "canonical": "#d8d5cc",
+        "tonalRamp": ["#272625", "#444341", "#62615c", "#7f7e78", "#9d9b94", "#bbb8b0", "#d8d5cc", "#f3f2f0"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#262626", "#434343", "#616161", "#7e7e7e", "#9b9b9b", "#b8b8b8", "#d5d5d5", "#f2f2f2"]
+      },
+      "open": {
+        "role": "neutral",
+        "displayName": "Status Green",
+        "canonical": "#2f9e44",
+        "tonalRamp": ["#0e2f14", "#195324", "#237733", "#2e9b43", "#5bb36c", "#8bc996", "#badfc1", "#eaf5ec"]
+      },
+      "booked": {
+        "role": "neutral",
+        "displayName": "Status Red",
+        "canonical": "#c92a2a",
+        "tonalRamp": ["#651515", "#b32525", "#cf4343", "#d86565", "#e18888", "#eaabab", "#f2cdcd", "#fbf0f0"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines and page H1s in Bricolage Grotesque."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles with the short orange section-heading rule."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Service cards, case-study titles, nested H2s."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Supporting copy in the system UI stack."
+      },
+      "label": {
+        "displayName": "Label / Printout",
+        "purpose": "Uppercase mono eyebrows, receipt meta, footer copyright, table headers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "receipt-drop",
+        "value": "drop-shadow(0 16px 20px rgb(30 42 50 / 0.18))",
+        "purpose": "Follows the torn receipt mask on .receipt-wrap only."
+      },
+      {
+        "name": "hover-lift",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "purpose": "Button and card hover elevation with a 2px lift."
+      },
+      {
+        "name": "card-lift-soft",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08)",
+        "purpose": "Softer hover for case-study and content cards."
+      }
+    ],
+    "motion": [
+      {
+        "name": "hero-underline-draw",
+        "value": "500ms 300ms ease-out",
+        "purpose": "Draws the flare underline under the hero closing phrase once on load."
+      },
+      {
+        "name": "lift-150",
+        "value": "transform 150ms",
+        "purpose": "Default button and card hover lift timing."
+      },
+      {
+        "name": "nav-underline",
+        "value": "transform 200ms",
+        "purpose": "Scales the flare underline under nav links."
+      },
+      {
+        "name": "reveal-rise",
+        "value": "view() timeline, entry 0%–45%",
+        "purpose": "Scroll-driven fade/rise for .reveal when animation-timeline is supported."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Square rescue CTA — flare-deep fill, lifts on hover.",
+      "html": "<button class=\"ds-btn-primary\">Book a free 15-minute call</button>",
+      "css": ".ds-btn-primary { background: var(--color-flare-deep, #c03e10); color: var(--color-porcelain, #f6f5f1); padding: 0.75rem 1.5rem; font-weight: 600; border: none; border-radius: 0; cursor: pointer; transition: transform 150ms, background-color 150ms, box-shadow 150ms; } .ds-btn-primary:hover { transform: translateY(-0.125rem); background: var(--color-flare, #e8531f); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); } .ds-btn-primary:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary:hover { transform: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Square ink-outline CTA that fills ink on hover.",
+      "html": "<button class=\"ds-btn-secondary\">See services</button>",
+      "css": ".ds-btn-secondary { background: transparent; color: var(--color-ink, #1e2a32); padding: 0.75rem 1.5rem; font-weight: 600; border: 1px solid var(--color-ink, #1e2a32); border-radius: 0; cursor: pointer; transition: transform 150ms, background-color 150ms, color 150ms, box-shadow 150ms; } .ds-btn-secondary:hover { transform: translateY(-0.125rem); background: var(--color-ink, #1e2a32); color: var(--color-porcelain, #f6f5f1); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); } .ds-btn-secondary:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-secondary:hover { transform: none; } }"
+    },
+    {
+      "name": "Nav Book CTA",
+      "kind": "button",
+      "refersTo": "button-nav-cta",
+      "description": "Compact ink header CTA for booking a checkup.",
+      "html": "<a class=\"ds-btn-nav\" href=\"/contact/\">Book a checkup</a>",
+      "css": ".ds-btn-nav { display: inline-block; background: var(--color-ink, #1e2a32); color: var(--color-porcelain, #f6f5f1); padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; border-radius: 0; transition: background-color 150ms; } .ds-btn-nav:hover { background: var(--color-steel, #35586c); } .ds-btn-nav:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Square white field with soft-rule border for Netlify forms.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Your name</span><input class=\"ds-input\" type=\"text\" placeholder=\"Jordan Smith\" /></label>",
+      "css": ".ds-field { display: block; } .ds-field-label { display: block; font-weight: 600; color: var(--color-ink, #1e2a32); } .ds-input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.75rem 1rem; border: 1px solid var(--color-line, #d8d5cc); border-radius: 0; background: var(--color-white, #fff); color: var(--color-ink, #1e2a32); font: inherit; } .ds-input:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "White paper panel with hairline border; lifts slightly on hover.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-eyebrow\">Website Rescue</p><h3 class=\"ds-card-title\">Off Wix, onto a site you own</h3><p class=\"ds-card-body\">Fixed price · 2–3 weeks</p></article>",
+      "css": ".ds-card { background: var(--color-white, #fff); color: var(--color-ink, #1e2a32); border: 1px solid var(--color-line, #d8d5cc); border-radius: 0; padding: 2rem; transition: transform 150ms, border-color 150ms, box-shadow 150ms; } .ds-card:hover { transform: translateY(-0.125rem); border-color: var(--color-ink, #1e2a32); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08); } .ds-eyebrow { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-flare-deep, #c03e10); margin: 0; } .ds-card-title { font-family: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif; font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0 0; } .ds-card-body { color: var(--color-mist, #5c6b73); margin: 0.75rem 0 0; } @media (prefers-reduced-motion: reduce) { .ds-card:hover { transform: none; } }"
+    },
+    {
+      "name": "Dashed Callout",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Ink dashed paper block for booking nudges.",
+      "html": "<aside class=\"ds-callout\"><h3 class=\"ds-callout-title\">Rather just talk?</h3><p class=\"ds-callout-body\">Book a free 15-minute call — no prep needed.</p><a class=\"ds-btn-primary\" href=\"/contact/\">Book a time →</a></aside>",
+      "css": ".ds-callout { border: 2px dashed var(--color-ink, #1e2a32); background: var(--color-white, #fff); padding: 2rem; border-radius: 0; } .ds-callout-title { display: inline-block; font-family: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif; font-size: 1.5rem; font-weight: 700; margin: 0; padding-bottom: 0.15em; border-bottom: 4px solid var(--color-flare, #e8531f); } .ds-callout-body { color: var(--color-mist, #5c6b73); margin: 0.5rem 0 1rem; } .ds-btn-primary { display: inline-block; background: var(--color-flare-deep, #c03e10); color: var(--color-porcelain, #f6f5f1); padding: 0.75rem 1.5rem; font-weight: 600; text-decoration: none; border-radius: 0; } .ds-btn-primary:hover { background: var(--color-flare, #e8531f); } .ds-btn-primary:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Header Nav",
+      "kind": "nav",
+      "refersTo": "button-nav-cta",
+      "description": "Wordmark with flare period, mist links, ink book CTA.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"/\">Gian Trotta<span class=\"ds-dot\">.</span></a><nav class=\"ds-nav\" aria-label=\"Main\"><a class=\"ds-nav-link\" href=\"/services/\">Services</a><a class=\"ds-nav-link ds-nav-link-current\" href=\"/case-studies/\" aria-current=\"page\">Case studies</a><a class=\"ds-btn-nav\" href=\"/contact/\">Book a checkup</a></nav></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--color-line, #d8d5cc); background: var(--color-porcelain, #f6f5f1); } .ds-wordmark { font-family: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif; font-size: 1.125rem; font-weight: 700; color: var(--color-ink, #1e2a32); text-decoration: none; letter-spacing: -0.025em; } .ds-dot { color: var(--color-flare, #e8531f); } .ds-nav { display: flex; align-items: center; gap: 1.5rem; } .ds-nav-link { position: relative; color: var(--color-mist, #5c6b73); text-decoration: none; font-size: 0.875rem; } .ds-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--color-flare, #e8531f); transform: scaleX(0); transform-origin: left; transition: transform 200ms; } .ds-nav-link:hover, .ds-nav-link-current { color: var(--color-ink, #1e2a32); font-weight: 600; } .ds-nav-link:hover::after, .ds-nav-link-current::after { transform: scaleX(1); } .ds-btn-nav { display: inline-block; background: var(--color-ink, #1e2a32); color: var(--color-porcelain, #f6f5f1); padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; } .ds-btn-nav:hover { background: var(--color-steel, #35586c); }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "chip",
+      "refersTo": "eyebrow",
+      "description": "Uppercase mono printout label above headings.",
+      "html": "<p class=\"ds-eyebrow\">Cleveland, Ohio</p><p class=\"ds-eyebrow ds-eyebrow-accent\">Website Rescue</p>",
+      "css": ".ds-eyebrow { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-mist, #5c6b73); margin: 0; } .ds-eyebrow-accent { color: var(--color-flare-deep, #c03e10); }"
+    },
+    {
+      "name": "Checkup Receipt",
+      "kind": "custom",
+      "refersTo": "receipt",
+      "description": "Signature torn-edge diagnostic slip with mono printout rows.",
+      "html": "<aside class=\"ds-receipt-wrap\" aria-label=\"Site checkup results\"><div class=\"ds-receipt\"><p class=\"ds-receipt-meta\">Site checkup · giantrotta.dev</p><div class=\"ds-receipt-row\"><span>Google speed score</span><strong>100 / 100</strong></div><div class=\"ds-receipt-row\"><span>Loads in</span><strong>under 1 second</strong></div><div class=\"ds-receipt-row ds-receipt-row-last\"><span>Monthly platform fee</span><strong class=\"ds-receipt-accent\">$0</strong></div></div></aside>",
+      "css": ".ds-receipt-wrap { filter: drop-shadow(0 16px 20px rgb(30 42 50 / 0.18)); max-width: 22rem; } .ds-receipt { background: #fff; padding: 2.25rem 1.75rem; font-family: ui-monospace, 'SF Mono', Menlo, monospace; color: var(--color-ink, #1e2a32); } .ds-receipt-meta { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-mist, #5c6b73); } .ds-receipt-row { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px dotted var(--color-line, #d8d5cc); font-size: 0.875rem; } .ds-receipt-row-last { border-bottom: none; padding-bottom: 0; } .ds-receipt-row strong { color: var(--color-steel, #35586c); font-weight: 700; } .ds-receipt-accent { color: var(--color-flare-deep, #c03e10) !important; }"
+    },
+    {
+      "name": "Stat Grid",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Proof mosaic: white cells separated by soft-rule gutters.",
+      "html": "<dl class=\"ds-stats\"><div class=\"ds-stat\"><dt class=\"ds-eyebrow\">Monthly fee</dt><dd class=\"ds-stat-value\">$0</dd></div><div class=\"ds-stat\"><dt class=\"ds-eyebrow\">Loads in</dt><dd class=\"ds-stat-value\">&lt; 1 second</dd></div><div class=\"ds-stat\"><dt class=\"ds-eyebrow\">On Google</dt><dd class=\"ds-stat-value\">Found</dd></div></dl>",
+      "css": ".ds-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--color-line, #d8d5cc); background: var(--color-line, #d8d5cc); margin: 0; } .ds-stat { background: #fff; padding: 1.25rem; } .ds-eyebrow { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-mist, #5c6b73); margin: 0; } .ds-stat-value { margin: 0.5rem 0 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 700; font-size: 1.25rem; color: var(--color-steel, #35586c); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Shop Receipt",
+    "overview": "This site feels like a shop counter after a diagnostic: torn-edge paper, dotted lines, numbers that settle the argument. Warmth comes from the Cleveland neighbor voice, not from soft SaaS chrome. The visitor should feel they could shake hands with the person who wrote the receipt.\n\nSurfaces stay paper-flat. Porcelain page ground, white panels, ink hairlines. Depth arrives through borders, dashed callouts, and a short orange rule under section titles. Shadows show up for hover and for the signature checkup receipt, not as default furniture.\n\nDensity is roomy but not sparse: max-width containers, clear section breaks, one job per block. Personality lives in the receipt object, the flare accent used sparingly, square CTAs that lift a hair on hover, and monospace utility labels that read like a printout.",
+    "keyCharacteristics": [
+      "Proof object first: the checkup receipt is the system's signature silhouette",
+      "Zero-radius forms: square buttons, fields, and cards",
+      "Safety-orange accent as a scarce signal (underlines, rules, primary actions)",
+      "Paper stack: porcelain ground → white surfaces → ink/steel type",
+      "Warm plain-English craft, not agency polish"
+    ],
+    "rules": [
+      {
+        "name": "The Scarce Flare Rule",
+        "body": "Flare colors are a minority voice on any screen. Body text stays ink/mist; orange marks action, proof underlines, and status accents.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Pairing Rule",
+        "body": "On porcelain/white use flare-deep for small text. On ink use flare-bright. Do not put raw flare on body-sized text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Printout Label Rule",
+        "body": "Uppercase mono labels introduce sections; they never replace headlines.",
+        "section": "typography"
+      },
+      {
+        "name": "The Optional Display Rule",
+        "body": "Do not force webfont swap mid-paint. Prefer font-display: optional (or equivalent) for display faces.",
+        "section": "typography"
+      },
+      {
+        "name": "The Counter Width Rule",
+        "body": "Marketing pages breathe inside max-w-6xl; conversion forms stay narrower (max-w-3xl) so fields feel fillable, not abandoned.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "At rest, surfaces are flat. Shadows appear for hover, the receipt, or ephemeral chrome (mobile menu). Do not pre-elevate every card.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Zero Radius Rule",
+        "body": "Interactive chrome and content cards stay square. Tiny rounded bars inside the hamburger icon are the only intentional round geometry.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do lead proof with real numbers, receipts, and before/after evidence styled as printouts.",
+      "Do keep primary actions on flare-deep and accents scarce.",
+      "Do use square corners and white-on-porcelain paper stacking.",
+      "Do put section titles on .section-heading so the short orange rule stays consistent.",
+      "Do honor prefers-reduced-motion for lift, underline draw, ping dots, and scroll reveals.",
+      "Do keep Netlify contact forms as static HTML with data-netlify=\"true\" when touching Contact."
+    ],
+    "donts": [
+      "Don't round buttons, fields, or cards into pills or soft SaaS radii.",
+      "Don't flood pages with flare orange or treat it as a full-bleed brand wash.",
+      "Don't invent testimonials, metrics, clients, or unverified scores to fill empty proof slots.",
+      "Don't add ambient multi-layer shadows on resting cards.",
+      "Don't swap display fonts mid-paint in a way that causes CLS (avoid font-display: swap for Bricolage).",
+      "Don't wrap the contact form in a client-only component that strips Netlify attributes at build time."
+    ]
+  }
+}

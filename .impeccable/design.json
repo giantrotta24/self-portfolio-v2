@@ -161,7 +161,7 @@
       "kind": "button",
       "refersTo": "button-nav-cta",
       "description": "Compact ink header CTA for booking a checkup.",
-      "html": "<a class=\"ds-btn-nav\" href=\"/contact/\">Book a checkup</a>",
+      "html": "<a class=\"ds-btn-nav\" href=\"/contact/\">Book a free call</a>",
       "css": ".ds-btn-nav { display: inline-block; background: var(--color-ink, #1e2a32); color: var(--color-porcelain, #f6f5f1); padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; border-radius: 0; transition: background-color 150ms; } .ds-btn-nav:hover { background: var(--color-steel, #35586c); } .ds-btn-nav:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
     },
     {

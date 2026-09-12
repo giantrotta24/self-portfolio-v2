@@ -11,7 +11,7 @@ I care more about the boring checks. Did the page get faster? Is the main action
 
 I was part of the team on a homepage redesign for RVshare, an RV rental marketplace. My slice was performance, SEO, and accessibility. I can't share company details. The public before-and-after numbers are enough.
 
-<figure class="my-10 border border-line bg-porcelain p-4 sm:p-6 not-prose">
+<figure class="my-10 border border-line bg-white p-4 sm:p-6 not-prose">
   <figcaption class="font-utility text-xs uppercase tracking-widest text-mist">
     rvshare.com · before and after
   </figcaption>
@@ -97,4 +97,4 @@ Maybe it's speed. Maybe the contact button is buried. Maybe Google is missing ba
 
 That's the work I care about.
 
-A business website doesn't need to impress other web designers. It needs to help someone take the next step. If yours hasn't been checked that way in a while, my [Site Checkup](/contact/) is built for it: real numbers, plain language, and a clear list of what to fix first.
+A business website doesn't need to impress other web designers. It needs to help someone take the next step. If yours hasn't been checked that way in a while, [book a free 15-minute call](/contact/). You'll get real numbers, plain language, and a clear list of what to fix first.

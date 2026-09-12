@@ -420,7 +420,7 @@ const loopNodes = [
       {
         steps.map(({ n, name, gate, tag, me, ai, why, exhibit }) => (
           <article
-            class={`reveal card-lift border border-line bg-white p-5 ${gate ? 'border-l-4 border-l-flare' : ''} ${exhibit || n === 1 ? 'md:col-span-2' : ''}`}
+            class={`reveal card-lift border border-line bg-white p-5 ${gate ? 'border-t-4 border-t-flare' : ''} ${exhibit || n === 1 ? 'md:col-span-2' : ''}`}
           >
             <div class="flex flex-wrap items-center gap-3">
               <span
@@ -455,7 +455,7 @@ const loopNodes = [
               </div>
             </dl>
             {exhibit && (
-              <div class="mt-5 border border-flare-deep border-l-4 bg-porcelain p-5">
+              <div class="mt-5 border border-flare-deep bg-porcelain p-5">
                 <p class="eyebrow eyebrow-accent">Exhibit · why findings get attacked</p>
                 <h4 class="mt-2 font-display text-lg font-semibold">
                   The reviewer was right about the math and wrong about the screen.
@@ -509,7 +509,7 @@ const loopNodes = [
       <div class="mt-8 grid gap-4 lg:grid-cols-3">
         {
           misses.map(({ h, body }) => (
-            <article class="reveal card-lift border border-line border-l-4 border-l-flare bg-white p-5">
+            <article class="reveal card-lift border border-line bg-white p-5">
               <p class="eyebrow eyebrow-accent">{h}</p>
               <p class="mt-3 text-sm text-mist">{body}</p>
             </article>
@@ -608,7 +608,7 @@ const loopNodes = [
         or not we work together.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
-        <a href="/contact/" class="btn-primary">Book a free call</a>
+        <a href="/contact/" class="btn-primary">Book a free 15-minute call</a>
         <a href="/services/" class="btn-secondary">See services</a>
       </div>
     </div>

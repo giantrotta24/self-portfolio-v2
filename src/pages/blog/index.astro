@@ -5,6 +5,9 @@ import Base from '../../layouts/Base.astro';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 ---
 
 <Base
@@ -12,14 +15,18 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   description="Plain-English writing about website speed, Google visibility, and AI-search visibility for small business owners — plus the occasional build story."
 >
   <section class="mx-auto max-w-3xl px-6 py-16">
-    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Blog</h1>
-    <p class="mt-4 text-lg text-mist">
-      Things I've learned making websites.
+    <p class="eyebrow eyebrow-accent">Notes from the shop</p>
+    <h1 class="section-heading mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+      Blog
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-mist">
+      Speed, findability, and build stories — written so a Northeast Ohio owner can use them, with
+      enough detail that a recruiter can see how I ship.
     </p>
 
     {
       posts.length === 0 ? (
-        <p class="mt-12 border border-dashed border-line bg-white p-8 text-mist">
+        <p class="mt-12 border-2 border-dashed border-ink bg-white p-8 text-mist">
           First posts land with the site launch. In the meantime,
           <a href="/contact/" class="underline hover:text-ink">
             book a free 15-minute call
@@ -34,10 +41,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
                 <h2 class="font-display text-2xl font-bold group-hover:text-steel">
                   {post.data.title}
                 </h2>
-                <p class="mt-1 font-utility text-sm text-mist">
-                  {post.data.pubDate.toISOString().slice(0, 10)}
-                </p>
-                <p class="mt-2 text-mist">{post.data.description}</p>
+                <p class="mt-1 font-utility text-sm text-mist">{formatDate(post.data.pubDate)}</p>
+                <p class="mt-2 max-w-prose text-mist">{post.data.description}</p>
                 <p class="mt-3 font-semibold text-steel">
                   Read the post
                   <span class="inline-block transition-transform group-hover:translate-x-1">→</span>

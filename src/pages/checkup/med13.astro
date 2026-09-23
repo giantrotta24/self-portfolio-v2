@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 
 const receiptRows = [
-  { label: 'Phone, main content shows', value: '8.6 s', tone: 'bad' },
+  { label: 'Mid-range phone, 4G', value: '8.6 s', tone: 'bad' },
+  { label: 'Fast phone, Wi-Fi', value: '~2.4 s', tone: 'good' },
   { label: 'Google\'s "good" mark', value: '2.5 s', tone: '' },
   { label: 'Homepage download', value: '~5 MB', tone: 'bad' },
   { label: 'Server response', value: '~70 ms', tone: 'good' },
@@ -25,12 +26,13 @@ const works = [
   { title: 'It does its job', body: 'People can read about MED13, RSVP for the gala, and give.' },
   { title: 'The host is fast', body: 'The server answers in about 70 ms. Hosting is not the problem.' },
   { title: 'Spanish is built in', body: 'The language switch works. The fixes keep it.' },
-  { title: 'Desktop is fine', body: 'About 2 seconds to the main content on a laptop.' },
+  { title: 'Fast connections are fine', body: 'About 2 seconds on a laptop, or on a new phone with good Wi-Fi.' },
 ];
 
 const bars = [
   { name: 'Home, phone', value: '8.6 s', width: 'w-[86%]', fill: 'bg-flare-deep' },
   { name: 'Gala, phone', value: '8.2 s', width: 'w-[82%]', fill: 'bg-flare-deep' },
+  { name: 'Home, fast phone', value: '2.4', width: 'w-[24%]', fill: 'bg-steel' },
   { name: 'Home, desktop', value: '2.2', width: 'w-[22%]', fill: 'bg-steel' },
 ];
 
@@ -214,7 +216,7 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
         <div class="grid min-w-0 gap-5 lg:col-span-7">
           <p class="eyebrow eyebrow-accent">What I found on med13.org</p>
           <h1 class="font-display text-4xl font-bold leading-tight tracking-tight text-balance sm:text-5xl xl:text-6xl">
-            The site works. On a phone, it <span class="hero-underline">makes people wait.</span>
+            The site works. On a slower phone, it <span class="hero-underline">makes people wait.</span>
           </h1>
           <p class="max-w-xl text-lg text-mist">
             Families can read it, RSVP for the gala, and donate. I ran the same checkup I run on
@@ -277,9 +279,10 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
     <section class={sectionClass}>
       <div>
         <p class="eyebrow">1 · Speed</p>
-        <h2 class={headingClass}>The wait is on phones</h2>
+        <h2 class={headingClass}>The wait is on slower phones</h2>
         <p class="mt-4 max-w-2xl text-mist">
-          Seconds until the main content appears. The dashed line is Google's "good" mark.
+          Seconds until the main content appears. "Phone" is Google's standard test: a mid-range phone
+          on a slow 4G connection. The dashed line is Google's "good" mark.
         </p>
       </div>
 
@@ -289,7 +292,7 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
           <div
             class="grid gap-3.5"
             role="img"
-            aria-label="Home on a phone 8.6 seconds, gala page on a phone 8.2 seconds, home on desktop 2.2 seconds. Google's good mark is 2.5 seconds."
+            aria-label="Home on a mid-range phone 8.6 seconds, gala page on a mid-range phone 8.2 seconds, home on a fast phone and connection 2.4 seconds, home on desktop 2.2 seconds. Google's good mark is 2.5 seconds."
           >
             {
               bars.map((bar) => (
@@ -322,11 +325,11 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
             </div>
           </div>
           <div class="flex flex-wrap items-center gap-2 text-sm text-mist">
-            <i class="inline-block h-4 w-0 border-l-2 border-dashed border-ink" /> Google's "good" mark, 2.5 s. Phones take more than 3× that.
+            <i class="inline-block h-4 w-0 border-l-2 border-dashed border-ink" /> Google's "good" mark, 2.5 s. A mid-range phone takes more than 3× that.
           </div>
           <p class="text-sm text-mist">
-            Re-checked late morning: the home page on a phone took 10.1 s and 17.2 s on two more
-            runs. Phone times swing, and none came near 2.5 s.
+            Re-checked late morning: the mid-range phone test took 10.1 s and 17.2 s on two more runs.
+            Those times swing, and none came near 2.5 s. With no slowdown, the page loads in about 2.4 s.
           </p>
         </div>
 
@@ -355,8 +358,9 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
 
       <p class="max-w-3xl font-display text-xl font-medium leading-snug">
         Parents often find this site on a phone, in a waiting room or late at night after a
-        diagnosis. <em class="not-italic text-flare-deep">Eight seconds or more</em> is long enough to
-        leave before the mission statement shows up.
+        diagnosis. On an older phone or a weak signal,
+        <em class="not-italic text-flare-deep">eight seconds or more</em> is long enough to leave before
+        the mission statement shows up. The 5 MB download is the reason, and it costs data on every visit.
       </p>
     </section>
 

@@ -141,8 +141,8 @@ const fixes = [
 const steps = [
   {
     label: 'Step 1',
-    title: 'Sync GitHub with Replit',
-    body: 'Replit is ahead of GitHub. Bring GitHub up to date so changes have a reviewable home.',
+    title: 'Connect Replit and GitHub',
+    body: 'Replit is ahead of GitHub. Bring GitHub up to date, then keep the two in sync on their own. Details below.',
     muted: false,
     labelClass: 'text-flare-deep',
   },
@@ -186,8 +186,8 @@ const outOfScope = [
 
 const asks = [
   {
-    question: 'Can I sync GitHub with the Replit app?',
-    detail: "If yes, I'll need access to the Replit project.",
+    question: 'Can we connect Replit and GitHub so they stay in sync?',
+    detail: "If yes, I'll need access to the Replit project to set it up with Amy.",
   },
   {
     question: 'Should I fix the eight items above?',
@@ -197,6 +197,41 @@ const asks = [
     question: 'Can I list the work on giantrotta.dev?',
     detail: 'Foundation name, before-and-after scores.',
   },
+];
+
+const setupSteps = [
+  {
+    body: 'Connect the Replit project to GitHub and push once.',
+    detail: 'GitHub catches up to the live site.',
+  },
+  {
+    body: 'Add a GitHub key to Replit Secrets.',
+    detail: 'It only works on this one repository.',
+  },
+  {
+    body: 'Tell Replit to pull whenever the project opens.',
+    detail: null,
+    detailHtml: 'One line in the project\'s <code class="font-utility text-[0.85em]">.replit</code> settings.',
+  },
+  {
+    body: 'Tell Agent to pull before each task and push after.',
+    detail: null,
+    detailHtml: 'A few lines in <code class="font-utility text-[0.85em]">replit.md</code>, which Agent reads every time.',
+  },
+  {
+    body: 'Add the build check to GitHub pull requests.',
+    detail: null,
+  },
+  {
+    body: 'Try it on a copy of the project first.',
+    detail: 'Nothing touches the live site until it works there.',
+  },
+];
+
+const houseRules = [
+  'Undo with a new change, not a rollback, once work is on GitHub. Rolling back past it splits the history in two.',
+  'Passwords, keys, and the database stay in Replit. They never go through GitHub.',
+  'If we both edit the same file at the same time, Replit flags it when the project opens. Agent or I can sort it out.',
 ];
 
 const sectionClass = 'grid gap-6 border-t border-line py-12';
@@ -473,6 +508,97 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
           ))
         }
       </ol>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">Step 1, up close</p>
+        <h2 class={headingClass}>Amy keeps working in Replit. I work in GitHub. They stay in sync.</h2>
+        <p class="mt-4 max-w-2xl text-mist">
+          Replit can push to GitHub and pull from it. Out of the box, someone has to click a button
+          each time. A one-time setup makes both directions happen on their own.
+        </p>
+      </div>
+
+      <div
+        class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1fr)]"
+        role="img"
+        aria-label="Replit, where Amy works, and GitHub, where Gian works, sync in both directions automatically. Publishing to med13.org stays a click in Replit."
+      >
+        <div class="grid content-start gap-1.5 border border-ink bg-white p-5">
+          <span class="eyebrow">Replit</span>
+          <strong class="font-display text-xl">Amy</strong>
+          <p class="text-sm text-mist">Edits with Replit Agent, same as today.</p>
+        </div>
+
+        <div class="grid content-center gap-3">
+          <div class="grid gap-1 border border-dashed border-line bg-white p-3.5">
+            <span class="font-utility text-sm font-bold tracking-wide text-steel">Replit → GitHub</span>
+            <p class="text-sm">Agent saves and pushes its work after every task.</p>
+            <span class="font-utility text-xs uppercase tracking-[0.08em] text-steel">Automatic</span>
+          </div>
+          <div class="grid gap-1 border border-dashed border-line bg-white p-3.5">
+            <span class="font-utility text-sm font-bold tracking-wide text-steel">GitHub → Replit</span>
+            <p class="text-sm">
+              Replit pulls the latest code every time the project opens, and Agent pulls again
+              before it starts a task.
+            </p>
+            <span class="font-utility text-xs uppercase tracking-[0.08em] text-steel">Automatic</span>
+          </div>
+        </div>
+
+        <div class="grid content-start gap-1.5 border border-ink bg-white p-5">
+          <span class="eyebrow">GitHub</span>
+          <strong class="font-display text-xl">Gian</strong>
+          <p class="text-sm text-mist">Each fix is a pull request. GitHub checks that the site still builds before anything merges.</p>
+        </div>
+
+        <div class="grid gap-1.5 lg:col-start-1">
+          <div class="grid gap-1 border border-line bg-white p-3.5">
+            <span class="font-utility text-sm font-bold tracking-wide text-flare-deep">Replit → med13.org</span>
+            <p class="text-sm">Amy clicks Publish, same as today. Replit can't publish straight from GitHub.</p>
+            <span class="font-utility text-xs uppercase tracking-[0.08em] text-flare-deep">One click</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="grid content-start gap-4.5 border border-line bg-white p-6">
+          <h3 class="font-display text-xl font-bold">One-time setup</h3>
+          <ol class="grid list-decimal gap-2 pl-5 text-[0.95rem]">
+            {
+              setupSteps.map((step) => (
+                <li class="pl-1">
+                  {step.body}
+                  {step.detailHtml ? (
+                    <span class="mt-0.5 block text-sm text-mist" set:html={step.detailHtml} />
+                  ) : step.detail ? (
+                    <span class="mt-0.5 block text-sm text-mist">{step.detail}</span>
+                  ) : null}
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+        <div class="grid content-start gap-4.5 border border-line bg-white p-6">
+          <h3 class="font-display text-xl font-bold">House rules</h3>
+          <ul class="grid gap-2">
+            {
+              houseRules.map((rule) => (
+                <li class="relative pl-5 before:absolute before:left-0 before:top-[0.7em] before:h-0.5 before:w-2 before:bg-flare before:content-['']">
+                  {rule}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <p class="max-w-3xl border-t border-dashed border-line pt-4 text-[0.95rem] text-mist">
+        Later, if you want merged fixes to go live without anyone clicking Publish, the site would
+        need to be hosted somewhere that deploys from GitHub. That's a separate decision, and not
+        part of this.
+      </p>
     </section>
 
     <section class={sectionClass}>

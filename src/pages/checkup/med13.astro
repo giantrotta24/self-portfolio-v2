@@ -1,0 +1,526 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const receiptRows = [
+  { label: 'Phone, main content shows', value: '8.6 s', tone: 'bad' },
+  { label: 'Google\'s "good" mark', value: '2.5 s', tone: '' },
+  { label: 'Homepage download', value: '~5 MB', tone: 'bad' },
+  { label: 'Server response', value: '~70 ms', tone: 'good' },
+  { label: 'Accessibility failures', value: '4 kinds', tone: 'bad' },
+  { label: 'Pages in sitemap', value: '3 of 8+', tone: 'bad' },
+  { label: 'Link-preview cards', value: 'none', tone: 'bad' },
+  { label: 'AI-readable summary', value: 'none', tone: 'bad' },
+];
+
+const toneClass: Record<string, string> = {
+  bad: 'text-flare-deep',
+  good: 'text-steel',
+  '': '',
+};
+
+const leader =
+  "after:order-1 after:flex-[1_1_12px] after:-translate-y-1 after:border-b after:border-dotted after:border-line after:content-['']";
+
+const works = [
+  { title: 'It does its job', body: 'People can read about MED13, RSVP for the gala, and give.' },
+  { title: 'The host is fast', body: 'The server answers in about 70 ms. Hosting is not the problem.' },
+  { title: 'Spanish is built in', body: 'The language switch works. The fixes keep it.' },
+  { title: 'Desktop is fine', body: 'About 2 seconds to the main content on a laptop.' },
+];
+
+const bars = [
+  { name: 'Home, phone', value: '8.6 s', width: 'w-[86%]', fill: 'bg-flare-deep' },
+  { name: 'Gala, phone', value: '8.2 s', width: 'w-[82%]', fill: 'bg-flare-deep' },
+  { name: 'Home, desktop', value: '2.2', width: 'w-[22%]', fill: 'bg-steel' },
+];
+
+const ticks = [
+  { label: '0', position: 'left-0' },
+  { label: '2.5', position: 'left-1/4 -translate-x-1/2' },
+  { label: '5', position: 'left-1/2 -translate-x-1/2' },
+  { label: '7.5', position: 'left-3/4 -translate-x-1/2' },
+  { label: '10 s', position: 'left-full -translate-x-full' },
+];
+
+const segments = [
+  { width: 'w-[38%]', color: 'bg-steel', label: "med13.org's own code and images", size: '1.9 MB' },
+  { width: 'w-[24%]', color: 'bg-flare-deep', label: 'Classy donation form', size: '1.2 MB' },
+  { width: 'w-[18%]', color: 'bg-[#e8835a]', label: 'Stripe payments', size: '0.9 MB' },
+  { width: 'w-[20%]', color: 'bg-[#b9b5aa]', label: 'GoFundMe, Facebook, cookie banner, fonts', size: '~1.0 MB' },
+];
+
+const checks = [
+  {
+    title: 'Search',
+    verdict: 'Gaps',
+    verdictClass: 'text-steel',
+    feel: 'Google can find the homepage. Most other pages are hard to find, and shared links show no preview.',
+    items: [
+      'The sitemap lists 3 pages. The site has at least 8.',
+      "Get Involved, News & Events, and Roadmap show up in search with the homepage's title.",
+      'A shared gala link has no image or card on Facebook, iMessage, or Slack.',
+      'www.med13.org shows a security warning instead of the site.',
+    ],
+  },
+  {
+    title: 'AI search',
+    verdict: 'Weak',
+    verdictClass: 'text-flare-deep',
+    feel: "When someone asks ChatGPT or Google's AI about MED13 support, the foundation's own pages are hard for it to read.",
+    items: [
+      "The page text only appears after JavaScript runs. Many AI crawlers don't run it.",
+      'No llms.txt, the short plain-text summary that AI tools look for.',
+      'No structured data telling machines "this is a nonprofit, this is the Oct 10 gala."',
+    ],
+  },
+  {
+    title: 'Accessibility',
+    verdict: 'Fix first',
+    verdictClass: 'text-flare-deep',
+    feel: "Some visitors can't zoom in, and some labels are too faint to read.",
+    items: [
+      'Pinch-to-zoom is turned off on phones.',
+      '23 teal and coral labels and buttons are too light against white.',
+      'The mobile menu button and the Facebook icon have no name for screen readers.',
+    ],
+  },
+];
+
+const swatches = [
+  { text: 'Get involved', demo: 'text-[#69b0ab]', ratio: '#69b0ab · 2.5 : 1 · fails' },
+  { text: 'Get involved', demo: 'text-[#3d7f7a]', ratio: '#3d7f7a · 4.6 : 1 · passes' },
+  { text: 'Donate today', demo: 'text-[#ffb19e]', ratio: '#ffb19e · 1.7 : 1 · fails' },
+  {
+    text: 'Donate today',
+    demo: 'justify-self-start bg-[#ffb19e] px-1.5 py-1 text-ink',
+    ratio: 'coral as a fill, dark text · passes',
+  },
+];
+
+const fixes = [
+  {
+    title: "Compress and cache the site's files",
+    why: 'The main JavaScript ships raw at 1.28 MB, and repeat visitors download it again every time.',
+    tags: ['Speed', 'Server setting'],
+  },
+  {
+    title: 'Load the donation forms only when someone goes to give',
+    why: 'Classy, Stripe, and GoFundMe add about 2 MB before the mission statement appears.',
+    tags: ['Speed'],
+  },
+  { title: 'Turn pinch-to-zoom back on', why: 'One line in the page header.', tags: ['Access', 'One line'] },
+  {
+    title: 'Darken the teal and coral, name the icon buttons',
+    why: 'Same colors, a shade deeper. Labels for the menu and social icons.',
+    tags: ['Access'],
+  },
+  {
+    title: 'List every page in the sitemap, give each its own title',
+    why: 'Get Involved, News & Events, and Roadmap start showing up as themselves.',
+    tags: ['Search'],
+  },
+  {
+    title: 'Add link-preview cards and structured data',
+    why: 'A real image when someone shares the gala. Nonprofit and event details machines can read.',
+    tags: ['Search', 'AI'],
+  },
+  {
+    title: 'Publish an llms.txt',
+    why: 'A plain-text summary of the foundation, its key pages, and how to cite them.',
+    tags: ['AI'],
+  },
+  {
+    title: 'Fix www.med13.org',
+    why: 'A valid certificate that forwards to med13.org, so nobody hits a warning page.',
+    tags: ['Search', 'Server setting'],
+  },
+];
+
+const steps = [
+  {
+    label: 'Step 1',
+    title: 'Sync GitHub with Replit',
+    body: 'Replit is ahead of GitHub. Bring GitHub up to date so changes have a reviewable home.',
+    muted: false,
+    labelClass: 'text-flare-deep',
+  },
+  {
+    label: 'Done',
+    title: 'Baseline checkup',
+    body: 'The numbers on this page are the "before." Nothing on the live site changes until the sync is agreed.',
+    muted: true,
+    labelClass: 'text-steel',
+  },
+  {
+    label: 'Step 3',
+    title: 'Fix the list above',
+    body: 'One reviewable change at a time. The scope is the list, nothing more.',
+    muted: false,
+    labelClass: 'text-flare-deep',
+  },
+  {
+    label: 'Step 4',
+    title: 'Re-run the checkup',
+    body: 'Same tests, same pages. Before-and-after scores side by side.',
+    muted: false,
+    labelClass: 'text-flare-deep',
+  },
+  {
+    label: 'Only if you want',
+    title: 'Redesign, later',
+    body: 'A separate conversation, after the fixes above are live.',
+    muted: true,
+    labelClass: 'text-mist',
+  },
+];
+
+const outOfScope = [
+  'Visual redesign',
+  'New pages or sections',
+  'Moving to a different CMS',
+  'The literature project',
+  'Social media',
+];
+
+const asks = [
+  {
+    question: 'Can I sync GitHub with the Replit app?',
+    detail: "If yes, I'll need access to the Replit project.",
+  },
+  {
+    question: 'Should I fix the eight items above?',
+    detail: 'No redesign. Each change reviewed before it goes live.',
+  },
+  {
+    question: 'Can I list the work on giantrotta.dev?',
+    detail: 'Foundation name, before-and-after scores.',
+  },
+];
+
+const sectionClass = 'grid gap-6 border-t border-line py-12';
+const headingClass = 'section-heading mt-3 font-display text-3xl font-bold tracking-tight text-balance sm:text-4xl';
+---
+
+<Base
+  title="med13.org Site Checkup — Gian Trotta"
+  description="Speed, search, AI search, and accessibility findings for med13.org, with a no-redesign fix list."
+  noindex
+>
+  <div class="mx-auto max-w-6xl overflow-x-clip px-6 pb-16">
+    <!-- Hero: what the checkup found, with the receipt that sums it up -->
+    <section class="pb-12 pt-12 lg:pt-16">
+      <p class="eyebrow">Site Checkup · MED13 Foundation · 2026-09-23</p>
+      <div class="mt-8 grid items-center gap-12 lg:grid-cols-12">
+        <div class="grid min-w-0 gap-5 lg:col-span-7">
+          <p class="eyebrow eyebrow-accent">What I found on med13.org</p>
+          <h1 class="font-display text-4xl font-bold leading-tight tracking-tight text-balance sm:text-5xl xl:text-6xl">
+            The site works. On a phone, it <span class="hero-underline">makes people wait.</span>
+          </h1>
+          <p class="max-w-xl text-lg text-mist">
+            Families can read it, RSVP for the gala, and donate. I ran the same checkup I run on
+            any site: speed, search, AI search, and accessibility. Below is what it found, what I
+            would fix, and what I'm asking for in return.
+          </p>
+        </div>
+
+        <aside
+          class="receipt-wrap w-full min-w-0 max-w-md justify-self-start transition-transform duration-300 lg:col-span-5 lg:max-w-none lg:justify-self-stretch lg:-rotate-2 lg:hover:rotate-0 motion-reduce:transition-none"
+          aria-label="Checkup summary"
+        >
+          <div class="receipt-paper px-5 py-8 font-utility text-sm sm:px-7 sm:py-9">
+            <div class="grid gap-0.5 border-b-2 border-dotted border-line pb-3.5 text-center">
+              <strong class="text-[0.95rem] tracking-[0.12em]">SITE CHECKUP</strong>
+              <span class="text-xs text-mist">MED13.ORG · 2026-09-23</span>
+              <span class="text-xs text-mist">Lighthouse 12 · axe-core 4.10</span>
+            </div>
+            <dl class="my-3.5 grid gap-1.5">
+              {
+                receiptRows.map((row) => (
+                  <div class={`flex items-baseline gap-2 ${leader}`}>
+                    <dt class="min-w-0">{row.label}</dt>
+                    <dd class={`order-2 whitespace-nowrap font-bold tabular-nums ${toneClass[row.tone]}`}>
+                      {row.value}
+                    </dd>
+                  </div>
+                ))
+              }
+            </dl>
+            <dl class="border-t-2 border-dotted border-line pt-3.5 text-base">
+              <div class={`flex items-baseline gap-2 ${leader}`}>
+                <dt class="min-w-0">Cost to the foundation</dt>
+                <dd class="order-2 whitespace-nowrap font-bold tabular-nums">$0</dd>
+              </div>
+            </dl>
+            <p class="pt-2.5 text-center text-xs text-mist">Fixes listed below. No redesign.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">Keep these</p>
+        <h2 class={headingClass}>What's already working</h2>
+      </div>
+      <ul class="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        {
+          works.map((item) => (
+            <li class="grid gap-1 bg-white px-5 py-4.5">
+              <strong class="font-display text-lg">{item.title}</strong>
+              <span class="text-mist">{item.body}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">1 · Speed</p>
+        <h2 class={headingClass}>The wait is on phones</h2>
+        <p class="mt-4 max-w-2xl text-mist">
+          Seconds until the main content appears. The dashed line is Google's "good" mark.
+        </p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="grid content-start gap-4.5 border border-line bg-white p-6">
+          <h3 class="font-display text-xl font-bold">Time to main content</h3>
+          <div
+            class="grid gap-3.5"
+            role="img"
+            aria-label="Home on a phone 8.6 seconds, gala page on a phone 8.2 seconds, home on desktop 2.2 seconds. Google's good mark is 2.5 seconds."
+          >
+            {
+              bars.map((bar) => (
+                <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-3 sm:grid-cols-[7.5rem_minmax(0,1fr)]">
+                  <div class="text-sm leading-tight">{bar.name}</div>
+                  <div class="relative h-6.5">
+                    <div
+                      class={`flex h-full items-center justify-end pr-2 font-utility text-[0.8rem] font-bold leading-none text-white tabular-nums ${bar.width} ${bar.fill}`}
+                    >
+                      {bar.value}
+                    </div>
+                    <div class="absolute -bottom-1.5 -top-1.5 left-1/4 w-0 border-l-2 border-dashed border-ink" />
+                  </div>
+                </div>
+              ))
+            }
+            <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 sm:grid-cols-[7.5rem_minmax(0,1fr)]">
+              <div />
+              <div class="relative h-4.5 border-t border-line">
+                {
+                  ticks.map((tick) => (
+                    <span
+                      class={`absolute top-1 whitespace-nowrap font-utility text-[0.72rem] leading-none text-mist tabular-nums ${tick.position}`}
+                    >
+                      {tick.label}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-sm text-mist">
+            <i class="inline-block h-4 w-0 border-l-2 border-dashed border-ink" /> Google's "good" mark, 2.5 s. Phones take more than 3× that.
+          </div>
+          <p class="text-sm text-mist">
+            Re-checked late morning: the home page on a phone took 10.1 s and 17.2 s on two more
+            runs. Phone times swing, and none came near 2.5 s.
+          </p>
+        </div>
+
+        <div class="grid content-start gap-4.5 border border-line bg-white p-6">
+          <h3 class="font-display text-xl font-bold">What a phone downloads for the homepage</h3>
+          <div
+            class="flex h-10 w-full gap-0.5"
+            role="img"
+            aria-label="About 5 megabytes: med13.org's own code and images 1.9, Classy donation form 1.2, Stripe 0.9, other embeds about 1.0."
+          >
+            {segments.map((segment) => <div class={`h-full ${segment.width} ${segment.color}`} />)}
+          </div>
+          <ul class="grid gap-2">
+            {
+              segments.map((segment) => (
+                <li class="grid grid-cols-[14px_minmax(0,1fr)_auto] items-center gap-2.5 text-[0.93rem]">
+                  <i class={`block h-3.5 w-3.5 ${segment.color}`} />
+                  {segment.label}
+                  <b class="font-utility text-[0.85rem] leading-none tabular-nums">{segment.size}</b>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <p class="max-w-3xl font-display text-xl font-medium leading-snug">
+        Parents often find this site on a phone, in a waiting room or late at night after a
+        diagnosis. <em class="not-italic text-flare-deep">Eight seconds or more</em> is long enough to
+        leave before the mission statement shows up.
+      </p>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">2–4 · Search, AI search, accessibility</p>
+        <h2 class={headingClass}>The other three checks</h2>
+        <p class="mt-4 max-w-2xl text-mist">
+          Lighthouse gives the site 100 for SEO. That score only checks that search engines are
+          allowed in. The real gaps are underneath it.
+        </p>
+      </div>
+
+      <div class="grid gap-px border border-line bg-line sm:grid-cols-2">
+        {
+          checks.map((check) => (
+            <div class="grid content-start gap-3 bg-white p-6.5">
+              <div class="flex flex-wrap items-baseline justify-between gap-3">
+                <h3 class="font-display text-xl font-bold">{check.title}</h3>
+                <span
+                  class={`border border-current px-2 py-1.5 font-utility text-[0.72rem] font-bold uppercase leading-none tracking-[0.08em] ${check.verdictClass}`}
+                >
+                  {check.verdict}
+                </span>
+              </div>
+              <p>{check.feel}</p>
+              <ul class="grid list-disc gap-1.5 pl-4.5 text-[0.95rem] text-mist">
+                {check.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+        <div class="grid content-start gap-3 bg-white p-6.5">
+          <div class="flex flex-wrap items-baseline justify-between gap-3">
+            <h3 class="font-display text-xl font-bold">Contrast, up close</h3>
+            <span class="border border-current px-2 py-1.5 font-utility text-[0.72rem] font-bold uppercase leading-none tracking-[0.08em] text-steel">
+              Example
+            </span>
+          </div>
+          <p>
+            Text needs a 4.5 : 1 contrast ratio to pass WCAG AA. A darker shade of the same teal
+            passes.
+          </p>
+          <div class="grid grid-cols-2 gap-2.5">
+            {
+              swatches.map((swatch) => (
+                <div class="grid gap-1.5 border border-line bg-white p-3">
+                  <span class={`font-body text-base font-bold leading-tight ${swatch.demo}`}>{swatch.text}</span>
+                  <span class="font-utility text-xs leading-snug text-mist">{swatch.ratio}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">The offer</p>
+        <h2 class={headingClass}>What I'd fix, without a redesign</h2>
+        <p class="mt-4 max-w-2xl text-mist">
+          In order of payoff. The site keeps its look, and each fix is a small change your team can
+          review before it goes live.
+        </p>
+      </div>
+      <ol class="border border-line bg-white">
+        {
+          fixes.map((fix, index) => (
+            <li class="grid grid-cols-[1.8rem_minmax(0,1fr)] items-start gap-3.5 border-dotted border-line px-5 py-4 not-first:border-t sm:grid-cols-[2.2rem_minmax(0,1fr)_auto]">
+              <span class="font-utility text-sm font-bold leading-normal text-flare-deep">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <strong class="block font-semibold">{fix.title}</strong>
+                <span class="text-[0.93rem] text-mist">{fix.why}</span>
+              </div>
+              <div class="col-start-2 flex flex-wrap justify-start gap-1.5 sm:col-start-auto sm:justify-end">
+                {
+                  fix.tags.map((tag) => (
+                    <span class="whitespace-nowrap border border-line px-2 py-1.5 font-utility text-[0.7rem] uppercase leading-none tracking-[0.06em] text-mist">
+                      {tag}
+                    </span>
+                  ))
+                }
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="text-[0.95rem] text-mist">
+        Later, once the code is synced: split up the JavaScript so each page loads only what it
+        needs. It's a bigger change, so it waits until 1–4 are done.
+      </p>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">How it would go</p>
+        <h2 class={headingClass}>Sync first, then fix, then show the difference</h2>
+      </div>
+      <ol class="grid gap-px border border-line bg-line lg:grid-cols-5">
+        {
+          steps.map((step) => (
+            <li class={`grid content-start gap-2 p-5 ${step.muted ? 'bg-porcelain' : 'bg-white'}`}>
+              <span class={`eyebrow ${step.labelClass}`}>{step.label}</span>
+              <strong class="font-display text-lg leading-tight">{step.title}</strong>
+              <p class="text-[0.93rem] text-mist">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class={sectionClass}>
+      <div class="grid items-start gap-6 lg:grid-cols-5">
+        <div class="grid gap-3.5 border-2 border-dashed border-ink p-7 lg:col-span-3">
+          <p class="eyebrow eyebrow-accent">Terms</p>
+          <p class="font-display text-[clamp(2rem,4vw,2.8rem)] font-bold leading-none tracking-tight">Free.</p>
+          <p class="max-w-xl">
+            It's volunteer time. The one thing I'm asking for is permission to show this work on
+            giantrotta.dev, with the before-and-after scores and the foundation's name.
+          </p>
+        </div>
+        <div class="grid gap-2.5 lg:col-span-2">
+          <p class="eyebrow">Not part of this</p>
+          <ul class="grid gap-1.5">
+            {
+              outOfScope.map((item) => (
+                <li class="relative pl-5 text-mist before:absolute before:left-0 before:top-[0.7em] before:h-0.5 before:w-2 before:bg-line before:content-['']">
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class={sectionClass}>
+      <div>
+        <p class="eyebrow">Today</p>
+        <h2 class={headingClass}>Three yes-or-no questions</h2>
+      </div>
+      <ol class="grid gap-3">
+        {
+          asks.map((ask) => (
+            <li class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 border border-ink bg-white px-5 py-4.5 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
+              <span class="h-5.5 w-5.5 border-2 border-ink" aria-hidden="true" />
+              <div>
+                <strong class="block font-display text-lg leading-snug">{ask.question}</strong>
+                <span class="text-[0.93rem] text-mist">{ask.detail}</span>
+              </div>
+              <span class="col-start-2 whitespace-nowrap font-utility text-[0.8rem] font-bold leading-none tracking-widest text-mist sm:col-start-auto">
+                YES / NO
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <p class="eyebrow border-t border-dashed border-line pt-7">
+      Measured 2026-09-23 · med13.org home (phone + desktop) and /gala (phone)
+    </p>
+  </div>
+</Base>

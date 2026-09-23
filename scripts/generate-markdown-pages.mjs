@@ -9,6 +9,7 @@ import TurndownService from 'turndown';
 const SITE = 'https://giantrotta.dev';
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const SKIP = new Set(['404.html']);
+const SKIP_DIRS = new Set(['checkup']);
 
 const turndown = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
 
@@ -18,6 +19,7 @@ async function findHtmlFiles(dir) {
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
+      if (SKIP_DIRS.has(path.relative(DIST, full))) continue;
       files.push(...(await findHtmlFiles(full)));
     } else if (entry.name.endsWith('.html') && !SKIP.has(entry.name)) {
       files.push(full);

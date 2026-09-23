@@ -4,9 +4,11 @@ interface Props {
   description: string;
   /** Path of the page, e.g. "/services" — used for the canonical URL. */
   path: string;
+  /** Unlisted page: keep it out of search and skip the markdown alternate. */
+  noindex?: boolean;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, noindex = false } = Astro.props;
 const canonical = new URL(path, Astro.site);
 const markdownPath = path.replace(/\/$/, '') || '/index';
 const markdownVersion = new URL(`${markdownPath}.md`, Astro.site);
@@ -47,7 +49,7 @@ const jsonLd = {
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<link rel="alternate" type="text/markdown" href={markdownVersion} />
+{noindex ? <meta name="robots" content="noindex, nofollow" /> : <link rel="alternate" type="text/markdown" href={markdownVersion} />}
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content={title} />

@@ -37,3 +37,9 @@
   for = "/*.md"
   [headers.values]
     Content-Type = "text/markdown; charset=utf-8"
+
+# Unlisted pages sent by link (e.g. /checkup/med13/): reachable, never indexed.
+[[headers]]
+  for = "/checkup/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

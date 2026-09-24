@@ -187,7 +187,7 @@ const outOfScope = [
 const asks = [
   {
     question: 'Connect Replit and GitHub so they stay in sync',
-    detail: 'Set up with Amy, on a copy of the project first.',
+    detail: "I set it up on a copy of the project first and keep it running. Amy's routine stays the same.",
     agreed: true,
   },
   {
@@ -220,7 +220,7 @@ const setupSteps = [
   {
     body: 'Tell Agent to pull before each task and push after.',
     detail: null,
-    detailHtml: 'A few lines in <code class="font-utility text-[0.85em]">replit.md</code>, which Agent reads every time.',
+    detailHtml: 'A few lines in <code class="font-utility text-[0.85em]">replit.md</code>, which Agent reads every time. They also tell Agent to stop and flag any sync problem instead of trying to fix it.',
   },
   {
     body: 'Add the build check to GitHub pull requests.',
@@ -235,8 +235,9 @@ const setupSteps = [
 const houseRules = [
   'Undo with a new change, not a rollback, once work is on GitHub. Rolling back past it splits the history in two.',
   'Passwords, keys, and the database stay in Replit. They never go through GitHub.',
-  'If we both edit the same file at the same time, Replit flags it when the project opens. Agent or I can sort it out.',
+  'If a sync ever fails, Agent stops and tells Amy to message me. She never has to sort it out herself.',
   'Publish ships everything in Replit at that moment, finished or not. Whoever publishes checks with the other first.',
+  "I watch GitHub for Agent's pushes, so problems get caught on my side, not Amy's.",
 ];
 
 const codeClass = 'font-utility text-[0.85em]';
@@ -643,7 +644,8 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
         <h2 class={headingClass}>Amy keeps working in Replit. I work in GitHub. They stay in sync.</h2>
         <p class="mt-4 max-w-2xl text-mist">
           Replit can push to GitHub and pull from it. Out of the box, someone has to click a button
-          each time. A one-time setup makes both directions happen on their own.
+          each time. A one-time setup makes both directions happen on their own. Amy's routine doesn't
+          change. She works with Agent, and keeping the sync healthy is my job.
         </p>
       </div>
 
@@ -655,7 +657,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
         <div class="grid content-start gap-1.5 border border-ink bg-white p-5">
           <span class="eyebrow">Replit</span>
           <strong class="font-display text-xl">Amy</strong>
-          <p class="text-sm text-mist">Edits with Replit Agent, same as today.</p>
+          <p class="text-sm text-mist">Edits with Replit Agent, same as today. Never has to pull, sync, or fix a conflict.</p>
         </div>
 
         <div class="grid content-center gap-3">
@@ -684,8 +686,8 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
           <div class="grid gap-1 border border-line bg-white p-3.5">
             <span class="font-utility text-sm font-bold tracking-wide text-flare-deep">Replit → med13.org</span>
             <p class="text-sm">
-              After a fix merges, Replit pulls it in the next time the project opens. Then Amy or I
-              click Publish. Replit can't publish straight from GitHub.
+              After a fix merges, I open the Replit project so it pulls the change in, check it, and
+              publish once Amy's work is at a stopping point. Replit can't publish straight from GitHub.
             </p>
             <span class="font-utility text-xs uppercase tracking-[0.08em] text-flare-deep">One click</span>
           </div>

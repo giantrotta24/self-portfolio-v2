@@ -25,7 +25,6 @@ const leader =
 const works = [
   { title: 'It does its job', body: 'People can read about MED13, RSVP for the gala, and give.' },
   { title: 'The host is fast', body: 'The server answers in about 70 ms. Hosting is not the problem.' },
-  { title: 'Spanish is built in', body: 'The language switch works. The fixes keep it.' },
   { title: 'Fast connections are fine', body: 'About 2 seconds on a laptop, or on a new phone with good Wi-Fi.' },
 ];
 
@@ -383,8 +382,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
           </h1>
           <p class="max-w-xl text-lg text-mist">
             Families can read it, RSVP for the gala, and donate. I ran the same checkup I run on
-            any site: speed, search, AI search, and accessibility. Below is what it found, what I
-            would fix, and what I'm asking for in return.
+            any site: speed, search, AI search, and accessibility. Below are those findings.
           </p>
         </div>
 
@@ -427,7 +425,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
         <p class="eyebrow">Keep these</p>
         <h2 class={headingClass}>What's already working</h2>
       </div>
-      <ul class="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="grid gap-px border border-line bg-line sm:grid-cols-3">
         {
           works.map((item) => (
             <li class="grid gap-1 bg-white px-5 py-4.5">
@@ -520,8 +518,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
       </div>
 
       <p class="max-w-3xl font-display text-xl font-medium leading-snug">
-        Parents often find this site on a phone, in a waiting room or late at night after a
-        diagnosis. On an older phone or a weak signal,
+        On an older phone or a weak signal,
         <em class="not-italic text-flare-deep">eight seconds or more</em> is long enough to leave before
         the mission statement shows up. The 5 MB download is the reason, and it costs data on every visit.
       </p>

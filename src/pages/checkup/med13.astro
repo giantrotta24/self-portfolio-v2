@@ -186,16 +186,20 @@ const outOfScope = [
 
 const asks = [
   {
-    question: 'Can we connect Replit and GitHub so they stay in sync?',
-    detail: "If yes, I'll need access to the Replit project to set it up with Amy.",
+    question: 'Connect Replit and GitHub so they stay in sync',
+    detail: "I set it up on a copy of the project first and keep it running. Amy's routine stays the same.",
+    agreed: true,
   },
   {
-    question: 'Should I fix the eight items above?',
+    question: 'Fix the eight items above',
     detail: 'No redesign. Each change reviewed before it goes live.',
+    agreed: true,
   },
   {
     question: 'Can I list the work on giantrotta.dev?',
-    detail: 'Foundation name, before-and-after scores.',
+    detail:
+      "Foundation name, before-and-after scores. This page is already on my site, unlisted and hidden from search, so it's easy to share. I'll take it down if you'd rather.",
+    agreed: false,
   },
 ];
 
@@ -216,7 +220,7 @@ const setupSteps = [
   {
     body: 'Tell Agent to pull before each task and push after.',
     detail: null,
-    detailHtml: 'A few lines in <code class="font-utility text-[0.85em]">replit.md</code>, which Agent reads every time.',
+    detailHtml: 'A few lines in <code class="font-utility text-[0.85em]">replit.md</code>, which Agent reads every time. They also tell Agent to stop and flag any sync problem instead of trying to fix it.',
   },
   {
     body: 'Add the build check to GitHub pull requests.',
@@ -231,11 +235,135 @@ const setupSteps = [
 const houseRules = [
   'Undo with a new change, not a rollback, once work is on GitHub. Rolling back past it splits the history in two.',
   'Passwords, keys, and the database stay in Replit. They never go through GitHub.',
-  'If we both edit the same file at the same time, Replit flags it when the project opens. Agent or I can sort it out.',
+  'If a sync ever fails, Agent stops and tells Amy to message me. She never has to sort it out herself.',
+  'Publish ships everything in Replit at that moment, finished or not. Whoever publishes checks with the other first.',
+  "I watch GitHub for Agent's pushes, so problems get caught on my side, not Amy's.",
 ];
+
+const codeClass = 'font-utility text-[0.85em]';
+
+const methodRows = [
+  {
+    check: 'Phone timings',
+    tool: 'Lighthouse 12.8.2 CLI, headless Chrome 153',
+    settings: 'Default mobile profile: simulated 150 ms round trip, 1.6 Mbps down, 4× CPU slowdown',
+    result: 'Home LCP 8.6 s, 10.1 s, 17.2 s over three runs. Perf 56–57. Gala LCP 8.2–8.4 s.',
+  },
+  {
+    check: 'Desktop timings',
+    tool: `Lighthouse, <code class="${codeClass}">--preset=desktop</code>`,
+    settings: '40 ms round trip, 10 Mbps, no CPU slowdown',
+    result: 'Home LCP 1.7–2.2 s. Perf 82–86.',
+  },
+  {
+    check: 'Fast-phone baseline',
+    tool: `Lighthouse, <code class="${codeClass}">--throttling-method=provided</code>`,
+    settings: 'Mobile viewport, no simulated slowdown. My laptop and connection, so a best case.',
+    result: 'Home LCP 2.3–2.4 s. Perf 95.',
+  },
+  {
+    check: 'Server response',
+    tool: `Lighthouse <code class="${codeClass}">server-response-time</code>`,
+    settings: 'Root document only',
+    result: '60–80 ms across runs',
+  },
+  {
+    check: 'Weight by source',
+    tool: 'Lighthouse network requests, grouped by domain',
+    settings: 'Transfer size, mobile run',
+    result:
+      'med13.org 1.98 MB, classy.org 1.21, stripe.com 0.82–0.92, gstatic (fonts) 0.48, gofundme 0.22, transcend 0.17, facebook 0.11',
+  },
+  {
+    check: 'Compression, caching',
+    tool: 'curl',
+    settings: `Request sent with <code class="${codeClass}">Accept-Encoding: gzip, br</code>`,
+    result: `<code class="${codeClass}">content-length: 1279415</code>, no <code class="${codeClass}">content-encoding</code>, <code class="${codeClass}">cache-control: private, max-age=0</code>`,
+  },
+  {
+    check: 'First HTML',
+    tool: 'curl',
+    settings: `<code class="${codeClass}">/</code> and <code class="${codeClass}">/llms.txt</code>`,
+    result: `Both 200, 1,236 bytes, the same empty <code class="${codeClass}">&lt;div id="root"&gt;</code> shell. <code class="${codeClass}">maximum-scale=1</code> in the viewport tag.`,
+  },
+  {
+    check: 'Sitemap',
+    tool: 'curl',
+    settings: `<code class="${codeClass}">/sitemap.xml</code>`,
+    result: `3 <code class="${codeClass}">&lt;loc&gt;</code> entries: <code class="${codeClass}">/</code>, <code class="${codeClass}">/gala</code>, <code class="${codeClass}">/who-we-are</code>`,
+  },
+  {
+    check: 'www',
+    tool: 'curl',
+    settings: `<code class="${codeClass}">https://www.med13.org</code>`,
+    result: `<code class="${codeClass}">SSL_ERROR_SYSCALL</code> during the TLS handshake`,
+  },
+  {
+    check: 'Rendered meta',
+    tool: 'Playwright, Chromium',
+    settings: `After network idle plus 1.5 s, home and <code class="${codeClass}">/gala</code>`,
+    result: `No <code class="${codeClass}">og:*</code>, no canonical, 0 JSON-LD blocks`,
+  },
+  {
+    check: 'Accessibility',
+    tool: 'axe-core 4.10.3, plus Lighthouse',
+    settings: 'WCAG 2 A and AA rules on the rendered homepage',
+    result: `meta-viewport 1 (critical), color-contrast 23 (serious), link-name 1 (serious). Lighthouse button-name on <code class="${codeClass}">button-mobile-menu</code>.`,
+  },
+  {
+    check: 'Contrast ratios',
+    tool: 'WCAG 2 relative-luminance formula',
+    settings: 'Text color on white',
+    result: '#69b0ab 2.5:1, #ffb19e 1.7:1, #3d7f7a 4.6:1',
+  },
+  {
+    check: 'GitHub',
+    tool: 'GitHub REST API',
+    settings: `<code class="${codeClass}">repos/med13foundation/website</code>`,
+    result: `<code class="${codeClass}">pushed_at: 2026-02-27T00:33:14Z</code>`,
+  },
+];
+
+const replitSources = [
+  { href: 'https://docs.replit.com/features/workspace-tools/git-interface', label: 'Git pane' },
+  {
+    href: 'https://docs.replit.com/features/version-control/checkpoints-and-rollbacks',
+    label: 'Checkpoints and rollbacks',
+  },
+  { href: 'https://docs.replit.com/learn/projects-and-artifacts/replit-deployments', label: 'Deployments' },
+  { href: 'https://docs.replit.com/features/project-setup/replit-dot-md', label: 'replit.md' },
+  {
+    href: 'https://docs.replit.com/features/data-and-storage/development-and-production',
+    label: 'Dev and prod databases',
+  },
+];
+
+const reproCode = `# Phone test (Lighthouse default mobile profile)
+npx lighthouse@12 https://med13.org/ --form-factor=mobile --output=json --output-path=home-mobile.json
+
+# Desktop
+npx lighthouse@12 https://med13.org/ --preset=desktop --output=json --output-path=home-desktop.json
+
+# No simulated slowdown
+npx lighthouse@12 https://med13.org/ --throttling-method=provided --output=json --output-path=home-fast.json
+
+# Compression and caching on the main bundle (current file name)
+curl -sI -H 'Accept-Encoding: gzip, br' https://med13.org/assets/index-jIooLJoF.js
+
+# First HTML, llms.txt, sitemap, www
+curl -s https://med13.org/ | head -c 1300
+curl -s -o /dev/null -w '%{http_code} %{size_download}B\\n' https://med13.org/llms.txt
+curl -s https://med13.org/sitemap.xml
+curl -sI https://www.med13.org
+
+# Accessibility (WCAG 2 A/AA)
+npx @axe-core/cli https://med13.org/ --tags wcag2a,wcag2aa`;
 
 const sectionClass = 'grid gap-6 border-t border-line py-12';
 const headingClass = 'section-heading mt-3 font-display text-3xl font-bold tracking-tight text-balance sm:text-4xl';
+const methodThClass =
+  'border-b border-line px-3.5 py-3 text-left font-utility text-[0.7rem] uppercase leading-tight tracking-[0.08em] text-mist';
+const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top';
 ---
 
 <Base
@@ -288,7 +416,7 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
                 <dd class="order-2 whitespace-nowrap font-bold tabular-nums">$0</dd>
               </div>
             </dl>
-            <p class="pt-2.5 text-center text-xs text-mist">Fixes listed below. No redesign.</p>
+            <p class="pt-2.5 text-center text-xs text-mist">Fixes listed below. No redesign. Method at the end.</p>
           </div>
         </aside>
       </div>
@@ -516,19 +644,20 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
         <h2 class={headingClass}>Amy keeps working in Replit. I work in GitHub. They stay in sync.</h2>
         <p class="mt-4 max-w-2xl text-mist">
           Replit can push to GitHub and pull from it. Out of the box, someone has to click a button
-          each time. A one-time setup makes both directions happen on their own.
+          each time. A one-time setup makes both directions happen on their own. Amy's routine doesn't
+          change. She works with Agent, and keeping the sync healthy is my job.
         </p>
       </div>
 
       <div
         class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1fr)]"
         role="img"
-        aria-label="Replit, where Amy works, and GitHub, where Gian works, sync in both directions automatically. Publishing to med13.org stays a click in Replit."
+        aria-label="Replit, where Amy works, and GitHub, where Gian works, sync in both directions automatically. Publishing to med13.org stays a click in Replit, by Amy or Gian."
       >
         <div class="grid content-start gap-1.5 border border-ink bg-white p-5">
           <span class="eyebrow">Replit</span>
           <strong class="font-display text-xl">Amy</strong>
-          <p class="text-sm text-mist">Edits with Replit Agent, same as today.</p>
+          <p class="text-sm text-mist">Edits with Replit Agent, same as today. Never has to pull, sync, or fix a conflict.</p>
         </div>
 
         <div class="grid content-center gap-3">
@@ -556,7 +685,10 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
         <div class="grid gap-1.5 lg:col-start-1">
           <div class="grid gap-1 border border-line bg-white p-3.5">
             <span class="font-utility text-sm font-bold tracking-wide text-flare-deep">Replit → med13.org</span>
-            <p class="text-sm">Amy clicks Publish, same as today. Replit can't publish straight from GitHub.</p>
+            <p class="text-sm">
+              After a fix merges, I open the Replit project so it pulls the change in, check it, and
+              publish once Amy's work is at a stopping point. Replit can't publish straight from GitHub.
+            </p>
             <span class="font-utility text-xs uppercase tracking-[0.08em] text-flare-deep">One click</span>
           </div>
         </div>
@@ -628,25 +760,112 @@ const headingClass = 'section-heading mt-3 font-display text-3xl font-bold track
 
     <section class={sectionClass}>
       <div>
-        <p class="eyebrow">Today</p>
-        <h2 class={headingClass}>Three yes-or-no questions</h2>
+        <p class="eyebrow">Agreed 2026-09-23</p>
+        <h2 class={headingClass}>Where we landed</h2>
       </div>
       <ol class="grid gap-3">
         {
           asks.map((ask) => (
-            <li class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 border border-ink bg-white px-5 py-4.5 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
-              <span class="h-5.5 w-5.5 border-2 border-ink" aria-hidden="true" />
+            <li
+              class={`grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 border bg-white px-5 py-4.5 sm:grid-cols-[auto_minmax(0,1fr)_auto] ${ask.agreed ? 'border-line' : 'border-ink'}`}
+            >
+              {ask.agreed ? (
+                <span
+                  class="relative h-5.5 w-5.5 border-2 border-steel bg-steel after:absolute after:left-1.5 after:top-px after:h-3 after:w-1.5 after:rotate-45 after:border-r-[3px] after:border-b-[3px] after:border-white after:content-['']"
+                  aria-hidden="true"
+                />
+              ) : (
+                <span class="h-5.5 w-5.5 border-2 border-ink" aria-hidden="true" />
+              )}
               <div>
                 <strong class="block font-display text-lg leading-snug">{ask.question}</strong>
                 <span class="text-[0.93rem] text-mist">{ask.detail}</span>
               </div>
-              <span class="col-start-2 whitespace-nowrap font-utility text-[0.8rem] font-bold leading-none tracking-widest text-mist sm:col-start-auto">
-                YES / NO
+              <span
+                class={`col-start-2 whitespace-nowrap font-utility text-[0.8rem] font-bold leading-none tracking-widest sm:col-start-auto ${ask.agreed ? 'text-steel' : 'text-flare-deep'}`}
+              >
+                {ask.agreed ? 'AGREED' : 'ASKING'}
               </span>
             </li>
           ))
         }
       </ol>
+    </section>
+
+    <section class={sectionClass} id="method">
+      <div>
+        <p class="eyebrow">Method</p>
+        <h2 class={headingClass}>How I measured this</h2>
+        <p class="mt-4 max-w-2xl text-mist">
+          Every number on this page comes from public tools run against the live site on 2026-09-23.
+          No access to the code or Replit was needed. The commands are at the bottom if you want to
+          rerun any of it.
+        </p>
+      </div>
+
+      <div class="min-w-0 overflow-x-auto border border-line bg-white">
+        <table class="w-full min-w-[760px] border-collapse text-[0.9rem]">
+          <thead>
+            <tr>
+              <th scope="col" class={methodThClass}>Check</th>
+              <th scope="col" class={methodThClass}>Tool</th>
+              <th scope="col" class={methodThClass}>Settings</th>
+              <th scope="col" class={methodThClass}>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              methodRows.map((row) => (
+                <tr>
+                  <td class={`${methodTdClass} whitespace-nowrap font-semibold`}>{row.check}</td>
+                  <td class={`${methodTdClass} text-mist`} set:html={row.tool} />
+                  <td class={`${methodTdClass} text-mist`} set:html={row.settings} />
+                  <td class={`${methodTdClass} tabular-nums`} set:html={row.result} />
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid max-w-[46rem] gap-2 text-[0.95rem] text-mist">
+        <p>
+          <strong class="font-semibold text-ink">Lab data, not visitor data.</strong> These are
+          controlled test runs. There's no real-visitor data here, so it doesn't say how many of your
+          visitors are on slower phones. If the site has analytics, that's the number to check.
+        </p>
+        <p>
+          <strong class="font-semibold text-ink">Phone timings swing.</strong> Simulated LCP varied
+          from 8.6 to 17.2 seconds across runs of the same page. That's why every run is listed. The
+          page weight and headers were the same every time.
+        </p>
+        <p>
+          <strong class="font-semibold text-ink">Checked once.</strong> The per-page titles on Get
+          Involved, News & Events, and Roadmap were checked in the morning run only.
+        </p>
+      </div>
+
+      <div class="grid gap-1 text-[0.9rem] text-mist">
+        <p class="eyebrow">Replit sources for the sync section</p>
+        <p>
+          {
+            replitSources.map((source, index) => (
+              <>
+                <a href={source.href} class="text-steel underline hover:text-ink">
+                  {source.label}
+                </a>
+                {index < replitSources.length - 1 ? ' · ' : ' '}
+              </>
+            ))
+          }
+          (fetched 2026-09-23)
+        </p>
+      </div>
+
+      <details class="min-w-0 border border-line bg-white">
+        <summary class="cursor-pointer px-4.5 py-3.5 font-semibold">Run it yourself</summary>
+        <pre class="min-w-0 overflow-x-auto border-t border-dotted border-line bg-porcelain px-4.5 py-4 leading-relaxed"><code class="font-utility text-[0.8rem] text-ink" set:text={reproCode} /></pre>
+      </details>
     </section>
 
     <p class="eyebrow border-t border-dashed border-line pt-7">

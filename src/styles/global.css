@@ -82,25 +82,31 @@ html {
 }
 
 /* Homepage hero: single orange underline under the closing phrase, drawn in
-   on load. border-bottom (not a background/transform trick) so it still
-   renders correctly per line if the phrase ever wraps across two lines.
+   on load. A text underline (not border-bottom) so its position comes from
+   the baseline: a border sits at the bottom of the font's full inline box,
+   which spills into the next line under tight leading. Offset clears the
+   descenders (0.18em in Bricolage); still renders per line when it wraps.
    Lives here (not a page-level <style>) so it lands in the bundled external
    stylesheet — Astro inlines page-level <style> blocks directly into the
    HTML, which the CSP's `style-src 'self'` (no 'unsafe-inline') blocks. */
 .hero-underline {
-  border-bottom: 6px solid transparent;
+  text-decoration-line: underline;
+  text-decoration-thickness: max(4px, 0.1em);
+  text-underline-offset: 0.21em;
+  text-decoration-skip-ink: none;
+  text-decoration-color: transparent;
   animation: hero-underline-draw 500ms 300ms ease-out forwards;
 }
 
 @keyframes hero-underline-draw {
   to {
-    border-bottom-color: var(--color-flare);
+    text-decoration-color: var(--color-flare);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-underline {
-    border-bottom-color: var(--color-flare);
+    text-decoration-color: var(--color-flare);
     animation: none;
   }
 }

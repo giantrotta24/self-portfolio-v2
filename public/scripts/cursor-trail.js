@@ -1,6 +1,7 @@
 // Cursor trail: grid-snapped squares light up where the pointer crosses empty
-// space, then fade. Text, controls, and marked blocks are skipped. Mouse only,
-// and off entirely for reduced motion. Served same-origin so it stays inside
+// space, then fade. Runs in alternating page blocks (hero on, next off, and so
+// on), and skips text, controls, and marked blocks. Mouse only, and off entirely
+// for reduced motion. Served same-origin so it stays inside
 // script-src 'self'; it touches no HTML sinks, so Trusted Types never engages.
 (() => {
   const finePointer = matchMedia('(pointer: fine)');
@@ -34,9 +35,16 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
+  function inTrailBlock(target) {
+    const block = target.closest('main > *');
+    if (!block) return false;
+    const blocks = [...block.parentElement.children].filter((el) => el.tagName !== 'SCRIPT');
+    return blocks.indexOf(block) % 2 === 0;
+  }
+
   function light(clientX, clientY, now) {
     const target = document.elementFromPoint(clientX, clientY);
-    if (!target || target.closest(SKIP)) return;
+    if (!target || target.closest(SKIP) || !inTrailBlock(target)) return;
     const gx = Math.floor((clientX + scrollX) / CELL);
     const gy = Math.floor((clientY + scrollY) / CELL);
     lit.set(`${gx},${gy}`, now);

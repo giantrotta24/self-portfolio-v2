@@ -255,7 +255,7 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 ### Motion (component-tied)
 - Hero underline draws in once (~500ms, 300ms delay); reduced motion → final state immediately.
 - Scroll reveals (`.reveal`) use CSS scroll-driven animation when supported.
-- Cursor trail (site-wide via `Base.astro`, `public/scripts/cursor-trail.js`): 12px flare squares snap to a 24px grid where a mouse crosses empty space, then shrink and fade over ~700ms. Runs only in alternating top-level blocks of `<main>` (hero on, the next off, the next on), never in the header or footer. Skips text, controls, the receipt, and `[data-trail-ignore]`. Canvas uses `mix-blend-mode: multiply`. Mouse only (`pointer: fine`); never runs under reduced motion. The one piece of JS-driven motion on the site; CSS can't follow a cursor.
+- Cursor trail (site-wide via `Base.astro`, `public/scripts/cursor-trail.js`): 12px flare squares snap to a 24px grid where a mouse crosses empty space, then shrink and fade over ~700ms. Runs across the full viewport width within the vertical bands of alternating top-level blocks of `<main>` (hero on, the next off, the next on), never in the header or footer. Skips text, controls, the receipt, and `[data-trail-ignore]`. Canvas uses `mix-blend-mode: multiply`. Mouse only (`pointer: fine`); never runs under reduced motion. The one piece of JS-driven motion on the site; CSS can't follow a cursor.
 - Diagram dash-flow animations only where those SVGs exist; always gated by `prefers-reduced-motion`.
 
 ## Do's and Don'ts

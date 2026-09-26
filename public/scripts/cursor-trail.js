@@ -1,8 +1,9 @@
 // Cursor trail: grid-snapped squares light up where the pointer crosses empty
-// space, then fade. Runs in alternating page blocks (hero on, next off, and so
-// on), and skips text, controls, and marked blocks. Mouse only, and off entirely
-// for reduced motion. Served same-origin so it stays inside
-// script-src 'self'; it touches no HTML sinks, so Trusted Types never engages.
+// space, then fade. Runs across the full viewport width, in the vertical bands
+// of alternating page blocks (hero on, next off, and so on), and skips text,
+// controls, and marked blocks. Mouse only, and off entirely for reduced motion.
+// Served same-origin so it stays inside script-src 'self'; it touches no HTML
+// sinks, so Trusted Types never engages.
 (() => {
   const finePointer = matchMedia('(pointer: fine)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -35,16 +36,22 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function inTrailBlock(target) {
-    const block = target.closest('main > *');
-    if (!block) return false;
-    const blocks = [...block.parentElement.children].filter((el) => el.tagName !== 'SCRIPT');
-    return blocks.indexOf(block) % 2 === 0;
+  const main = document.querySelector('main');
+
+  function inTrailBand(clientY) {
+    if (!main) return false;
+    const blocks = [...main.children].filter((el) => el.tagName !== 'SCRIPT');
+    const index = blocks.findIndex((block) => {
+      const { top, bottom } = block.getBoundingClientRect();
+      return clientY >= top && clientY < bottom;
+    });
+    return index >= 0 && index % 2 === 0;
   }
 
   function light(clientX, clientY, now) {
+    if (!inTrailBand(clientY)) return;
     const target = document.elementFromPoint(clientX, clientY);
-    if (!target || target.closest(SKIP) || !inTrailBlock(target)) return;
+    if (!target || target.closest(SKIP)) return;
     const gx = Math.floor((clientX + scrollX) / CELL);
     const gy = Math.floor((clientY + scrollY) / CELL);
     lit.set(`${gx},${gy}`, now);

@@ -12,6 +12,8 @@ Primary: Northeast Ohio small-business owners deciding whether to hire Gian for 
 
 Secondary: employers and recruiters evaluating Gian's engineering judgment, shipping standards, and client work (portfolio dual-purpose).
 
+Not yet launched: founders and software leaders deciding whether to hire Gian to move their software delivery from manual, one-at-a-time steps to systems AI runs inside enforced rules. Teams with in-house developers come first; non-technical founders who rely on an outside developer or agency are served too. Served only by `/ai-consulting`, which stays hidden (noindex, out of the sitemap, `llms.txt`, and markdown output, unlinked) until launch.
+
 ## Product Purpose
 
 giantrotta.dev is Gian Trotta's freelance marketing site for web work in Cleveland / Northeast Ohio. It sells fixed-price website help and proves the pitch with this site's own speed and findability.
@@ -27,6 +29,8 @@ Site tagline in use: "Your website should bring in customers, not another monthl
 ## Operating Context
 
 - Services: Website Rescue (flagship), New Website Build, Site Checkup, Care Plan
+- AI consulting (hidden page, not launched): sells AI-run delivery, meaning parallel isolated workspaces per task, automated checks on every change, and releases that go out when those checks pass, so a request becomes a live feature without waiting in a queue. People set the rules; enforced checks decide what ships; routine changes merge and deploy on their own and exceptions go to a person. Offers: Delivery Audit (flagship, fixed price, 1–2 weeks; fee comes off a Build), Build (fixed price, 4–6 weeks, on one real product), Support (monthly retainer).
+- AI consulting copy: plain English for non-technical buyers, no engineering jargon (no "Docker" or "worktrees" on the page). Proof is Gian's own day-to-day agent setup, described without numbers. Do not feature the EDHLAB human-in-the-loop pipeline as the method; it is out of date. No RVshare mention (the credential stays on /about).
 - Geography: Cleveland and Northeast Ohio (Akron, Parma, Lakewood, surrounding suburbs); remote-friendly build; in-person kickoff when local
 - Conversion path: free 15-minute call (Cal.com) and Netlify Forms contact
 - Content: case studies with before/after numbers, blog posts, availability badge

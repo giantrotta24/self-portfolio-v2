@@ -5,85 +5,95 @@ import StatGrid from '../components/StatGrid.astro';
 const situations = [
   {
     title: 'Starting from nothing',
-    body: 'Your engineers are curious, a few are experimenting, and nobody has decided what good looks like. I design the pipeline with you and run it on real tickets until your team can run it without me.',
+    body: 'Your team is curious about AI, a few people are trying it, and nobody has decided what good looks like. I set up a way of working with you and run it on real work until your team can run it without me.',
   },
   {
     title: 'Everyone does it differently',
-    body: "AI is already in the workflow, but every engineer has a private setup and your reviewers can't see what the agent did. I find where it breaks down and turn the parts that work into a shared setup your reviewers can check.",
+    body: 'AI is already part of how your team works, but everyone uses it in their own way and nobody can easily tell what it did. I find where it breaks down and turn what works into one shared process you can check.',
   },
 ];
 
 const steps = [
-  { n: 1, name: 'Agree on the problem', gate: true },
+  { n: 1, name: 'Agree on the problem', person: true },
   { n: 2, name: 'Find the real cause' },
-  { n: 3, name: 'Write the brief' },
-  { n: 4, name: 'Build it, test-first' },
-  { n: 5, name: 'Prove it on screen' },
-  { n: 6, name: 'Review it hard' },
-  { n: 7, name: 'Open the pull request', gate: true },
-  { n: 8, name: 'Write it down' },
+  { n: 3, name: 'Do the work' },
+  { n: 4, name: 'Prove it works' },
+  { n: 5, name: 'Approve it before it goes live', person: true },
+  { n: 6, name: 'Write down what we learned' },
 ];
 
 const metrics = [
-  { label: 'Issues run', value: '40+', note: 'from bug report to reviewed fix' },
-  { label: 'Fixes', value: '20+', note: 'merged and live' },
-  { label: 'Correct no-ships', value: '6', note: 'the right answer was to ship nothing' },
+  { label: 'Problems', value: '40+', note: 'taken from report to finished fix' },
+  { label: 'Fixes', value: '20+', note: 'live for real users' },
+  { label: 'No change needed', value: '6', note: 'times the right call was to change nothing' },
 ];
 
-const misses = [
-  'Three passing tests missed buttons covering the header. Now every visual change needs before-and-after screenshots.',
-  'Early pull requests went out with the wrong scope, and one fixed code that was already working. Now nothing opens a pull request without an independent review, and a second reviewer challenges every finding before anyone acts on it.',
-  "Dead ends get written down, so the next run doesn't spend time re-checking them.",
+const questions = [
+  {
+    q: 'Can we trust what it produces?',
+    a: 'Nothing reaches your customers without a person approving it, and every change comes with proof that it works.',
+  },
+  {
+    q: 'Is AI helping my team, or just creating more work?',
+    a: "That's what the checkup answers. Some teams get real time back. Others spend that time checking AI's work. You'll know which one you are.",
+  },
+  {
+    q: 'Do I need to understand the technical side?',
+    a: 'No. Reports come in plain English, and every recommendation says what it costs and what you get.',
+  },
 ];
 
 const offers = [
   {
-    name: 'Pipeline Checkup',
+    name: 'AI Checkup',
     tagline: 'The low-risk front door.',
     description:
-      "I spend a week or two with your team, your repos, and your review process, and map every point where a person has to step in. You get a plain report: what's working, where AI is adding risk or slowing you down, and what to change first. If a pilot makes sense afterward, the checkup fee comes off the price.",
+      "I spend a week or two with your team, learning how work gets done today. I map where AI is helping, where it's adding risk, and where a person needs to stay in charge. You get a plain-English report with what to change first. If a pilot makes sense afterward, the checkup fee comes off the price.",
     engagement: 'Fixed price · 1–2 weeks',
   },
   {
-    name: 'Pipeline Pilot',
-    tagline: 'The pipeline, running on your code.',
+    name: 'AI Pilot',
+    tagline: 'The process, running on your work.',
     description:
-      "I set up the loop on one repository and run real tickets through it alongside your engineers. When we're done, your team owns the setup: the instructions, the checks, and the guardrails.",
+      "I set up the process on one real project and run real work through it alongside your team. When we're done, your team owns it: the written steps, the checks, and the safety rules.",
     engagement: 'Fixed price · 4–6 weeks',
   },
   {
     name: 'Team Workshop',
-    tagline: 'Half a day, your codebase.',
+    tagline: 'Half a day with your team.',
     description:
-      'A working session for your engineers on how the loop works and why each checkpoint exists, ending with a live run on a real ticket from your backlog.',
+      'A working session on how the process works and why each step exists, ending with a live run on a real piece of your work.',
     engagement: 'Fixed price · half day',
   },
   {
     name: 'Advisory',
     tagline: 'Someone to check in with.',
     description:
-      'Monthly time for questions, reviews of new workflows, and help widening the pipeline as your team trusts it with more.',
+      'Monthly time for questions, a second opinion on new tools, and help expanding the process as your team trusts it with more.',
     engagement: 'Monthly retainer',
   },
 ];
 ---
 
 <Base
-  title="AI-Assisted Development for Engineering Teams | Gian Trotta"
-  description="I help engineering teams turn scattered AI use into a development pipeline with clear checkpoints and proof on every change."
+  title="AI You Can Trust With Your Software | Gian Trotta"
+  description="I help founders and leaders build trust in AI one step at a time, with a person in charge of what reaches customers. Plain-English advice, fixed prices."
   noindex
 >
   <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
-    <p class="eyebrow eyebrow-accent">For engineering teams</p>
-    <h1 class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-balance sm:text-5xl">
-      AI-assisted development that <span class="hero-underline">survives code review.</span>
+    <p class="eyebrow eyebrow-accent">For founders and software leaders</p>
+    <h1
+      class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-balance sm:text-5xl"
+    >
+      AI you can <span class="hero-underline">trust with your software.</span>
     </h1>
     <p class="mt-4 max-w-2xl text-lg text-mist">
-      I help engineering teams turn scattered AI use into a pipeline reviewers can trust.
+      I help companies build trust in AI one step at a time: clear rules, proof for every change,
+      and a person in charge of what goes live. You don't need to be technical to work with me.
     </p>
     <div class="mt-8 flex flex-wrap gap-4">
       <a href="/contact/" class="btn-primary">Book a free 15-minute call</a>
-      <a href="/case-studies/edhlab/" class="btn-secondary">See how I work →</a>
+      <a href="/case-studies/edhlab/" class="btn-secondary">See it on a real product →</a>
     </div>
   </section>
 
@@ -106,29 +116,29 @@ const offers = [
   <section class="border-y border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-        One loop, two human checkpoints
+        How trust gets built
       </h2>
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-        Every change goes through the same eight steps. A person owns the first and the seventh.
-        The agent does the work in between, and each step has a check it has to pass before the
-        next one starts.
+        Every piece of work follows the same steps. A person agrees on the problem at the start and
+        approves the result at the end. AI does the legwork in between, and each step has to show
+        its work before the next one starts.
       </p>
-      <ol class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <ol class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {
-          steps.map(({ n, name, gate }) => (
+          steps.map(({ n, name, person }) => (
             <li
-              class={`reveal card-lift flex items-center gap-3 border border-line bg-porcelain p-4 ${gate ? 'border-t-4 border-t-flare' : ''}`}
+              class={`reveal card-lift flex items-center gap-3 border border-line bg-porcelain p-4 ${person ? 'border-t-4 border-t-flare' : ''}`}
             >
               <span
-                class={`grid h-8 w-8 flex-none place-items-center font-display text-base font-bold text-porcelain ${gate ? 'bg-flare-deep' : 'bg-steel'}`}
+                class={`grid h-8 w-8 flex-none place-items-center font-display text-base font-bold text-porcelain ${person ? 'bg-flare-deep' : 'bg-steel'}`}
               >
                 {n}
               </span>
               <span class="font-display font-semibold">
                 {name}
-                {gate && (
+                {person && (
                   <span class="mt-1 block font-utility text-xs font-semibold uppercase tracking-wider text-flare-deep">
-                    Checkpoint
+                    A person decides
                   </span>
                 )}
               </span>
@@ -144,34 +154,32 @@ const offers = [
       Proof from a live product
     </h2>
     <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-      I run this loop as a contractor on a live multiplayer game platform. Since mid-August 2026:
+      I run this process as a contractor on a live multiplayer game platform. Since mid-August
+      2026:
     </p>
     <div class="reveal mt-6">
       <StatGrid stats={metrics} cols={3} noteClass="mt-1 font-utility text-xs" />
     </div>
     <p class="mt-6 max-w-3xl text-mist">
-      Six times the right answer was to ship nothing. The bug was already fixed, the report
-      described expected behavior, or the fix needed a product decision first. I built the
-      pipeline to reach that answer instead of forcing a fix.
+      Those six matter. The problem had already been solved, wasn't a problem after all, or needed
+      a business decision first. A process that always produces a change is one you can't trust.
     </p>
     <a href="/case-studies/edhlab/" class="btn-secondary mt-6 inline-block">
-      Read the full case study →
+      Read the full story →
     </a>
   </section>
 
   <section class="border-y border-line bg-white">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-        Guardrails, and the misses that made them
+        Fair questions to ask
       </h2>
-      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-        Every rule in the pipeline exists because something got through without it.
-      </p>
       <div class="mt-8 grid gap-4 lg:grid-cols-3">
         {
-          misses.map((body) => (
-            <article class="reveal card-lift border border-line bg-porcelain p-5">
-              <p class="text-sm text-mist">{body}</p>
+          questions.map(({ q, a }) => (
+            <article class="reveal card-lift border border-line bg-porcelain p-6">
+              <h3 class="font-display text-lg font-semibold">{q}</h3>
+              <p class="mt-3 text-mist">{a}</p>
             </article>
           ))
         }
@@ -205,8 +213,7 @@ const offers = [
         What I won't promise
       </h2>
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-        Agents that ship on their own. Every pipeline I've built keeps a person at the start and at
-        the end. I'll also tell you where I think AI shouldn't touch your code at all.
+        AI that runs your product on its own. I'll also tell you where I think it should stay out.
       </p>
     </div>
   </section>

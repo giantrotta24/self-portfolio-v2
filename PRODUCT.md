@@ -12,6 +12,8 @@ Primary: Northeast Ohio small-business owners deciding whether to hire Gian for 
 
 Secondary: employers and recruiters evaluating Gian's engineering judgment, shipping standards, and client work (portfolio dual-purpose).
 
+Not yet launched: founders and software leaders, often non-technical, deciding whether to hire Gian to help their team adopt AI in software work. Served only by `/ai-consulting`, which stays hidden (noindex, out of the sitemap, `llms.txt`, and markdown output, unlinked) until launch.
+
 ## Product Purpose
 
 giantrotta.dev is Gian Trotta's freelance marketing site for web work in Cleveland / Northeast Ohio. It sells fixed-price website help and proves the pitch with this site's own speed and findability.
@@ -27,6 +29,7 @@ Site tagline in use: "Your website should bring in customers, not another monthl
 ## Operating Context
 
 - Services: Website Rescue (flagship), New Website Build, Site Checkup, Care Plan
+- AI consulting (hidden page, not launched): AI Checkup (1–2 weeks), AI Pilot (4–6 weeks), Team Workshop (half day), Advisory (monthly). Copy is plain English for non-technical buyers: no engineering jargon, proof from the EDHLAB case study only, and no RVshare mention (the credential stays on /about).
 - Geography: Cleveland and Northeast Ohio (Akron, Parma, Lakewood, surrounding suburbs); remote-friendly build; in-person kickoff when local
 - Conversion path: free 15-minute call (Cal.com) and Netlify Forms contact
 - Content: case studies with before/after numbers, blog posts, availability badge

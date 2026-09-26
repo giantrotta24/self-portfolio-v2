@@ -16,9 +16,9 @@ colors:
 typography:
   display:
     fontFamily: "'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.25rem, 5vw, 4.5rem)"
+    fontSize: "clamp(2.75rem, 4.4vw, 3.25rem)"
     fontWeight: 700
-    lineHeight: 1.1
+    lineHeight: 1.15
     letterSpacing: "-0.025em"
   headline:
     fontFamily: "'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif"
@@ -161,7 +161,7 @@ A cool workshop paper ground with harbor ink type, lake-steel links, and a scarc
 Display font loads with `font-display: optional` (latin subset only) to avoid CLS from mid-load swaps.
 
 ### Hierarchy
-- **Display** (700, ~`text-5xl`→`text-7xl` on hero, tight tracking): Homepage hero and page H1s.
+- **Display** (700, tight tracking): Homepage hero and page H1s. Hero steps `text-4xl` → `text-5xl` → `text-6xl`, then from `lg` scales with `clamp(2.75rem, 4.4vw, 3.25rem)` at leading 1.15. The 3.25rem cap keeps the underlined closing phrase on one line inside the 7/12 hero column; re-check 1024–1280px before raising it.
 - **Headline** (700, ~`text-3xl`/`text-4xl`): Section titles with the orange section-heading rule.
 - **Title** (700, ~`text-2xl`): Service cards, case-study titles, nested H2s.
 - **Body** (400, `text-lg` / 1.125rem, relaxed): Supporting copy; keep measures readable (~max-w-2xl / max-w-3xl for long prose).
@@ -206,7 +206,7 @@ Recurring silhouettes:
 - **Torn receipt:** Conic-gradient mask on top/bottom edges (~22px tooth) — the system's signature shape.
 - **Hairline boxes:** `1px solid line` or `border-ink` on white.
 - **Dashed callouts:** `border-2 border-dashed border-ink` (booking nudge, footer top rule uses dashed `line`).
-- **Section underline:** 4px solid flare under `.section-heading`; hero phrase uses a thicker 6px flare underline that draws in on load.
+- **Section underline:** 4px solid flare under `.section-heading`; hero phrase uses a thicker flare text underline (`max(4px, 0.1em)`, offset 0.21em below the baseline to clear Bricolage's 0.18em descenders) that draws in on load. It is a text underline, not a border, so tight leading can't push it into the next line.
 
 ### Named Rules
 **The Zero Radius Rule.** Interactive chrome and content cards stay square. Tiny rounded bars inside the hamburger icon are the only intentional round geometry.

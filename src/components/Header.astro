@@ -6,7 +6,7 @@ const current = Astro.url.pathname;
 <header class="site-header sticky top-0 z-20 border-b border-line bg-porcelain">
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-6 py-5">
     <a href="/" class="flex items-center gap-2.5 font-display text-lg font-bold tracking-tight">
-      <!-- GT monogram, mirroring favicon.svg. Decorative: the wordmark names the link. -->
+      <!-- GT monogram, echoing favicon.svg. Decorative: the wordmark names the link. -->
       <span
         class="logo-mark relative grid size-8 shrink-0 place-items-center rounded-md bg-ink pb-px pr-px text-[0.75rem] leading-none text-porcelain"
         aria-hidden="true"
@@ -51,7 +51,7 @@ const current = Astro.url.pathname;
 
     <nav
       id="site-nav"
-      class="absolute inset-x-0 top-full z-20 hidden border-b border-line bg-porcelain px-6 pb-6 shadow-lg max-md:peer-checked:block md:static md:z-auto md:block md:border-0 md:bg-transparent md:p-0 md:shadow-none"
+      class="absolute inset-x-0 top-full z-20 hidden max-h-[calc(100dvh-100%)] overflow-y-auto overscroll-contain border-b border-line bg-porcelain px-6 pb-6 shadow-lg max-md:peer-checked:block md:static md:z-auto md:block md:border-0 md:bg-transparent md:p-0 md:max-h-none md:overflow-visible md:shadow-none"
       aria-label="Main"
     >
       <ul

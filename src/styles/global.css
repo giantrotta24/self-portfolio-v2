@@ -48,7 +48,8 @@ html {
   scroll-behavior: smooth;
   /* The header is sticky, so in-page anchor jumps (e.g. #audit, the skip
      link's #main) must land below it rather than underneath it. Covers the
-     header's rendered height (77px desktop, 81px mobile) with a little air. */
+     header's rendered height (77px desktop, 81px mobile) with a little air,
+     so targets don't need their own scroll-margin. */
   scroll-padding-top: 5.5rem;
 }
 

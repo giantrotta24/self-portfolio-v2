@@ -210,7 +210,7 @@ Recurring silhouettes:
 - **Section underline:** 4px solid flare under `.section-heading`; hero phrase uses a thicker flare text underline (`max(4px, 0.1em)`, offset 0.21em below the baseline to clear Bricolage's 0.18em descenders) that draws in on load. It is a text underline, not a border, so tight leading can't push it into the next line.
 
 ### Named Rules
-**The Zero Radius Rule.** Interactive chrome and content cards stay square. Tiny rounded bars inside the hamburger icon and the header's GT monogram (which mirrors the favicon's rounded tile and flare dot) are the only intentional round geometry.
+**The Zero Radius Rule.** Interactive chrome and content cards stay square. Tiny rounded bars inside the hamburger icon and the header's GT monogram (which echoes the favicon's rounded tile and flare dot) are the only intentional round geometry.
 
 ## Components
 
@@ -237,9 +237,9 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Error / Disabled:** Not specialized in the system yet; keep square paper styling if added.
 
 ### Navigation
-- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; mirrors `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + flare period. `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
+- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; echoes `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + flare period. `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
 - **Links:** Mist by default; hover/current → ink with flare underline scale-x reveal.
-- **Mobile:** Checkbox-driven drawer; Escape closes; full-viewport dismiss label.
+- **Mobile:** Checkbox-driven drawer hanging from the sticky header; capped at the viewport height below the header (`max-h-[calc(100dvh-100%)]`) and scrolls internally so the CTA stays reachable on short screens; Escape closes; full-viewport dismiss label.
 - **Footer:** Dashed top border; display wordmark with `flare-deep` period; mist link list; mono copyright line.
 
 ### Eyebrow
@@ -267,7 +267,7 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Do** keep primary actions on `flare-deep` and accents scarce.
 - **Do** use square corners and white-on-porcelain paper stacking.
 - **Do** put section titles on `.section-heading` so the short orange rule stays consistent.
-- **Do** honor `prefers-reduced-motion` for lift, underline draw, ping dots, and scroll reveals.
+- **Do** honor `prefers-reduced-motion` for lift, underline draw, ping dots, scroll reveals, the header shadow fade, and the GT monogram turn.
 - **Do** keep Netlify contact forms as static HTML with `data-netlify="true"` when touching Contact.
 
 ### Don't:

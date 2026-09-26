@@ -194,6 +194,18 @@ html {
   }
 }
 
+/* Canvas for public/scripts/cursor-trail.js. Multiply keeps the squares
+   reading as ink on paper; below z-10 so the mobile nav drawer stays on top. */
+.cursor-trail {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: multiply;
+}
+
 /* Dash-flow for the two diagrams: the loop circle's dashes crawl clockwise,
    the hub's capture-back arrows crawl toward the hub. Offsets match each
    stroke's dasharray period (6+7 and 5+5) so the cycle loops seamlessly. */

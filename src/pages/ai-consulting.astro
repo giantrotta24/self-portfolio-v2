@@ -52,7 +52,7 @@ const system = [
   },
   {
     who: 'AI',
-    name: 'Works side by side',
+    name: 'Works on many things at once',
     body: 'Each task gets its own isolated copy of your app, so many changes get built and tested at the same time without stepping on each other.',
   },
   {
@@ -64,9 +64,9 @@ const system = [
 
 const ownSetup = [
   'Several AI agents work at the same time, each in its own isolated copy of the code.',
-  "They run under hard limits they can't get around: no pushing straight to the live site, no rewriting history, and no editing their own rules.",
+  "They work under hard limits they can't get around: no sending changes straight to the live site, no erasing the record of what changed, and no editing their own rules.",
   'Every blocked action is logged. I widen what agents may do from that log, not from a hunch.',
-  'On this site, agents merge their own changes once the automated checks pass.',
+  'On this site, AI agents put their own changes live once the automated checks pass.',
 ];
 
 const questions = [
@@ -87,7 +87,7 @@ const questions = [
 
 <Base
   title="AI Delivery Systems for Software Teams | Gian Trotta"
-  description="I set up systems where AI builds, checks, and ships changes side by side, inside rules you set. Start with a fixed-price delivery audit."
+  description="I set up the system around your AI so its work goes live as fast as it gets written, inside rules you set. Start with a fixed-price delivery audit."
   noindex
 >
   <section class="mx-auto max-w-6xl overflow-x-clip px-6 pb-20 pt-16 lg:pt-20">
@@ -101,9 +101,8 @@ const questions = [
           <span class="hero-underline">Your releases still wait in line.</span>
         </h1>
         <p class="mt-6 max-w-2xl text-lg text-mist">
-          I set up systems where AI builds, checks, and ships changes side by side, inside rules
-          you set. A request turns into a live feature without sitting in a queue for someone's
-          free afternoon.
+          I set up the system around your AI so its work goes live as fast as it gets written,
+          inside rules you set. No more waiting on someone's free afternoon.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
           <a href="/contact/" class="btn-primary text-center sm:text-left">
@@ -152,7 +151,7 @@ const questions = [
       <dl class="mt-10 border-t border-line">
         {
           waits.map(({ title, body }) => (
-            <div class="grid gap-2 border-b border-line py-6 md:grid-cols-12 md:gap-8">
+            <div class="reveal grid gap-2 border-b border-line py-6 md:grid-cols-12 md:gap-8">
               <dt class="font-display text-xl font-bold md:col-span-4">{title}</dt>
               <dd class="max-w-prose text-mist md:col-span-8">{body}</dd>
             </div>
@@ -169,13 +168,13 @@ const questions = [
       </h2>
       <p class="mt-4 max-w-2xl text-mist">
         Before anyone buys tools or hands AI the keys, find out exactly where your delivery gets
-        stuck and what it would take to unstick it. Most teams start here.
+        stuck and what it would take to unstick it.
       </p>
 
       <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div class="bg-ink p-8 text-porcelain lg:col-span-7">
+        <div class="reveal card-lift bg-ink p-8 text-porcelain lg:col-span-7" data-trail-ignore>
           <p class="font-utility text-xs uppercase tracking-widest text-flare-bright">
-            Most teams start here
+            Step one
           </p>
           <h3 class="mt-4 font-display text-3xl font-bold tracking-tight">Delivery Audit</h3>
           <p class="mt-4 max-w-md text-porcelain/80">
@@ -204,14 +203,14 @@ const questions = [
         </div>
 
         <div class="lg:col-span-5">
-          <h3 class="font-display text-xl font-bold">Then, if you want it built</h3>
+          <h3 class="font-display text-xl font-bold">If you want it built</h3>
           <p class="mt-2 text-mist">
-            Nothing here is required. If you go on to a build, the audit fee comes off its price.
+            Optional. If you go ahead, the audit fee comes off the build.
           </p>
           <dl class="mt-6 border-t border-line">
             {
               afterAudit.map(({ name, body, engagement }) => (
-                <div class="border-b border-line py-5">
+                <div class="reveal border-b border-line py-5">
                   <dt class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <span class="font-display text-lg font-bold">{name}</span>
                     <span class="font-utility text-xs text-flare-deep">{engagement}</span>
@@ -232,13 +231,13 @@ const questions = [
         What the system looks like
       </h2>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist">
-        People stop being the bottleneck and start being the ones who set the rules. The rules are
-        enforced by the system itself, not left to anyone's memory.
+        People set the rules. The system enforces them on every change, so nobody has to remember
+        them.
       </p>
       <ol class="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
         {
           system.map(({ who, name, body, accent }) => (
-            <li class={`border-t-4 pt-5 ${accent ? 'border-flare' : 'border-steel'}`}>
+            <li class={`reveal border-t-4 pt-5 ${accent ? 'border-flare' : 'border-steel'}`}>
               <p
                 class={`font-utility text-xs uppercase tracking-widest ${accent ? 'text-flare-deep' : 'text-steel'}`}
               >
@@ -267,7 +266,7 @@ const questions = [
       <ul class="border-t border-line lg:col-span-7">
         {
           ownSetup.map((line) => (
-            <li class="flex gap-4 border-b border-line py-5">
+            <li class="reveal flex gap-4 border-b border-line py-5">
               <span class="mt-2.5 h-2 w-2 flex-none bg-flare" aria-hidden="true" />
               <span class="text-ink">{line}</span>
             </li>
@@ -280,12 +279,12 @@ const questions = [
   <section class="border-t border-line bg-white">
     <div class="mx-auto max-w-6xl px-6 py-20">
       <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-        Questions people ask first
+        Fair questions
       </h2>
       <dl class="mt-10 grid gap-x-12 md:grid-cols-3">
         {
           questions.map(({ q, a }) => (
-            <div class="border-t border-line py-6">
+            <div class="reveal border-t border-line py-6">
               <dt class="font-display text-lg font-bold">{q}</dt>
               <dd class="mt-2 max-w-prose text-mist">{a}</dd>
             </div>
@@ -296,7 +295,7 @@ const questions = [
   </section>
 
   <section class="mx-auto max-w-6xl px-6 py-20">
-    <div class="border-2 border-dashed border-ink bg-white p-8 sm:p-10">
+    <div class="reveal border-2 border-dashed border-ink bg-white p-8 sm:p-10">
       <h2 class="font-display text-2xl font-bold sm:text-3xl">Not sure where to start?</h2>
       <p class="mt-4 max-w-2xl text-mist">
         Book a free 15-minute call and walk me through how a change gets from idea to live today.
@@ -308,4 +307,6 @@ const questions = [
       </div>
     </div>
   </section>
+
+  <script src="/scripts/cursor-trail.js" defer></script>
 </Base>

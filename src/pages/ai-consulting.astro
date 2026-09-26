@@ -1,146 +1,251 @@
 ---
 import Base from '../layouts/Base.astro';
-import StatGrid from '../components/StatGrid.astro';
 
-const situations = [
+const beforeAfter = [
+  { item: 'Working on a change', before: 'one at a time', after: 'many at once' },
+  { item: 'Getting it reviewed', before: 'waits in line', after: 'checked on arrival' },
+  { item: 'Going live', before: 'scheduled, by hand', after: 'when checks pass' },
+  { item: 'Waiting on a person', before: 'every step', after: 'exceptions only' },
+];
+
+const waits = [
   {
-    title: 'Starting from nothing',
-    body: 'Your team is curious about AI, a few people are trying it, and nobody has decided what good looks like. I set up a way of working with you and run it on real work until your team can run it without me.',
+    title: 'One workspace, one task',
+    body: "There's only one place to build and test, so work lines up behind whatever is in progress. Adding AI doesn't help if it has to wait its turn too.",
   },
   {
-    title: 'Everyone does it differently',
-    body: 'AI is already part of how your team works, but everyone uses it in their own way and nobody can easily tell what it did. I find where it breaks down and turn what works into one shared process you can check.',
+    title: 'Review is a queue',
+    body: 'Every change waits for someone to find time to read it. The more AI writes, the longer that line gets.',
+  },
+  {
+    title: 'Releases are an event',
+    body: 'Going live happens on a schedule, one step at a time, by whoever knows the steps. Finished work sits until then.',
   },
 ];
 
-const steps = [
-  { n: 1, name: 'Agree on the problem', person: true },
-  { n: 2, name: 'Find the real cause' },
-  { n: 3, name: 'Do the work' },
-  { n: 4, name: 'Prove it works' },
-  { n: 5, name: 'Approve it before it goes live', person: true },
-  { n: 6, name: 'Write down what we learned' },
+const auditFindings = [
+  { item: 'Where work waits on a person', result: 'mapped' },
+  { item: 'What AI can take over', result: 'listed' },
+  { item: 'Guardrails you need first', result: 'spelled out' },
+  { item: 'What to automate first', result: 'ranked' },
 ];
 
-const metrics = [
-  { label: 'Problems', value: '40+', note: 'taken from report to finished fix' },
-  { label: 'Fixes', value: '20+', note: 'live for real users' },
-  { label: 'No change needed', value: '6', note: 'times the right call was to change nothing' },
+const afterAudit = [
+  {
+    name: 'Build',
+    body: 'I set up the system on one real product: separate workspaces for each task, automatic checks on every change, and releases that happen when those checks pass. Your team keeps all of it.',
+    engagement: 'Fixed price · 4–6 weeks',
+  },
+  {
+    name: 'Support',
+    body: 'Monthly help tuning the rules, adding automation as your team trusts it with more, and a second opinion on new tools.',
+    engagement: 'Monthly retainer',
+  },
+];
+
+const system = [
+  {
+    who: 'People',
+    name: 'Set the rules',
+    body: "Decide what gets built and what's off-limits: which parts of the product AI can change, and what every change has to prove before it counts.",
+    accent: true,
+  },
+  {
+    who: 'AI',
+    name: 'Works side by side',
+    body: 'Each task gets its own isolated copy of your app, so many changes get built and tested at the same time without stepping on each other.',
+  },
+  {
+    who: 'Checks',
+    name: 'Decide what ships',
+    body: 'Automated checks verify every change. Routine ones go live on their own. Anything outside the rules stops and waits for a person.',
+  },
+];
+
+const ownSetup = [
+  'Several AI agents work at the same time, each in its own isolated copy of the code.',
+  "They run under hard limits they can't get around: no pushing straight to the live site, no rewriting history, and no editing their own rules.",
+  'Every blocked action is logged. I widen what agents may do from that log, not from a hunch.',
+  'On this site, agents merge their own changes once the automated checks pass.',
 ];
 
 const questions = [
   {
-    q: 'Can we trust what it produces?',
-    a: 'Nothing reaches your customers without a person approving it, and every change comes with proof that it works.',
+    q: 'Is it safe to let AI ship on its own?',
+    a: "Only inside rules the system enforces, not rules it's asked to follow. Routine changes that pass every check go live. Anything else waits for a person.",
   },
   {
-    q: 'Is AI helping my team, or just creating more work?',
-    a: "That's what the checkup answers. Some teams get real time back. Others spend that time checking AI's work. You'll know which one you are.",
+    q: "We're not ready for AI to release anything.",
+    a: 'Then start with separate workspaces and automatic checks, and keep a person approving releases. You can hand over more once the checks have earned it.',
   },
   {
-    q: 'Do I need to understand the technical side?',
-    a: 'No. Reports come in plain English, and every recommendation says what it costs and what you get.',
-  },
-];
-
-const offers = [
-  {
-    name: 'AI Checkup',
-    tagline: 'The low-risk front door.',
-    description:
-      "I spend a week or two with your team, learning how work gets done today. I map where AI is helping, where it's adding risk, and where a person needs to stay in charge. You get a plain-English report with what to change first. If a pilot makes sense afterward, the checkup fee comes off the price.",
-    engagement: 'Fixed price · 1–2 weeks',
-  },
-  {
-    name: 'AI Pilot',
-    tagline: 'The process, running on your work.',
-    description:
-      "I set up the process on one real project and run real work through it alongside your team. When we're done, your team owns it: the written steps, the checks, and the safety rules.",
-    engagement: 'Fixed price · 4–6 weeks',
-  },
-  {
-    name: 'Team Workshop',
-    tagline: 'Half a day with your team.',
-    description:
-      'A working session on how the process works and why each step exists, ending with a live run on a real piece of your work.',
-    engagement: 'Fixed price · half day',
-  },
-  {
-    name: 'Advisory',
-    tagline: 'Someone to check in with.',
-    description:
-      'Monthly time for questions, a second opinion on new tools, and help expanding the process as your team trusts it with more.',
-    engagement: 'Monthly retainer',
+    q: "I'm not technical. Is this for me?",
+    a: "Yes. The audit report is written for the person paying for it. If an outside developer or agency builds your product, I'll work with them directly.",
   },
 ];
 ---
 
 <Base
-  title="AI You Can Trust With Your Software | Gian Trotta"
-  description="I help founders and leaders build trust in AI one step at a time, with a person in charge of what reaches customers. Plain-English advice, fixed prices."
+  title="AI Delivery Systems for Software Teams | Gian Trotta"
+  description="I set up systems where AI builds, checks, and ships changes side by side, inside rules you set. Start with a fixed-price delivery audit."
   noindex
 >
-  <section class="mx-auto max-w-5xl px-6 pb-12 pt-16">
-    <p class="eyebrow eyebrow-accent">For founders and software leaders</p>
-    <h1
-      class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-balance sm:text-5xl"
-    >
-      AI you can <span class="hero-underline">trust with your software.</span>
-    </h1>
-    <p class="mt-4 max-w-2xl text-lg text-mist">
-      I get teams from trying out AI to trusting it with real work.
-    </p>
-    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-      <a href="/contact/" class="btn-primary text-center sm:text-left">Book a free 15-minute call</a>
-      <a href="/case-studies/edhlab/" class="btn-secondary text-center sm:text-left">See it on a real product →</a>
+  <section class="mx-auto max-w-6xl overflow-x-clip px-6 pb-20 pt-16 lg:pt-20">
+    <div class="grid items-center gap-12 lg:grid-cols-12">
+      <div class="min-w-0 lg:col-span-7">
+        <p class="eyebrow eyebrow-accent text-sm!">For founders and software leaders</p>
+        <h1
+          class="mt-4 max-w-full font-display text-4xl font-bold leading-[1.15] tracking-tight text-balance sm:text-5xl lg:text-[clamp(2.75rem,4.4vw,3.25rem)]"
+        >
+          AI can build five things at once.{' '}
+          <span class="hero-underline">Your releases still wait in line.</span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-mist">
+          I set up systems where AI builds, checks, and ships changes side by side, inside rules
+          you set. A request turns into a live feature without sitting in a queue for someone's
+          free afternoon.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+          <a href="/contact/" class="btn-primary text-center sm:text-left">
+            Book a free 15-minute call
+          </a>
+          <a href="#audit" class="btn-secondary text-center sm:text-left">Start with an audit</a>
+        </div>
+      </div>
+
+      <aside
+        class="receipt-wrap min-w-0 w-full max-w-md justify-self-center transition-transform duration-300 sm:max-w-lg lg:col-span-5 lg:max-w-none lg:justify-self-stretch lg:-rotate-2 lg:hover:rotate-0 motion-reduce:transition-none"
+        aria-label="How delivery changes, before and after"
+      >
+        <div class="receipt-paper px-5 py-8 font-utility sm:px-7 sm:py-9">
+          <p class="text-xs uppercase tracking-widest text-mist">Delivery audit · before / after</p>
+          <dl class="mt-5 text-sm">
+            {
+              beforeAfter.map(({ item, before, after }, i) => (
+                <div class={`py-3 ${i < beforeAfter.length - 1 ? 'border-b border-dotted border-line' : ''}`}>
+                  <dt>{item}</dt>
+                  <dd class="mt-1 flex flex-wrap items-baseline justify-between gap-x-3">
+                    <span class="text-mist line-through decoration-mist/60">{before}</span>
+                    <span class="font-bold text-steel">{after}</span>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-4 border-t border-dashed border-line pt-4 text-xs leading-relaxed text-mist">
+            Every audit starts by finding the places your work waits on a person.
+          </p>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <section class="mx-auto max-w-5xl px-6 pb-16">
-    <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-      Two places teams get stuck
-    </h2>
-    <div class="mt-8 grid gap-4 md:grid-cols-2">
-      {
-        situations.map(({ title, body }) => (
-          <article class="reveal card-lift border border-line bg-white p-6">
-            <h3 class="font-display text-xl font-semibold">{title}</h3>
-            <p class="mt-3 text-mist">{body}</p>
-          </article>
-        ))
-      }
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+      <h2 class="section-heading font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        Where the work waits
+      </h2>
+      <p class="mt-4 max-w-2xl text-mist">
+        Most teams already use AI to write code. It doesn't get to customers any faster, because
+        everything around the code still moves one piece at a time.
+      </p>
+      <dl class="mt-10 border-t border-line">
+        {
+          waits.map(({ title, body }) => (
+            <div class="grid gap-2 border-b border-line py-6 md:grid-cols-12 md:gap-8">
+              <dt class="font-display text-xl font-bold md:col-span-4">{title}</dt>
+              <dd class="max-w-prose text-mist md:col-span-8">{body}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section id="audit" class="scroll-mt-8 border-t border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+      <h2 class="section-heading font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        Start with an audit
+      </h2>
+      <p class="mt-4 max-w-2xl text-mist">
+        Before anyone buys tools or hands AI the keys, find out exactly where your delivery gets
+        stuck and what it would take to unstick it. Most teams start here.
+      </p>
+
+      <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div class="bg-ink p-8 text-porcelain lg:col-span-7">
+          <p class="font-utility text-xs uppercase tracking-widest text-flare-bright">
+            Most teams start here
+          </p>
+          <h3 class="mt-4 font-display text-3xl font-bold tracking-tight">Delivery Audit</h3>
+          <p class="mt-4 max-w-md text-porcelain/80">
+            I follow real changes from request to release and note every place they wait on
+            someone. You get a plain-English plan for what to automate, in what order, and which
+            guardrails have to come first.
+          </p>
+          <dl class="mt-8 max-w-md space-y-3 font-utility text-sm">
+            {
+              auditFindings.map(({ item, result }, i) => (
+                <div
+                  class={`flex justify-between gap-4 ${i < auditFindings.length - 1 ? 'border-b border-dotted border-porcelain/25 pb-3' : ''}`}
+                >
+                  <dt class="text-porcelain/70">{item}</dt>
+                  <dd class="shrink-0 font-bold">{result}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 font-utility text-sm">
+            <span class="uppercase tracking-widest text-porcelain/60">Fixed price · 1–2 weeks</span>
+            <a href="/contact/" class="group font-bold underline-offset-4 hover:text-flare-bright hover:underline">
+              Book a call to start <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </p>
+        </div>
+
+        <div class="lg:col-span-5">
+          <h3 class="font-display text-xl font-bold">Then, if you want it built</h3>
+          <p class="mt-2 text-mist">
+            Nothing here is required. If you go on to a build, the audit fee comes off its price.
+          </p>
+          <dl class="mt-6 border-t border-line">
+            {
+              afterAudit.map(({ name, body, engagement }) => (
+                <div class="border-b border-line py-5">
+                  <dt class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <span class="font-display text-lg font-bold">{name}</span>
+                    <span class="font-utility text-xs text-flare-deep">{engagement}</span>
+                  </dt>
+                  <dd class="mt-2 text-mist">{body}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="border-y border-line bg-white">
-    <div class="mx-auto max-w-5xl px-6 py-16">
+    <div class="mx-auto max-w-6xl px-6 py-20">
       <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-        How trust gets built
+        What the system looks like
       </h2>
-      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-        Every piece of work follows the same steps. A person agrees on the problem at the start and
-        approves the result at the end. AI does the legwork in between, and each step has to show
-        its work before the next one starts.
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist">
+        People stop being the bottleneck and start being the ones who set the rules. The rules are
+        enforced by the system itself, not left to anyone's memory.
       </p>
-      <ol class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ol class="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
         {
-          steps.map(({ n, name, person }) => (
-            <li
-              class={`reveal card-lift flex items-center gap-3 border border-line bg-porcelain p-4 ${person ? 'border-t-4 border-t-flare' : ''}`}
-            >
-              <span
-                class={`grid h-8 w-8 flex-none place-items-center font-display text-base font-bold text-porcelain ${person ? 'bg-flare-deep' : 'bg-steel'}`}
+          system.map(({ who, name, body, accent }) => (
+            <li class={`border-t-4 pt-5 ${accent ? 'border-flare' : 'border-steel'}`}>
+              <p
+                class={`font-utility text-xs uppercase tracking-widest ${accent ? 'text-flare-deep' : 'text-steel'}`}
               >
-                {n}
-              </span>
-              <span class="font-display font-semibold">
-                {name}
-                {person && (
-                  <span class="mt-1 block font-utility text-xs font-semibold uppercase tracking-wider text-flare-deep">
-                    A person decides
-                  </span>
-                )}
-              </span>
+                {who}
+              </p>
+              <p class="mt-2 font-display text-xl font-bold">{name}</p>
+              <p class="mt-2 text-mist">{body}</p>
             </li>
           ))
         }
@@ -148,83 +253,54 @@ const offers = [
     </div>
   </section>
 
-  <section class="mx-auto max-w-5xl px-6 py-16">
-    <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-      Proof from a live product
-    </h2>
-    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-      I run this process as a contractor on a live multiplayer game platform. Since mid-August
-      2026:
-    </p>
-    <div class="reveal mt-6">
-      <StatGrid stats={metrics} cols={3} noteClass="mt-1 font-utility text-xs" />
-    </div>
-    <p class="mt-6 max-w-3xl text-mist">
-      Those six matter. The problem had already been solved, wasn't a problem after all, or needed
-      a business decision first. A process that always produces a change is one you can't trust.
-    </p>
-    <a href="/case-studies/edhlab/" class="btn-secondary mt-6 inline-block">
-      Read the full story →
-    </a>
-  </section>
-
-  <section class="border-y border-line bg-white">
-    <div class="mx-auto max-w-5xl px-6 py-16">
-      <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-        Fair questions to ask
-      </h2>
-      <div class="mt-8 grid gap-4 lg:grid-cols-3">
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-5">
+        <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
+          How I work every day
+        </h2>
+        <p class="mt-6 text-lg leading-relaxed text-mist">
+          I run my own work this way, including this site. It's the same setup I'd help you build,
+          sized to your team.
+        </p>
+      </div>
+      <ul class="border-t border-line lg:col-span-7">
         {
-          questions.map(({ q, a }) => (
-            <article class="reveal card-lift border border-line bg-porcelain p-6">
-              <h3 class="font-display text-lg font-semibold">{q}</h3>
-              <p class="mt-3 text-mist">{a}</p>
-            </article>
+          ownSetup.map((line) => (
+            <li class="flex gap-4 border-b border-line py-5">
+              <span class="mt-2.5 h-2 w-2 flex-none bg-flare" aria-hidden="true" />
+              <span class="text-ink">{line}</span>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </div>
   </section>
 
-  <section class="mx-auto max-w-5xl px-6 py-16">
-    <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-      Ways to work together
-    </h2>
-    <div class="mt-8 space-y-8">
-      {
-        offers.map(({ name, tagline, description, engagement }) => (
-          <article class="reveal border border-line bg-white p-8 transition-all duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg motion-reduce:hover:translate-y-0">
-            <div class="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 class="font-display text-2xl font-bold">{name}</h3>
-              <p class="font-utility text-sm text-flare-deep">{engagement}</p>
-            </div>
-            <p class="mt-1 font-semibold text-steel">{tagline}</p>
-            <p class="mt-3 max-w-3xl text-mist">{description}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="border-y border-line bg-white">
-    <div class="mx-auto max-w-5xl px-6 py-16">
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-6xl px-6 py-20">
       <h2 class="section-heading font-display text-3xl font-bold tracking-tight">
-        What I won't promise
+        Questions people ask first
       </h2>
-      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-mist">
-        AI that runs your product on its own. I'll also tell you where I think it should stay out.
-      </p>
+      <dl class="mt-10 grid gap-x-12 md:grid-cols-3">
+        {
+          questions.map(({ q, a }) => (
+            <div class="border-t border-line py-6">
+              <dt class="font-display text-lg font-bold">{q}</dt>
+              <dd class="mt-2 max-w-prose text-mist">{a}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </section>
 
-  <section class="mx-auto max-w-5xl px-6 py-16">
-    <div class="reveal border-2 border-dashed border-ink bg-white p-8 sm:p-10">
-      <h2 class="section-heading font-display text-2xl font-bold sm:text-3xl">
-        Not sure where your team fits?
-      </h2>
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    <div class="border-2 border-dashed border-ink bg-white p-8 sm:p-10">
+      <h2 class="font-display text-2xl font-bold sm:text-3xl">Not sure where to start?</h2>
       <p class="mt-4 max-w-2xl text-mist">
-        Start with a free 15-minute call. You'll leave knowing what your team's AI setup needs,
-        whether or not we work together.
+        Book a free 15-minute call and walk me through how a change gets from idea to live today.
+        I'll tell you where it's stuck, whether or not we work together.
       </p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
         <a href="/contact/" class="btn-primary text-center sm:text-left">Book the call</a>

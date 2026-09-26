@@ -5,8 +5,16 @@ const current = Astro.url.pathname;
 
 <header class="site-header sticky top-0 z-20 border-b border-line bg-porcelain">
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-6 py-5">
-    <a href="/" class="font-display text-lg font-bold tracking-tight">
-      Gian Trotta<span class="text-flare">.</span>
+    <a href="/" class="flex items-center gap-2.5 font-display text-lg font-bold tracking-tight">
+      <!-- GT monogram, mirroring favicon.svg. Decorative: the wordmark names the link. -->
+      <span
+        class="logo-mark relative grid size-8 shrink-0 place-items-center rounded-md bg-ink pb-px pr-px text-[0.75rem] leading-none text-porcelain"
+        aria-hidden="true"
+      >
+        GT
+        <span class="absolute bottom-[3px] right-[3px] size-[5px] rounded-full bg-flare"></span>
+      </span>
+      <span>Gian Trotta<span class="text-flare">.</span></span>
     </a>
 
     <!--

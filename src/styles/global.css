@@ -219,6 +219,16 @@ html {
   }
 }
 
+/* GT monogram turns with the scroll position (header-scroll.js writes
+   --logo-turn from scrollY). No transition: the angle tracks the scroll
+   directly, so it is exactly upright whenever the page is at the top.
+   Reduced motion keeps it still. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-mark {
+    transform: rotate(var(--logo-turn, 0deg));
+  }
+}
+
 /* Canvas for public/scripts/cursor-trail.js. Multiply keeps the squares
    reading as ink on paper; below z-10 so the mobile nav drawer stays on top. */
 .cursor-trail {

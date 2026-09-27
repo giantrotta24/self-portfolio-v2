@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { contactInterests } from '../data/contact-interests';
 ---
 
 <Base
@@ -57,6 +58,7 @@ import Base from '../layouts/Base.astro';
         <textarea
           id="message"
           name="message"
+          data-interests={JSON.stringify(contactInterests)}
           rows="5"
           required
           class="mt-2 w-full border border-field bg-white px-4 py-3"
@@ -83,4 +85,5 @@ import Base from '../layouts/Base.astro';
       </a>
     </div>
   </section>
+  <script src="/scripts/contact-prefill.js" defer></script>
 </Base>

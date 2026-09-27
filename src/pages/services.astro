@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { contactHref, type ContactInterest } from '../data/contact-interests';
 
 const services = [
   {
@@ -8,6 +9,8 @@ const services = [
     description:
       'I move your site off the monthly-fee platform and rebuild it as a fast, modern site you own outright. Same content, better look, found on Google and by AI assistants — and no platform subscription ever again.',
     engagement: 'Fixed price · 2–3 weeks',
+    interest: 'rescue',
+    cta: 'Ask about a rescue',
   },
   {
     name: 'New Website Build',
@@ -15,6 +18,8 @@ const services = [
     description:
       'For businesses without a site (or with one too far gone to rescue). You get the same result: fast, findable, fee-free, and easy to keep updated.',
     engagement: 'Fixed price · 2–4 weeks',
+    interest: 'new-build',
+    cta: 'Ask about a new build',
   },
   {
     name: 'Site Checkup',
@@ -22,6 +27,8 @@ const services = [
     description:
       'A fixed-price diagnostic of your current site: speed, Google visibility, AI-search visibility, and accessibility — delivered as a plain-English report with a prioritized fix list. If a rescue makes sense afterward, the checkup fee comes off the price.',
     engagement: 'Fixed price · 1 week',
+    interest: 'checkup',
+    cta: 'Ask about a checkup',
   },
   {
     name: 'Care Plan',
@@ -29,8 +36,10 @@ const services = [
     description:
       'Monthly updates, uptime and speed monitoring, and small content changes handled for you. For rescue and build clients who want a site that stays healthy.',
     engagement: 'Monthly retainer',
+    interest: 'care-plan',
+    cta: 'Ask about a care plan',
   },
-];
+] satisfies { interest: ContactInterest; [field: string]: string }[];
 ---
 
 <Base
@@ -47,15 +56,19 @@ const services = [
 
     <div class="mt-12 space-y-8">
       {
-        services.map(({ name, tagline, description, engagement }) => (
-          <article class="border border-line bg-white p-8 transition-all duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg motion-reduce:hover:translate-y-0">
+        services.map(({ name, tagline, description, engagement, interest, cta }) => (
+          <a
+            href={contactHref(interest)}
+            class="group block border border-line bg-white p-8 transition-[translate,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-ink hover:shadow-lg focus-visible:border-ink motion-reduce:hover:translate-y-0"
+          >
             <div class="flex flex-wrap items-baseline justify-between gap-2">
               <h2 class="font-display text-2xl font-bold">{name}</h2>
               <p class="font-utility text-sm text-flare-deep">{engagement}</p>
             </div>
             <p class="mt-1 font-semibold text-steel">{tagline}</p>
             <p class="mt-3 max-w-3xl text-mist">{description}</p>
-          </article>
+            <p class="mt-6 font-utility text-sm font-bold group-hover:text-flare-deep group-focus-visible:text-flare-deep">{cta} →</p>
+          </a>
         ))
       }
     </div>

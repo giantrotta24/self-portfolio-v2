@@ -40,7 +40,8 @@ docs/evidence/  "Before" Lighthouse reports + full-page screenshots of the
 - **Netlify Forms:** the contact form must stay static HTML with `data-netlify="true"` present at build time. Don't wrap it in a client-side component or the build bot won't register it.
 - **Blog posts** ship when `draft: false` in frontmatter.
 - **JSON-LD** (`ProfessionalService` + `Person`) lives in `src/components/SEO.astro`.
-- Planned: `.md` versions of pages + richer `llms.txt` via a custom build step; Cal.com booking embed on Contact as a lazy island.
+- **Booking** on Contact is a plain link to cal.com that opens in a new tab. Cal's embed modal needs inline styles, which the CSP's `style-src 'self'` blocks, so don't bring it back without loosening that.
+- Planned: `.md` versions of pages + richer `llms.txt` via a custom build step.
 - The hero "checkup receipt" numbers (100/100, sub-second) must be verified against the deployed site before launch.
 
 ## History

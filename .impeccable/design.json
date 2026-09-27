@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-11T23:15:00-04:00",
+  "generatedAt": "2026-09-26T23:00:00-04:00",
   "title": "Design System: giantrotta.dev",
   "extensions": {
     "colorMeta": {
@@ -8,67 +8,120 @@
         "role": "neutral",
         "displayName": "Workshop Paper",
         "canonical": "#f6f5f1",
-        "tonalRamp": ["#262626", "#444342", "#61615f", "#7e7e7c", "#9c9b98", "#b9b8b5", "#d6d5d2", "#f3f2ee"]
+        "tonalRamp": ["#262626", "#444342", "#61615f", "#7e7e7c", "#9c9b98", "#b9b8b5", "#d6d5d2", "#f3f2ee"],
+        "dark": "#141c22"
       },
       "ink": {
         "role": "neutral",
         "displayName": "Harbor Ink",
         "canonical": "#1e2a32",
-        "tonalRamp": ["#1d2830", "#3b454c", "#596268", "#787f84", "#969c9f", "#b5b9bb", "#d3d5d7", "#f2f2f3"]
+        "tonalRamp": ["#1d2830", "#3b454c", "#596268", "#787f84", "#969c9f", "#b5b9bb", "#d3d5d7", "#f2f2f3"],
+        "dark": "#f6f5f1"
       },
       "steel": {
         "role": "secondary",
         "displayName": "Lake Steel",
         "canonical": "#35586c",
-        "tonalRamp": ["#192932", "#2c4859", "#466678", "#688291", "#8a9eaa", "#acbac3", "#ced7db", "#f0f3f4"]
+        "tonalRamp": ["#192932", "#2c4859", "#466678", "#688291", "#8a9eaa", "#acbac3", "#ced7db", "#f0f3f4"],
+        "dark": "#82abc1"
       },
       "flare": {
         "role": "primary",
         "displayName": "Rescue Flare",
         "canonical": "#e8531f",
-        "tonalRamp": ["#501d0b", "#8d3213", "#ca481b", "#ea6536", "#ef8763", "#f4aa91", "#f8cdbe", "#fdf0eb"]
+        "tonalRamp": ["#501d0b", "#8d3213", "#ca481b", "#ea6536", "#ef8763", "#f4aa91", "#f8cdbe", "#fdf0eb"],
+        "dark": "#e8531f"
       },
       "flare-deep": {
         "role": "primary",
         "displayName": "Rescue Flare Deep",
         "canonical": "#c03e10",
-        "tonalRamp": ["#551b07", "#96300c", "#c44a1e", "#cf6b48", "#da8c71", "#e4ae9a", "#efcfc4", "#faf0ed"]
+        "tonalRamp": ["#551b07", "#96300c", "#c44a1e", "#cf6b48", "#da8c71", "#e4ae9a", "#efcfc4", "#faf0ed"],
+        "dark": "#ff7a45"
       },
       "flare-bright": {
         "role": "primary",
         "displayName": "Rescue Flare Bright",
         "canonical": "#ff7a45",
-        "tonalRamp": ["#432012", "#753820", "#a8502d", "#db693b", "#ff8453", "#ffa885", "#ffccb7", "#ffefe9"]
+        "tonalRamp": ["#432012", "#753820", "#a8502d", "#db693b", "#ff8453", "#ffa885", "#ffccb7", "#ffefe9"],
+        "dark": "#ff7a45"
       },
       "mist": {
         "role": "neutral",
         "displayName": "Cool Mist",
         "canonical": "#5c6b73",
-        "tonalRamp": ["#22272a", "#3b454a", "#55636a", "#738087", "#939da2", "#b2b9bd", "#d2d6d8", "#f1f2f3"]
+        "tonalRamp": ["#22272a", "#3b454a", "#55636a", "#738087", "#939da2", "#b2b9bd", "#d2d6d8", "#f1f2f3"],
+        "dark": "#97a5ad"
       },
       "line": {
         "role": "neutral",
         "displayName": "Soft Rule",
         "canonical": "#d8d5cc",
-        "tonalRamp": ["#272625", "#444341", "#62615c", "#7f7e78", "#9d9b94", "#bbb8b0", "#d8d5cc", "#f3f2f0"]
+        "tonalRamp": ["#272625", "#444341", "#62615c", "#7f7e78", "#9d9b94", "#bbb8b0", "#d8d5cc", "#f3f2f0"],
+        "dark": "#34434d"
       },
       "white": {
         "role": "neutral",
         "displayName": "White",
         "canonical": "#ffffff",
-        "tonalRamp": ["#262626", "#434343", "#616161", "#7e7e7e", "#9b9b9b", "#b8b8b8", "#d5d5d5", "#f2f2f2"]
+        "tonalRamp": ["#262626", "#434343", "#616161", "#7e7e7e", "#9b9b9b", "#b8b8b8", "#d5d5d5", "#f2f2f2"],
+        "dark": "#1e2a32"
       },
       "open": {
         "role": "neutral",
         "displayName": "Status Green",
-        "canonical": "#2f9e44",
-        "tonalRamp": ["#0e2f14", "#195324", "#237733", "#2e9b43", "#5bb36c", "#8bc996", "#badfc1", "#eaf5ec"]
+        "canonical": "#268038",
+        "tonalRamp": ["#0e2f14", "#195324", "#237733", "#2e9b43", "#5bb36c", "#8bc996", "#badfc1", "#eaf5ec"],
+        "dark": "#4cc265"
       },
       "booked": {
         "role": "neutral",
         "displayName": "Status Red",
         "canonical": "#c92a2a",
-        "tonalRamp": ["#651515", "#b32525", "#cf4343", "#d86565", "#e18888", "#eaabab", "#f2cdcd", "#fbf0f0"]
+        "tonalRamp": ["#651515", "#b32525", "#cf4343", "#d86565", "#e18888", "#eaabab", "#f2cdcd", "#fbf0f0"],
+        "dark": "#ff6b6b"
+      },
+      "flare-hover": {
+        "role": "primary",
+        "displayName": "Rescue Flare Hover",
+        "canonical": "#a8380e",
+        "tonalRamp": ["#461706", "#7c290a", "#b33c0f", "#e94e13", "#f07546", "#f49d7c", "#f9c5b1", "#fdede7"],
+        "dark": "#a8380e"
+      },
+      "flare-fill": {
+        "role": "primary",
+        "displayName": "Rescue Flare Fill",
+        "canonical": "#c03e10",
+        "tonalRamp": ["#461706", "#7c280a", "#b33a0f", "#e94b13", "#f07346", "#f49b7c", "#f9c4b1", "#fdede7"],
+        "dark": "#c03e10"
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field Rule",
+        "canonical": "#7c878d",
+        "tonalRamp": ["#232729", "#3e4448", "#5a6368", "#758187", "#949da2", "#b3babd", "#d2d6d8", "#f1f2f3"],
+        "dark": "#71828c"
+      },
+      "inverse": {
+        "role": "neutral",
+        "displayName": "Flagship Panel",
+        "canonical": "#1e2a32",
+        "tonalRamp": ["#1c282f", "#324654", "#496679", "#5e849d", "#82a0b4", "#a6bcca", "#cad7df", "#eff3f5"],
+        "dark": "#27353f"
+      },
+      "on-inverse": {
+        "role": "neutral",
+        "displayName": "On Flagship",
+        "canonical": "#f6f5f1",
+        "tonalRamp": ["#2e2b1e", "#524c34", "#766e4c", "#998e63", "#b1a885", "#c8c1a9", "#dedacc", "#f5f4ef"],
+        "dark": "#f6f5f1"
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "On Chart Fill",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#262626", "#434343", "#616161", "#7e7e7e", "#9b9b9b", "#b8b8b8", "#d5d5d5", "#f2f2f2"],
+        "dark": "#141c22"
       }
     },
     "typographyMeta": {
@@ -96,17 +149,17 @@
     "shadows": [
       {
         "name": "receipt-drop",
-        "value": "drop-shadow(0 16px 20px rgb(30 42 50 / 0.18))",
-        "purpose": "Follows the torn receipt mask on .receipt-wrap only."
+        "value": "drop-shadow(0 16px 20px light-dark(rgb(30 42 50 / 0.18), rgb(0 0 0 / 0.7)))",
+        "purpose": "Follows the torn receipt mask on .receipt-wrap only. Black at 0.7 after hours; the receipt itself stays white paper."
       },
       {
         "name": "hover-lift",
-        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "value": "0 10px 15px -3px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5)), 0 4px 6px -4px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5))",
         "purpose": "Button and card hover elevation with a 2px lift."
       },
       {
         "name": "card-lift-soft",
-        "value": "0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08)",
+        "value": "0 10px 15px -3px light-dark(rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.45)), 0 4px 6px -4px light-dark(rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.45))",
         "purpose": "Softer hover for case-study and content cards."
       }
     ],
@@ -130,6 +183,16 @@
         "name": "reveal-rise",
         "value": "view() timeline, entry 0%–45%",
         "purpose": "Scroll-driven fade/rise for .reveal when animation-timeline is supported."
+      },
+      {
+        "name": "theme-reveal",
+        "value": "clip-path circle 450ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Circular reveal from the theme toggle on ::view-transition-new(root); skipped under reduced motion or without View Transitions."
+      },
+      {
+        "name": "theme-icon-morph",
+        "value": "transform 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms ease",
+        "purpose": "Sun rays retract into a moon crescent on the theme toggle; instant under reduced motion."
       }
     ],
     "breakpoints": [
@@ -144,9 +207,9 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Square rescue CTA — flare-deep fill, lifts on hover.",
+      "description": "Square rescue CTA — flare-fill, deepens and lifts on hover.",
       "html": "<button class=\"ds-btn-primary\">Book a free 15-minute call</button>",
-      "css": ".ds-btn-primary { background: var(--color-flare-deep, #c03e10); color: var(--color-porcelain, #f6f5f1); padding: 0.75rem 1.5rem; font-weight: 600; border: none; border-radius: 0; cursor: pointer; transition: transform 150ms, background-color 150ms, box-shadow 150ms; } .ds-btn-primary:hover { transform: translateY(-0.125rem); background: var(--color-flare, #e8531f); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); } .ds-btn-primary:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary:hover { transform: none; } }"
+      "css": ".ds-btn-primary { background: var(--color-flare-fill, #c03e10); color: var(--color-on-inverse, #f6f5f1); padding: 0.75rem 1.5rem; font-weight: 600; border: none; border-radius: 0; cursor: pointer; transition: transform 150ms, background-color 150ms, box-shadow 150ms; } .ds-btn-primary:hover { transform: translateY(-0.125rem); background: var(--color-flare-hover, #a8380e); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); } .ds-btn-primary:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary:hover { transform: none; } }"
     },
     {
       "name": "Secondary Button",
@@ -168,9 +231,9 @@
       "name": "Text Field",
       "kind": "input",
       "refersTo": "input",
-      "description": "Square white field with soft-rule border for Netlify forms.",
+      "description": "Square white field with a field-rule border (3:1) for Netlify forms.",
       "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Your name</span><input class=\"ds-input\" type=\"text\" placeholder=\"Jordan Smith\" /></label>",
-      "css": ".ds-field { display: block; } .ds-field-label { display: block; font-weight: 600; color: var(--color-ink, #1e2a32); } .ds-input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.75rem 1rem; border: 1px solid var(--color-line, #d8d5cc); border-radius: 0; background: var(--color-white, #fff); color: var(--color-ink, #1e2a32); font: inherit; } .ds-input:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
+      "css": ".ds-field { display: block; } .ds-field-label { display: block; font-weight: 600; color: var(--color-ink, #1e2a32); } .ds-input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.75rem 1rem; border: 1px solid var(--color-field, #7c878d); border-radius: 0; background: var(--color-white, #fff); color: var(--color-ink, #1e2a32); font: inherit; } .ds-input::placeholder { color: var(--color-mist, #5c6b73); opacity: 1; } .ds-input:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
     },
     {
       "name": "Content Card",
@@ -192,9 +255,9 @@
       "name": "Header Nav",
       "kind": "nav",
       "refersTo": "button-nav-cta",
-      "description": "Wordmark with flare period, mist links, ink book CTA.",
+      "description": "Wordmark with flare-deep period, mist links, ink book CTA, theme toggle.",
       "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"/\">Gian Trotta<span class=\"ds-dot\">.</span></a><nav class=\"ds-nav\" aria-label=\"Main\"><a class=\"ds-nav-link\" href=\"/services/\">Services</a><a class=\"ds-nav-link ds-nav-link-current\" href=\"/case-studies/\" aria-current=\"page\">Case studies</a><a class=\"ds-btn-nav\" href=\"/contact/\">Book a checkup</a></nav></header>",
-      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--color-line, #d8d5cc); background: var(--color-porcelain, #f6f5f1); } .ds-wordmark { font-family: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif; font-size: 1.125rem; font-weight: 700; color: var(--color-ink, #1e2a32); text-decoration: none; letter-spacing: -0.025em; } .ds-dot { color: var(--color-flare, #e8531f); } .ds-nav { display: flex; align-items: center; gap: 1.5rem; } .ds-nav-link { position: relative; color: var(--color-mist, #5c6b73); text-decoration: none; font-size: 0.875rem; } .ds-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--color-flare, #e8531f); transform: scaleX(0); transform-origin: left; transition: transform 200ms; } .ds-nav-link:hover, .ds-nav-link-current { color: var(--color-ink, #1e2a32); font-weight: 600; } .ds-nav-link:hover::after, .ds-nav-link-current::after { transform: scaleX(1); } .ds-btn-nav { display: inline-block; background: var(--color-ink, #1e2a32); color: var(--color-porcelain, #f6f5f1); padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; } .ds-btn-nav:hover { background: var(--color-steel, #35586c); }"
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--color-line, #d8d5cc); background: var(--color-porcelain, #f6f5f1); } .ds-wordmark { font-family: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif; font-size: 1.125rem; font-weight: 700; color: var(--color-ink, #1e2a32); text-decoration: none; letter-spacing: -0.025em; } .ds-dot { color: var(--color-flare-deep, #c03e10); } .ds-nav { display: flex; align-items: center; gap: 1.5rem; } .ds-nav-link { position: relative; color: var(--color-mist, #5c6b73); text-decoration: none; font-size: 0.875rem; } .ds-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--color-flare, #e8531f); transform: scaleX(0); transform-origin: left; transition: transform 200ms; } .ds-nav-link:hover, .ds-nav-link-current { color: var(--color-ink, #1e2a32); font-weight: 600; } .ds-nav-link:hover::after, .ds-nav-link-current::after { transform: scaleX(1); } .ds-btn-nav { display: inline-block; background: var(--color-ink, #1e2a32); color: var(--color-porcelain, #f6f5f1); padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; } .ds-btn-nav:hover { background: var(--color-steel, #35586c); }"
     },
     {
       "name": "Eyebrow Label",
@@ -219,6 +282,14 @@
       "description": "Proof mosaic: white cells separated by soft-rule gutters.",
       "html": "<dl class=\"ds-stats\"><div class=\"ds-stat\"><dt class=\"ds-eyebrow\">Monthly fee</dt><dd class=\"ds-stat-value\">$0</dd></div><div class=\"ds-stat\"><dt class=\"ds-eyebrow\">Loads in</dt><dd class=\"ds-stat-value\">&lt; 1 second</dd></div><div class=\"ds-stat\"><dt class=\"ds-eyebrow\">On Google</dt><dd class=\"ds-stat-value\">Found</dd></div></dl>",
       "css": ".ds-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--color-line, #d8d5cc); background: var(--color-line, #d8d5cc); margin: 0; } .ds-stat { background: #fff; padding: 1.25rem; } .ds-eyebrow { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-mist, #5c6b73); margin: 0; } .ds-stat-value { margin: 0.5rem 0 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 700; font-size: 1.25rem; color: var(--color-steel, #35586c); }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "refersTo": "theme-toggle",
+      "description": "Square 40px icon button, aria-pressed = dark showing; sun morphs to moon; hidden until JS runs.",
+      "html": "<button type=\"button\" class=\"ds-theme-toggle\" aria-label=\"Dark mode\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"5\" fill=\"currentColor\"/><path d=\"M12 1.5V4M12 20v2.5M1.5 12H4M20 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></button>",
+      "css": ".ds-theme-toggle { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; padding: 0; border: none; border-radius: 0; background: transparent; color: var(--color-ink, #1e2a32); cursor: pointer; } .ds-theme-toggle:hover { color: var(--color-flare-deep, #c03e10); } .ds-theme-toggle:focus-visible { outline: 3px solid var(--color-flare, #e8531f); outline-offset: 2px; }"
     }
   ],
   "narrative": {

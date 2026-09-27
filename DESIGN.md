@@ -237,7 +237,7 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Error / Disabled:** Not specialized in the system yet; keep square paper styling if added.
 
 ### Navigation
-- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; echoes `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + flare period. `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
+- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; echoes `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + flare period. Below `md` the header shows the monogram alone; the wordmark stays in the link as `sr-only` so it still reads "Gian Trotta." `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
 - **Links:** Mist by default; hover/current → ink with flare underline scale-x reveal.
 - **Mobile:** Checkbox-driven drawer hanging from the sticky header; capped at the viewport height below the header (`max-h-[calc(100dvh-100%)]`) and scrolls internally so the CTA stays reachable on short screens; Escape closes; full-viewport dismiss label.
 - **Footer:** Dashed top border; display wordmark with `flare-deep` period; mist link list; mono copyright line.

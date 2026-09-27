@@ -458,9 +458,12 @@ html {
   color: var(--color-ink);
 }
 
+.prose-custom .table-scroll {
+  margin: 1.75rem 0;
+}
+
 .prose-custom table {
   width: 100%;
-  margin: 1.75rem 0;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
@@ -495,9 +498,12 @@ html {
 
 /* Small screens: let wide tables scroll instead of crushing columns */
 @media (max-width: 640px) {
-  .prose-custom table {
-    display: block;
+  .prose-custom .table-scroll {
     overflow-x: auto;
+  }
+
+  .prose-custom table {
+    width: auto;
     white-space: nowrap;
   }
 }

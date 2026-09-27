@@ -194,9 +194,10 @@ Flat by default. Borders, white-on-porcelain stacking, and dashed frames carry h
 - **Hover lift** (`0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)`): Primary/secondary buttons and card-lift on hover, paired with `translateY(-0.125rem)`.
 - **Softer card hover** (same recipe at ~0.08 opacity): Case-study / content cards using `.card-lift`.
 - **Mobile nav** (`shadow-lg`): Temporary drawer only.
+- **Sticky header lift** (`0 6px 16px -6px rgb(30 42 50 / 0.18), 0 2px 4px -2px rgb(30 42 50 / 0.08)`): Only while the page is scrolled away from the top (`.site-header[data-scrolled]`); fades in over 200ms. At the top the header is flat.
 
 ### Named Rules
-**The Flat-By-Default Rule.** At rest, surfaces are flat. Shadows appear for hover, the receipt, or ephemeral chrome (mobile menu). Do not pre-elevate every card.
+**The Flat-By-Default Rule.** At rest, surfaces are flat. Shadows appear for hover, the receipt, or ephemeral chrome (mobile menu, the scrolled sticky header). Do not pre-elevate every card.
 
 ## Shapes
 
@@ -209,7 +210,7 @@ Recurring silhouettes:
 - **Section underline:** 4px solid flare under `.section-heading`; hero phrase uses a thicker flare text underline (`max(4px, 0.1em)`, offset 0.21em below the baseline to clear Bricolage's 0.18em descenders) that draws in on load. It is a text underline, not a border, so tight leading can't push it into the next line.
 
 ### Named Rules
-**The Zero Radius Rule.** Interactive chrome and content cards stay square. Tiny rounded bars inside the hamburger icon are the only intentional round geometry.
+**The Zero Radius Rule.** Interactive chrome and content cards stay square. Tiny rounded bars inside the hamburger icon and the header's GT monogram (which echoes the favicon's rounded tile and flare dot) are the only intentional round geometry.
 
 ## Components
 
@@ -236,9 +237,9 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Error / Disabled:** Not specialized in the system yet; keep square paper styling if added.
 
 ### Navigation
-- **Header:** Hairline bottom border; display wordmark `Gian Trotta` + flare period.
+- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; echoes `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + flare period. Below `md` the header shows the monogram alone; the wordmark stays in the link as `sr-only` so it still reads "Gian Trotta." `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
 - **Links:** Mist by default; hover/current → ink with flare underline scale-x reveal.
-- **Mobile:** Checkbox-driven drawer; Escape closes; full-viewport dismiss label.
+- **Mobile:** Checkbox-driven drawer hanging from the sticky header; capped at the viewport height below the header (`max-h-[calc(100dvh-100%)]`) and scrolls internally so the CTA stays reachable on short screens; Escape closes; full-viewport dismiss label.
 - **Footer:** Dashed top border; display wordmark with `flare-deep` period; mist link list; mono copyright line.
 
 ### Eyebrow
@@ -255,7 +256,8 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 ### Motion (component-tied)
 - Hero underline draws in once (~500ms, 300ms delay); reduced motion → final state immediately.
 - Scroll reveals (`.reveal`) use CSS scroll-driven animation when supported.
-- Cursor trail (site-wide via `Base.astro`, `public/scripts/cursor-trail.js`): 12px flare squares snap to a 24px grid where a mouse crosses empty space, then shrink and fade over ~700ms. Runs across the full viewport width within the vertical bands of alternating top-level blocks of `<main>` (hero on, the next off, the next on), never in the header or footer. Skips text, controls, the receipt, and `[data-trail-ignore]`. Canvas uses `mix-blend-mode: multiply`. Mouse only (`pointer: fine`); never runs under reduced motion. The one piece of JS-driven motion on the site; CSS can't follow a cursor.
+- Header scroll state (site-wide via `Base.astro`, `public/scripts/header-scroll.js`): sets `[data-scrolled]` on the header when `scrollY > 0` and writes `--logo-turn` on the GT monogram as a pure function of scroll position (0.36°/px, one turn per 1000px). Scrolling down turns it clockwise, scrolling up turns it back, and it is exactly upright at the top; overscroll bounce is clamped. No transition on the turn, so it tracks the scroll exactly. The rotation only applies under `prefers-reduced-motion: no-preference`.
+- Cursor trail (site-wide via `Base.astro`, `public/scripts/cursor-trail.js`): 12px flare squares snap to a 24px grid where a mouse crosses empty space, then shrink and fade over ~700ms. Runs across the full viewport width within the vertical bands of alternating top-level blocks of `<main>` (hero on, the next off, the next on), never in the header or footer. Skips text, controls, the receipt, and `[data-trail-ignore]`. Canvas uses `mix-blend-mode: multiply`. Mouse only (`pointer: fine`); never runs under reduced motion. JS-driven because CSS can't follow a cursor.
 - Diagram dash-flow animations only where those SVGs exist; always gated by `prefers-reduced-motion`.
 
 ## Do's and Don'ts
@@ -265,7 +267,7 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Do** keep primary actions on `flare-deep` and accents scarce.
 - **Do** use square corners and white-on-porcelain paper stacking.
 - **Do** put section titles on `.section-heading` so the short orange rule stays consistent.
-- **Do** honor `prefers-reduced-motion` for lift, underline draw, ping dots, and scroll reveals.
+- **Do** honor `prefers-reduced-motion` for lift, underline draw, ping dots, scroll reveals, the header shadow fade, and the GT monogram turn.
 - **Do** keep Netlify contact forms as static HTML with `data-netlify="true"` when touching Contact.
 
 ### Don't:

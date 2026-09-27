@@ -46,6 +46,11 @@ html {
   color: var(--color-ink);
   font-family: var(--font-body);
   scroll-behavior: smooth;
+  /* The header is sticky, so in-page anchor jumps (e.g. #audit, the skip
+     link's #main) must land below it rather than underneath it. Covers the
+     header's rendered height (77px desktop, 81px mobile) with a little air,
+     so targets don't need their own scroll-margin. */
+  scroll-padding-top: 5.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -191,6 +196,37 @@ html {
       animation-timeline: view();
       animation-range: entry 0% entry 45%;
     }
+  }
+}
+
+/* Sticky site header. Flat while it rests at the top of the page; once the
+   page scrolls, public/scripts/header-scroll.js sets [data-scrolled] and the
+   header lifts with a soft ink shadow (ephemeral chrome, like the mobile
+   drawer). No transform/filter here: the drawer's fixed dismiss layer lives
+   inside the header and would be trapped by a new containing block. */
+.site-header {
+  transition: box-shadow 200ms ease;
+}
+
+.site-header[data-scrolled] {
+  box-shadow:
+    0 6px 16px -6px rgb(30 42 50 / 0.18),
+    0 2px 4px -2px rgb(30 42 50 / 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
+
+/* GT monogram turns with the scroll position (header-scroll.js writes
+   --logo-turn from scrollY). No transition: the angle tracks the scroll
+   directly, so it is exactly upright whenever the page is at the top.
+   Reduced motion keeps it still. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-mark {
+    transform: rotate(var(--logo-turn, 0deg));
   }
 }
 

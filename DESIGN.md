@@ -199,7 +199,7 @@ Spatial model is a centered content column on porcelain, not a dashboard grid.
 Flat by default. Borders, white-on-porcelain stacking, and dashed frames carry hierarchy. Shadows are state and signature, not ambient furniture.
 
 ### Shadow Vocabulary
-- **Receipt drop** (`filter: drop-shadow(0 16px 20px rgb(30 42 50 / 0.18))`): Only on `.receipt-wrap`, so the shadow follows the torn mask.
+- **Receipt drop** (`filter: drop-shadow(0 16px 20px rgb(30 42 50 / 0.18))`): Only on `.receipt-wrap`, so the shadow follows the torn mask. Below `lg` the wrapper also carries `transform: translateZ(0)` so it gets its own compositing layer; without it, iOS Safari drops the shadow on and off while the page scrolls.
 - **Hover lift** (`0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)`): Primary/secondary buttons and card-lift on hover, paired with `translateY(-0.125rem)`.
 - **Softer card hover** (same recipe at ~0.08 opacity): Case-study / content cards using `.card-lift`.
 - **Mobile nav** (`shadow-lg`): Temporary drawer only.

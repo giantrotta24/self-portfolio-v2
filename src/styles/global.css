@@ -128,9 +128,19 @@ html {
 
 /* The checkup receipt: torn-paper edges + drop shadow.
    The shadow lives on the wrapper (drop-shadow follows the torn shape);
-   the mask lives on the paper itself — box-shadow would be clipped by it. */
+   the mask lives on the paper itself — box-shadow would be clipped by it.
+   Below lg, translateZ(0) gives the wrapper its own compositing layer: without
+   it, iOS Safari drops the drop-shadow on alternate frames while the page
+   scrolls, so the shadow flickers. The lg tilt uses the separate `rotate`
+   property, so it is untouched. */
 .receipt-wrap {
   filter: drop-shadow(0 16px 20px light-dark(rgb(30 42 50 / 0.18), rgb(0 0 0 / 0.7)));
+}
+
+@media (width < 64rem) {
+  .receipt-wrap {
+    transform: translateZ(0);
+  }
 }
 
 /* The receipt stays white paper with ink type in both schemes: a lit slip

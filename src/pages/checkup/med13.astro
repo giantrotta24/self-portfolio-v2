@@ -46,7 +46,7 @@ const ticks = [
 const segments = [
   { width: 'w-[38%]', color: 'bg-steel', label: "med13.org's own code and images", size: '1.9 MB' },
   { width: 'w-[24%]', color: 'bg-flare-deep', label: 'Classy donation form', size: '1.2 MB' },
-  { width: 'w-[18%]', color: 'bg-[#e8835a]', label: 'Stripe payments', size: '0.9 MB' },
+  { width: 'w-[18%]', color: 'bg-[color:light-dark(#e8835a,#a84f2b)]', label: 'Stripe payments', size: '0.9 MB' },
   { width: 'w-[20%]', color: 'bg-[#b9b5aa]', label: 'GoFundMe, Facebook, cookie banner, fonts', size: '~1.0 MB' },
 ];
 
@@ -461,7 +461,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
                   <div class="text-sm leading-tight">{bar.name}</div>
                   <div class="relative h-6.5">
                     <div
-                      class={`flex h-full items-center justify-end pr-2 font-utility text-[0.8rem] font-bold leading-none text-white tabular-nums ${bar.width} ${bar.fill}`}
+                      class={`flex h-full items-center justify-end pr-2 font-utility text-[0.8rem] font-bold leading-none text-on-accent tabular-nums ${bar.width} ${bar.fill}`}
                     >
                       {bar.value}
                     </div>
@@ -567,7 +567,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
           <div class="grid grid-cols-2 gap-2.5">
             {
               swatches.map((swatch) => (
-                <div class="grid gap-1.5 border border-line bg-white p-3">
+                <div class="grid gap-1.5 border border-line bg-white p-3 scheme-light">
                   <span class={`font-body text-base font-bold leading-tight ${swatch.demo}`}>{swatch.text}</span>
                   <span class="font-utility text-xs leading-snug text-mist">{swatch.ratio}</span>
                 </div>
@@ -768,7 +768,7 @@ const methodTdClass = 'border-t border-dotted border-line px-3.5 py-3 align-top'
             >
               {ask.agreed ? (
                 <span
-                  class="relative h-5.5 w-5.5 border-2 border-steel bg-steel after:absolute after:left-1.5 after:top-px after:h-3 after:w-1.5 after:rotate-45 after:border-r-[3px] after:border-b-[3px] after:border-white after:content-['']"
+                  class="relative h-5.5 w-5.5 border-2 border-steel bg-steel after:absolute after:left-1.5 after:top-px after:h-3 after:w-1.5 after:rotate-45 after:border-r-[3px] after:border-b-[3px] after:border-on-accent after:content-['']"
                   aria-hidden="true"
                 />
               ) : (

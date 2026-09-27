@@ -18,27 +18,76 @@
 }
 
 @theme {
-  /* Palette — porcelain/ink/steel with a safety-orange rescue accent */
-  --color-porcelain: #f6f5f1;
-  --color-ink: #1e2a32;
-  --color-steel: #35586c;
+  /* Palette — porcelain/ink/steel with a safety-orange rescue accent.
+     Each value is light-dark(light, dark): the "After hours" dark set
+     applies wherever color-scheme resolves to dark (see the color-scheme
+     block below). Tokens are custom properties substituted at the point of
+     use, so a subtree with its own color-scheme (the receipt) resolves them
+     to its own scheme. In dark, porcelain/white/ink swap roles: porcelain is
+     the deep-ink page ground, white is the raised slate panel, ink is
+     porcelain type. */
+  --color-porcelain: light-dark(#f6f5f1, #141c22);
+  --color-ink: light-dark(#1e2a32, #f6f5f1);
+  --color-steel: light-dark(#35586c, #82abc1);
+  /* Constant: public/scripts/cursor-trail.js reads it as a canvas color. */
   --color-flare: #e8531f;
-  --color-flare-deep: #c03e10;
+  /* Accent text on the page's own surfaces: deep on paper, bright on dark. */
+  --color-flare-deep: light-dark(#c03e10, #ff7a45);
   /* Accessible variant of the accent for small/normal-weight text on dark
      (ink) backgrounds. --color-flare fails WCAG AA (4.5:1) at body-text
      sizes on both porcelain/white (use --color-flare-deep there, 5.3:1)
-     and ink; --color-flare-bright passes 5.7:1 on ink. */
+     and ink; --color-flare-bright passes 5.7:1 on ink. Only used on the
+     inverse panels, which stay dark in both schemes. */
   --color-flare-bright: #ff7a45;
-  --color-mist: #5c6b73;
-  --color-line: #d8d5cc;
+  --color-mist: light-dark(#5c6b73, #97a5ad);
+  --color-line: light-dark(#d8d5cc, #34434d);
+  --color-white: light-dark(#ffffff, #1e2a32);
+
+  /* Role tokens for the few surfaces a value swap would break. */
+  /* The flagship dark panel: an ink slab on paper; after hours, a panel a
+     step lighter than the slate band, marked with a flare top edge
+     (.inverse-edge). */
+  --color-inverse: light-dark(#1e2a32, #27353f);
+  --color-on-inverse: #f6f5f1;
+  /* Primary button fill: stays deep so porcelain type keeps 4.9:1. Hover
+     goes a step deeper (6:1) rather than to raw flare (3.4:1). */
+  --color-flare-fill: #c03e10;
+  --color-flare-hover: #a8380e;
+  /* Form-field borders identify the control, so they need 3:1 against both
+     the field fill and the page. */
+  --color-field: light-dark(#7c878d, #71828c);
+  /* Type on bright chart fills (bg-steel / bg-flare-deep). */
+  --color-on-accent: light-dark(#ffffff, #141c22);
 
   /* Availability status-light colors */
-  --color-open: #2f9e44;
-  --color-booked: #c92a2a;
+  --color-open: light-dark(#268038, #4cc265);
+  --color-booked: light-dark(#c92a2a, #ff6b6b);
 
   --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-utility: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
+}
+
+/* Light by default. Dark when the visitor picks it (data-theme="dark"), or
+   when the OS prefers dark and the visitor hasn't picked light. Setting
+   color-scheme is what flips every light-dark() token, and it also themes
+   native form controls and scrollbars. --is-dark (0/1) carries the same
+   state into calc() for the few non-color properties that follow it. */
+:root {
+  color-scheme: light;
+  --is-dark: 0;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --is-dark: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --is-dark: 1;
+  }
 }
 
 html {
@@ -64,6 +113,13 @@ html {
   color: var(--color-porcelain);
 }
 
+/* Browser-default placeholders are too faint (and Firefox dims them further
+   with opacity). */
+::placeholder {
+  color: var(--color-mist);
+  opacity: 1;
+}
+
 /* Visible keyboard focus, everywhere */
 :focus-visible {
   outline: 3px solid var(--color-flare);
@@ -74,11 +130,17 @@ html {
    The shadow lives on the wrapper (drop-shadow follows the torn shape);
    the mask lives on the paper itself — box-shadow would be clipped by it. */
 .receipt-wrap {
-  filter: drop-shadow(0 16px 20px rgb(30 42 50 / 0.18));
+  filter: drop-shadow(0 16px 20px light-dark(rgb(30 42 50 / 0.18), rgb(0 0 0 / 0.7)));
 }
 
+/* The receipt stays white paper with ink type in both schemes: a lit slip
+   on the dark counter. color-scheme: light makes every token inside it
+   resolve to its light value. The color is re-declared because inherited
+   text color arrives already resolved from <html>. */
 .receipt-paper {
+  color-scheme: light;
   background: #fff;
+  color: var(--color-ink);
   mask:
     conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 22px 51%
       repeat-x,
@@ -139,19 +201,19 @@ html {
 
 /* Shared button treatments — homepage hero primary/secondary CTAs. */
 .btn-primary {
-  background-color: var(--color-flare-deep);
+  background-color: var(--color-flare-fill);
   padding: 0.75rem 1.5rem;
   font-weight: 600;
-  color: var(--color-porcelain);
+  color: var(--color-on-inverse);
   transition: transform 150ms;
 }
 
 .btn-primary:hover {
   transform: translateY(-0.125rem);
-  background-color: var(--color-flare);
+  background-color: var(--color-flare-hover);
   box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+    0 10px 15px -3px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5)),
+    0 4px 6px -4px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -172,8 +234,8 @@ html {
 .card-lift:hover {
   transform: translateY(-0.125rem);
   box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.08),
-    0 4px 6px -4px rgb(0 0 0 / 0.08);
+    0 10px 15px -3px light-dark(rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.45)),
+    0 4px 6px -4px light-dark(rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.45));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -210,8 +272,8 @@ html {
 
 .site-header[data-scrolled] {
   box-shadow:
-    0 6px 16px -6px rgb(30 42 50 / 0.18),
-    0 2px 4px -2px rgb(30 42 50 / 0.08);
+    0 6px 16px -6px light-dark(rgb(30 42 50 / 0.18), rgb(0 0 0 / 0.6)),
+    0 2px 4px -2px light-dark(rgb(30 42 50 / 0.08), rgb(0 0 0 / 0.4));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -240,6 +302,85 @@ html {
   pointer-events: none;
   z-index: 5;
   mix-blend-mode: multiply;
+}
+
+/* Dark-only rules that aren't colors, so light-dark() can't carry them.
+   Multiply against a dark ground turns the cursor-trail squares near-black.
+   The flagship panel (.inverse-edge) gets the section-heading flare rule on
+   its top edge, since after hours it is raised rather than an ink slab. */
+:root[data-theme='dark'] .cursor-trail {
+  mix-blend-mode: normal;
+}
+
+:root[data-theme='dark'] .inverse-edge {
+  border-top: 4px solid var(--color-flare);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .cursor-trail {
+    mix-blend-mode: normal;
+  }
+
+  :root:not([data-theme='light']) .inverse-edge {
+    border-top: 4px solid var(--color-flare);
+  }
+}
+
+/* Theme toggle (Header.astro + public/scripts/theme-toggle.js). Hidden, not
+   removed, until Base.astro's pre-paint script flags JS on <html>: the space
+   is reserved so nothing shifts when it appears, and a button that can't do
+   anything never reaches the tab order or the accessibility tree.
+   The icon follows --is-dark, so it is right on first paint with no stored
+   choice: the sun's rays retract and a cut slides in to leave a crescent. */
+.theme-toggle {
+  visibility: hidden;
+}
+
+:root[data-js] .theme-toggle {
+  visibility: visible;
+}
+
+.theme-toggle-icon * {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  transition:
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 250ms ease;
+}
+
+.theme-toggle-body {
+  transform: scale(calc(1 + var(--is-dark) * 0.75));
+}
+
+.theme-toggle-cut {
+  transform: translate(calc((1 - var(--is-dark)) * 9px), calc((var(--is-dark) - 1) * 9px));
+}
+
+.theme-toggle-rays {
+  opacity: calc(1 - var(--is-dark));
+  transform: rotate(calc(var(--is-dark) * -45deg)) scale(calc(1 - var(--is-dark) * 0.5));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-icon * {
+    transition: none;
+  }
+}
+
+/* Circular reveal: theme-toggle.js grows a clip-path circle on the new
+   snapshot from the button. Drop the default crossfade so the old page
+   stays put underneath instead of fading. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Tailwind's shadow-lg (mobile drawer, card hovers) is black at 10%, which
+   vanishes on the dark ground. */
+.shadow-lg,
+.hover\:shadow-lg {
+  --tw-shadow-color: light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5));
 }
 
 /* Dash-flow for the two diagrams: the loop circle's dashes crawl clockwise,
@@ -279,8 +420,8 @@ html {
   background-color: var(--color-ink);
   color: var(--color-porcelain);
   box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+    0 10px 15px -3px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5)),
+    0 4px 6px -4px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -309,7 +450,7 @@ html {
 }
 
 .prose-custom a:hover {
-  color: var(--color-flare);
+  color: var(--color-flare-deep);
 }
 
 .prose-custom strong {

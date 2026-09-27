@@ -11,8 +11,14 @@ colors:
   mist: "#5c6b73"
   line: "#d8d5cc"
   white: "#ffffff"
-  open: "#2f9e44"
+  open: "#268038"
   booked: "#c92a2a"
+  flare-hover: "#a8380e"
+  flare-fill: "#c03e10"
+  field: "#7c878d"
+  inverse: "#1e2a32"
+  on-inverse: "#f6f5f1"
+  on-accent: "#ffffff"
 typography:
   display:
     fontFamily: "'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif"
@@ -55,14 +61,14 @@ spacing:
   field: "0.75rem 1rem"
 components:
   button-primary:
-    backgroundColor: "{colors.flare-deep}"
-    textColor: "{colors.porcelain}"
+    backgroundColor: "{colors.flare-fill}"
+    textColor: "{colors.on-inverse}"
     rounded: "{rounded.none}"
     padding: "0.75rem 1.5rem"
     typography: "{typography.body}"
   button-primary-hover:
-    backgroundColor: "{colors.flare}"
-    textColor: "{colors.porcelain}"
+    backgroundColor: "{colors.flare-hover}"
+    textColor: "{colors.on-inverse}"
     rounded: "{rounded.none}"
   button-secondary:
     backgroundColor: "transparent"
@@ -84,6 +90,7 @@ components:
   input:
     backgroundColor: "{colors.white}"
     textColor: "{colors.ink}"
+    borderColor: "{colors.field}"
     rounded: "{rounded.none}"
     padding: "0.75rem 1rem"
   card:
@@ -128,8 +135,9 @@ Density is roomy but not sparse: max-width containers, clear section breaks, one
 A cool workshop paper ground with harbor ink type, lake-steel links, and a scarce rescue-orange accent for action and signature marks.
 
 ### Primary
-- **Rescue Flare** (`flare`): The scarce accent. Hero underline draw-in, nav link underlines, selection highlight, focus rings, primary hover. Keep it rare so it reads as a shop mark, not a theme wash.
-- **Rescue Flare Deep** (`flare-deep`): Primary button fill and accent eyebrows. Prefer this for small/normal-weight text on porcelain or white (passes AA where raw flare does not).
+- **Rescue Flare** (`flare`): The scarce accent. Hero underline draw-in, nav link underlines, section-heading rules, selection highlight, focus rings, cursor trail. Keep it rare so it reads as a shop mark, not a theme wash. Never text: it fails AA at text sizes on porcelain (3.4:1).
+- **Rescue Flare Deep** (`flare-deep`): Accent eyebrows, accent values, the wordmark period, text-link hovers. Prefer this for small/normal-weight text on porcelain or white (4.9:1 where raw flare fails).
+- **Flare Fill / Flare Hover** (`flare-fill` `#c03e10`, `flare-hover` `#a8380e`): The primary button's fill and its hover fill. Hover goes a step deeper (porcelain type 6:1), not to raw flare (3.4:1).
 - **Rescue Flare Bright** (`flare-bright`): Accent text on ink/dark surfaces only (passes AA on ink).
 
 ### Secondary
@@ -139,11 +147,12 @@ A cool workshop paper ground with harbor ink type, lake-steel links, and a scarc
 - **Workshop Paper** (`porcelain`): Page background.
 - **Harbor Ink** (`ink`): Primary text, secondary button borders, dark CTAs, dashed callout frames.
 - **Cool Mist** (`mist`): Secondary body copy, default eyebrows, footer meta.
-- **Soft Rule** (`line`): Hairline borders, dotted receipt rules, stat-grid gutters.
+- **Soft Rule** (`line`): Hairline borders, dotted receipt rules, stat-grid gutters. Decorative only: never the border that identifies a control.
+- **Field Rule** (`field`): Form-field borders. They identify the control, so they need 3:1 against the field and the page (3.4:1 on porcelain).
 - **White** (`white`): Raised paper panels, receipt face, form fields, cards.
 
 ### Status
-- **Status Green** (`open`) / **Status Red** (`booked`): Availability badge only. Do not reuse as general success/error chrome unless the meaning is literally availability.
+- **Status Green** (`open`) / **Status Red** (`booked`): Availability badge and the case-study "shipped" status only. Do not reuse as general success/error chrome unless the meaning is literally status. Green is `#268038` so the "shipped" label passes AA on white (5:1).
 
 ### Named Rules
 **The Scarce Flare Rule.** Flare colors are a minority voice on any screen. Body text stays ink/mist; orange marks action, proof underlines, and status accents.
@@ -195,6 +204,7 @@ Flat by default. Borders, white-on-porcelain stacking, and dashed frames carry h
 - **Softer card hover** (same recipe at ~0.08 opacity): Case-study / content cards using `.card-lift`.
 - **Mobile nav** (`shadow-lg`): Temporary drawer only.
 - **Sticky header lift** (`0 6px 16px -6px rgb(30 42 50 / 0.18), 0 2px 4px -2px rgb(30 42 50 / 0.08)`): Only while the page is scrolled away from the top (`.site-header[data-scrolled]`); fades in over 200ms. At the top the header is flat.
+- **After hours:** every shadow above keeps its geometry and switches to black at a higher alpha through `light-dark()`: receipt drop 0.7, hover lift 0.5, softer card hover 0.45, header lift 0.6/0.4, `shadow-lg` 0.5. Light-mode alphas are unchanged.
 
 ### Named Rules
 **The Flat-By-Default Rule.** At rest, surfaces are flat. Shadows appear for hover, the receipt, or ephemeral chrome (mobile menu, the scrolled sticky header). Do not pre-elevate every card.
@@ -218,27 +228,29 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 
 ### Buttons
 - **Shape:** Square (0 radius).
-- **Primary (`.btn-primary`):** `flare-deep` fill, porcelain text, `0.75rem 1.5rem`, semibold. Hover: lift 2px, fill `flare`, soft shadow. Respects `prefers-reduced-motion`.
+- **Primary (`.btn-primary`):** `flare-fill` fill, porcelain (`on-inverse`) text, `0.75rem 1.5rem`, semibold. Hover: lift 2px, fill `flare-hover`, soft shadow. Respects `prefers-reduced-motion`.
 - **Secondary (`.btn-secondary`):** Ink 1px border, transparent fill. Hover: ink fill, porcelain text, same lift.
 - **Nav CTA ("Book a checkup"):** Ink fill, smaller padding (`px-4 py-2`); hover to steel.
 - **Focus:** Global `:focus-visible` — 3px solid flare, 2px offset.
 
 ### Cards / Containers
 - **Corner Style:** Square.
-- **Background:** White on porcelain; flagship service door may invert to ink with porcelain type.
+- **Background:** White on porcelain; the flagship service door inverts to an `inverse` slab with `on-inverse` type and `flare-bright` accents (see Dark mode for its after-hours treatment).
 - **Border:** `1px solid line`; hover often darkens to ink and adds soft lift shadow.
 - **Internal Padding:** Typically `p-8` (2rem).
 - **Dashed callout:** Strong ink dashed frame for "not sure / book a call" blocks.
 
 ### Inputs / Fields
-- **Style:** White fill, `1px solid line`, square, `px-4 py-3`, full width in form column.
+- **Style:** White fill, `1px solid field`, square, `px-4 py-3`, full width in form column.
+- **Placeholder:** `mist`, full opacity (browser defaults are too faint, and Firefox dims them further).
 - **Labels:** Semibold ink above the field.
 - **Focus:** Global flare focus ring (no custom glow).
 - **Error / Disabled:** Not specialized in the system yet; keep square paper styling if added.
 
 ### Navigation
-- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; echoes `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + flare period. Below `md` the header shows the monogram alone; the wordmark stays in the link as `sr-only` so it still reads "Gian Trotta." `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
+- **Header:** Sticky to the top of the viewport on a porcelain ground; hairline bottom border; flat at the top, lifts with a soft shadow once the page scrolls. GT monogram (ink rounded tile, porcelain `GT`, flare dot; echoes `favicon.svg`, `aria-hidden`) beside the display wordmark `Gian Trotta` + `flare-deep` period. Below `md` the header shows the monogram alone; the wordmark stays in the link as `sr-only` so it still reads "Gian Trotta." `html` carries `scroll-padding-top: 5.5rem` so anchor jumps clear it. No `transform`/`filter` on the header itself: the mobile drawer's fixed dismiss layer lives inside it.
 - **Links:** Mist by default; hover/current → ink with flare underline scale-x reveal.
+- **Theme toggle:** Icon button just left of the hamburger (mobile) or the nav links (desktop); outside the drawer so it is one tap on phones. See Dark mode → Theme toggle.
 - **Mobile:** Checkbox-driven drawer hanging from the sticky header; capped at the viewport height below the header (`max-h-[calc(100dvh-100%)]`) and scrolls internally so the CTA stays reachable on short screens; Escape closes; full-viewport dismiss label.
 - **Footer:** Dashed top border; display wordmark with `flare-deep` period; mist link list; mono copyright line.
 
@@ -257,8 +269,56 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - Hero underline draws in once (~500ms, 300ms delay); reduced motion → final state immediately.
 - Scroll reveals (`.reveal`) use CSS scroll-driven animation when supported.
 - Header scroll state (site-wide via `Base.astro`, `public/scripts/header-scroll.js`): sets `[data-scrolled]` on the header when `scrollY > 0` and writes `--logo-turn` on the GT monogram as a pure function of scroll position (0.36°/px, one turn per 1000px). Scrolling down turns it clockwise, scrolling up turns it back, and it is exactly upright at the top; overscroll bounce is clamped. No transition on the turn, so it tracks the scroll exactly. The rotation only applies under `prefers-reduced-motion: no-preference`.
-- Cursor trail (site-wide via `Base.astro`, `public/scripts/cursor-trail.js`): 12px flare squares snap to a 24px grid where a mouse crosses empty space, then shrink and fade over ~700ms. Runs across the full viewport width within the vertical bands of alternating top-level blocks of `<main>` (hero on, the next off, the next on), never in the header or footer. Skips text, controls, the receipt, and `[data-trail-ignore]`. Canvas uses `mix-blend-mode: multiply`. Mouse only (`pointer: fine`); never runs under reduced motion. JS-driven because CSS can't follow a cursor.
+- Cursor trail (site-wide via `Base.astro`, `public/scripts/cursor-trail.js`): 12px flare squares snap to a 24px grid where a mouse crosses empty space, then shrink and fade over ~700ms. Runs across the full viewport width within the vertical bands of alternating top-level blocks of `<main>` (hero on, the next off, the next on), never in the header or footer. Skips text, controls, the receipt, and `[data-trail-ignore]`. Canvas uses `mix-blend-mode: multiply` in light and `normal` in dark (multiply turns the squares near-black on the dark ground). Mouse only (`pointer: fine`); never runs under reduced motion. JS-driven because CSS can't follow a cursor.
 - Diagram dash-flow animations only where those SVGs exist; always gated by `prefers-reduced-motion`.
+- Theme switch (circular reveal): clicking the theme toggle wraps the change in a View Transition and grows a `clip-path` circle on `::view-transition-new(root)` from the toggle's centre to the farthest viewport corner (450ms, `cubic-bezier(0.4, 0, 0.2, 1)`); the default root crossfade is off. Under reduced motion, or without View Transitions, the theme applies instantly.
+- Theme icon morph: the sun's rays rotate, shrink and fade while a mask cut slides in to leave a crescent (transform 400ms, opacity 250ms). Reduced motion switches it instantly.
+
+## Dark mode
+
+**Creative direction: "After hours."** The same shop counter with the lights down: deep-ink ground, slate panels, porcelain type, a lightened mist, and flare-bright for accent text. The checkup receipt stays lit paper. Every named rule above (Scarce Flare, Contrast Pairing, Zero Radius, Flat-By-Default) holds unchanged. Target: WCAG 2.2 AA in both themes.
+
+### Selector contract
+Light is the default. Dark applies under `:root[data-theme="dark"]`, and under `@media (prefers-color-scheme: dark)` for `:root:not([data-theme="light"])`. Those selectors set `color-scheme` (and `--is-dark: 0/1` for the few non-color properties), and every color token is `light-dark(light, dark)`, so one switch flips the palette, native form controls and scrollbars. The OS path is pure CSS and works with JavaScript off. `<meta name="color-scheme" content="light dark">` is in the head.
+
+A stored choice is applied before first paint by a one-line inline script at the top of `Base.astro`'s `<head>` (it reads `localStorage.theme`, accepts only `light`/`dark`, and flags `data-js` on `<html>`). Its sha256 is pinned in `netlify.toml`'s `script-src`; keep it byte-stable.
+
+### Tokens
+
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `porcelain` | `#f6f5f1` | `#141c22` | Page ground (deep ink after hours) |
+| `white` | `#ffffff` | `#1e2a32` | Raised panels, cards, fields (slate) |
+| `ink` | `#1e2a32` | `#f6f5f1` | Primary type, ink borders, dashed callouts |
+| `mist` | `#5c6b73` | `#97a5ad` | Secondary copy, eyebrows, placeholders |
+| `steel` | `#35586c` | `#82abc1` | Links, proof numbers |
+| `line` | `#d8d5cc` | `#34434d` | Decorative hairlines |
+| `field` | `#7c878d` | `#71828c` | Form-field borders (3:1 against field and page) |
+| `flare` | `#e8531f` | `#e8531f` | Rules, underlines, focus ring, selection, cursor trail. Constant: `cursor-trail.js` reads it as a canvas color |
+| `flare-deep` | `#c03e10` | `#ff7a45` | Accent text and borders on the page's own surfaces |
+| `flare-bright` | `#ff7a45` | `#ff7a45` | Accent text on `inverse` panels |
+| `flare-fill` | `#c03e10` | `#c03e10` | Primary button fill |
+| `flare-hover` | `#a8380e` | `#a8380e` | Primary button hover fill |
+| `inverse` | `#1e2a32` | `#27353f` | Flagship panel |
+| `on-inverse` | `#f6f5f1` | `#f6f5f1` | Type on `inverse` panels and on the primary button |
+| `on-accent` | `#ffffff` | `#141c22` | Type on bright chart fills (`bg-steel`, `bg-flare-deep`) |
+| `open` / `booked` | `#268038` / `#c92a2a` | `#4cc265` / `#ff6b6b` | Status |
+
+**Role tokens.** Porcelain, white and ink swap roles after hours, which would break the few surfaces whose meaning is fixed: the primary button (it would get dark type on orange), the flagship panel (it would turn into a light card), and white chart type. `flare-fill`, `flare-hover`, `on-inverse`, `inverse` and `on-accent` pin those. Everything else rides the swap; header inversions (nav CTA, GT tile, skip link, secondary-button hover) become light-on-dark chrome, which reads correctly.
+
+### Named rules
+**The Lit Receipt Rule.** The checkup receipt stays white paper with ink type in both themes, a lit slip on the dark counter. `.receipt-paper` sets `color-scheme: light` (and re-declares `color`, because inherited text color arrives already resolved), so every token inside resolves to its light value. Anything that states a ratio against white (the med13 contrast swatches) takes `scheme-light` the same way.
+
+**The Flagship Edge Rule.** After hours the flagship door (homepage rescue card, ai-consulting audit card) is raised, not recessed: an `inverse` panel a step lighter than the slate band it sits on, with the section-heading's 4px flare rule along its top edge (`.inverse-edge`, dark only). In light it stays the ink slab. Type inside is `on-inverse`, accents `flare-bright` (4.9:1 on `#27353f`).
+
+### Theme toggle
+- One `<button type="button">` in the header, outside the mobile drawer: left of the hamburger on phones, left of the nav links on desktop, clear of the CTA.
+- Fixed accessible name "Dark mode"; `aria-pressed` reflects the effective theme, including when it comes from the OS. Synced on OS `change` and on the `storage` event (other tabs).
+- 40×40 hit target, `ink` icon (13:1 light, 16:1 dark), `flare-deep` on hover, global flare focus ring, square. The icon is round; the control is not.
+- Hidden with `visibility: hidden` until `:root[data-js]`: space is reserved (no layout shift), and with JavaScript off it is out of the tab order and the accessibility tree.
+- Icon state is CSS-driven from `--is-dark`, so it is right on first paint with no stored choice: sun (light) → moon crescent (dark).
+- Persistence is sticky and self-clearing: a click stores the opposite theme in `localStorage.theme` and sets `data-theme`; if that lands on the OS preference, both are removed and the page follows the system again.
+- Logic lives in `public/scripts/theme-toggle.js` (same-origin, `defer`); motion is described under Motion.
 
 ## Do's and Don'ts
 
@@ -267,7 +327,7 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Do** keep primary actions on `flare-deep` and accents scarce.
 - **Do** use square corners and white-on-porcelain paper stacking.
 - **Do** put section titles on `.section-heading` so the short orange rule stays consistent.
-- **Do** honor `prefers-reduced-motion` for lift, underline draw, ping dots, scroll reveals, the header shadow fade, and the GT monogram turn.
+- **Do** honor `prefers-reduced-motion` for lift, underline draw, ping dots, scroll reveals, the header shadow fade, the GT monogram turn, the theme reveal, and the theme icon morph.
 - **Do** keep Netlify contact forms as static HTML with `data-netlify="true"` when touching Contact.
 
 ### Don't:

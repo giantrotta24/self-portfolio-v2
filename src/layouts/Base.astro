@@ -18,6 +18,11 @@ const { title, description, noindex = false } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Pre-paint theme: apply a stored choice before first paint, and flag
+         that JS runs (the theme toggle stays hidden without it). Keep it
+         byte-stable: netlify.toml's script-src pins its sha256. -->
+    <script is:inline>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}document.documentElement.setAttribute('data-js','')</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-96x96.png" sizes="96x96" type="image/png" />
     <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
@@ -42,5 +47,6 @@ const { title, description, noindex = false } = Astro.props;
     <Footer />
     <script src="/scripts/header-scroll.js" defer></script>
     <script src="/scripts/cursor-trail.js" defer></script>
+    <script src="/scripts/theme-toggle.js" defer></script>
   </body>
 </html>

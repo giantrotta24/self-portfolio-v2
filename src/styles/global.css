@@ -44,18 +44,23 @@
   --color-white: light-dark(#ffffff, #1e2a32);
 
   /* Role tokens for the few surfaces a value swap would break. */
-  /* The flagship dark panel: ink on paper, the deepest ink after hours. */
-  --color-inverse: light-dark(#1e2a32, #0e1519);
+  /* The flagship dark panel: an ink slab on paper; after hours, a panel a
+     step lighter than the slate band, marked with a flare top edge
+     (.inverse-edge). */
+  --color-inverse: light-dark(#1e2a32, #27353f);
   --color-on-inverse: #f6f5f1;
-  /* Primary button fill: stays deep so porcelain type keeps 4.9:1. */
+  /* Primary button fill: stays deep so porcelain type keeps 4.9:1. Hover
+     goes a step deeper (6:1) rather than to raw flare (3.4:1). */
   --color-flare-fill: #c03e10;
-  /* Form-field borders identify the control, so they need 3:1 after hours. */
-  --color-field: light-dark(#d8d5cc, #71828c);
+  --color-flare-hover: #a8380e;
+  /* Form-field borders identify the control, so they need 3:1 against both
+     the field fill and the page. */
+  --color-field: light-dark(#7c878d, #71828c);
   /* Type on bright chart fills (bg-steel / bg-flare-deep). */
   --color-on-accent: light-dark(#ffffff, #141c22);
 
   /* Availability status-light colors */
-  --color-open: light-dark(#2f9e44, #4cc265);
+  --color-open: light-dark(#268038, #4cc265);
   --color-booked: light-dark(#c92a2a, #ff6b6b);
 
   --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
@@ -66,18 +71,22 @@
 /* Light by default. Dark when the visitor picks it (data-theme="dark"), or
    when the OS prefers dark and the visitor hasn't picked light. Setting
    color-scheme is what flips every light-dark() token, and it also themes
-   native form controls and scrollbars. */
+   native form controls and scrollbars. --is-dark (0/1) carries the same
+   state into calc() for the few non-color properties that follow it. */
 :root {
   color-scheme: light;
+  --is-dark: 0;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
+  --is-dark: 1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
+    --is-dark: 1;
   }
 }
 
@@ -102,6 +111,13 @@ html {
 ::selection {
   background-color: var(--color-flare);
   color: var(--color-porcelain);
+}
+
+/* Browser-default placeholders are too faint (and Firefox dims them further
+   with opacity). */
+::placeholder {
+  color: var(--color-mist);
+  opacity: 1;
 }
 
 /* Visible keyboard focus, everywhere */
@@ -194,7 +210,7 @@ html {
 
 .btn-primary:hover {
   transform: translateY(-0.125rem);
-  background-color: var(--color-flare);
+  background-color: var(--color-flare-hover);
   box-shadow:
     0 10px 15px -3px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5)),
     0 4px 6px -4px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5));
@@ -288,15 +304,76 @@ html {
   mix-blend-mode: multiply;
 }
 
-/* Multiply against a dark ground turns the flare squares near-black. */
+/* Dark-only rules that aren't colors, so light-dark() can't carry them.
+   Multiply against a dark ground turns the cursor-trail squares near-black.
+   The flagship panel (.inverse-edge) gets the section-heading flare rule on
+   its top edge, since after hours it is raised rather than an ink slab. */
 :root[data-theme='dark'] .cursor-trail {
   mix-blend-mode: normal;
+}
+
+:root[data-theme='dark'] .inverse-edge {
+  border-top: 4px solid var(--color-flare);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .cursor-trail {
     mix-blend-mode: normal;
   }
+
+  :root:not([data-theme='light']) .inverse-edge {
+    border-top: 4px solid var(--color-flare);
+  }
+}
+
+/* Theme toggle (Header.astro + public/scripts/theme-toggle.js). Hidden, not
+   removed, until Base.astro's pre-paint script flags JS on <html>: the space
+   is reserved so nothing shifts when it appears, and a button that can't do
+   anything never reaches the tab order or the accessibility tree.
+   The icon follows --is-dark, so it is right on first paint with no stored
+   choice: the sun's rays retract and a cut slides in to leave a crescent. */
+.theme-toggle {
+  visibility: hidden;
+}
+
+:root[data-js] .theme-toggle {
+  visibility: visible;
+}
+
+.theme-toggle-icon * {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  transition:
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 250ms ease;
+}
+
+.theme-toggle-body {
+  transform: scale(calc(1 + var(--is-dark) * 0.75));
+}
+
+.theme-toggle-cut {
+  transform: translate(calc((1 - var(--is-dark)) * 9px), calc((var(--is-dark) - 1) * 9px));
+}
+
+.theme-toggle-rays {
+  opacity: calc(1 - var(--is-dark));
+  transform: rotate(calc(var(--is-dark) * -45deg)) scale(calc(1 - var(--is-dark) * 0.5));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-icon * {
+    transition: none;
+  }
+}
+
+/* Circular reveal: theme-toggle.js grows a clip-path circle on the new
+   snapshot from the button. Drop the default crossfade so the old page
+   stays put underneath instead of fading. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 /* Tailwind's shadow-lg (mobile drawer, card hovers) is black at 10%, which

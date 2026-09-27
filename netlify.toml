@@ -8,11 +8,16 @@
 # score so they don't move the number, but the gaps are real in
 # production, not just on the dev server.
 #
-# script-src's hash covers the one inline script Astro emits (the
-# mobile-nav Escape-key handler in Header.astro) — it's byte-identical
-# on every page. If a future dependency bump changes the minified
-# output, this hash will need regenerating: build the site, then
-#   node -e "const c=require('fs').readFileSync('dist/index.html','utf8').match(/<script type=\"module\">(.*?)<\/script>/s)[1]; console.log('sha256-'+require('crypto').createHash('sha256').update(c).digest('base64'))"
+# script-src's two hashes cover the only inline scripts Astro emits, each
+# byte-identical on every page:
+#   - sha256-kOf4…: the mobile-nav Escape-key handler (Header.astro,
+#     emitted as <script type="module">).
+#   - sha256-e1Ty…: the pre-paint theme script (Base.astro <head>,
+#     <script is:inline>), which applies a stored light/dark choice before
+#     first paint and flags that JS runs.
+# If either source changes, or a dependency bump changes the minified
+# output, regenerate: build the site, then
+#   node -e "const h=require('fs').readFileSync('dist/index.html','utf8');for(const m of h.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g))console.log('sha256-'+require('crypto').createHash('sha256').update(m[1]).digest('base64'))"
 # JSON-LD <script type="application/ld+json"> blocks are exempt from
 # script-src by spec (non-JS MIME type), so they need no entry here
 # despite differing per page.
@@ -23,7 +28,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-kOf4WRzWmFPXcQvmRYat0Nt1+40XXSbXeSPuO+Kl/C8='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; require-trusted-types-for 'script'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-kOf4WRzWmFPXcQvmRYat0Nt1+40XXSbXeSPuO+Kl/C8=' 'sha256-e1TyQYeaTeVRTruAV5LM5wepZAVZZ/R/SbILb26Fr7s='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; require-trusted-types-for 'script'"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"

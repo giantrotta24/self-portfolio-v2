@@ -450,7 +450,7 @@ html {
 }
 
 .prose-custom a:hover {
-  color: var(--color-flare);
+  color: var(--color-flare-deep);
 }
 
 .prose-custom strong {

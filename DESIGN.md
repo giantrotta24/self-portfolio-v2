@@ -240,7 +240,7 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 - **Internal Padding:** Typically `p-8` (2rem).
 - **Dashed callout:** Strong ink dashed frame for "not sure / book a call" blocks.
 - **Linked cards:** A card that lifts on hover must go somewhere. Make the whole card one `<a class="group block …">` (homepage rescue door, Services cards), never a lifting `<article>`. It ends with a mono bold affordance line with a trailing arrow ("How a rescue works →", "Ask about a checkup →") that turns `flare-deep` on hover (`flare-bright` on `inverse`); the Services cards also turn it on `:focus-visible`. Keyboard focus is the global flare ring, plus the hover's ink border on bordered cards; no lift on focus.
-- **Service → contact prefill:** Services cards link to `/contact/?interest=<key>`, and `public/scripts/contact-prefill.js` starts the message box with that key's opening line, only when the box is empty. The lines live in `src/data/contact-interests.ts` and reach the script through the form's `data-interests` attribute. To add one, add an entry there and link with `contactHref('<key>')`.
+- **Service → contact prefill:** Services cards link to `/contact/?interest=<key>`, and `public/scripts/contact-prefill.js` starts the message box with that key's opening line, only when the box is empty. The lines live in `src/data/contact-interests.ts` and reach the script through the message textarea's `data-interests` attribute (not the `<form>`: Netlify's form processing rewrites that tag and breaks attribute values containing apostrophes). To add one, add an entry there and link with `contactHref('<key>')`.
 
 ### Inputs / Fields
 - **Style:** White fill, `1px solid field`, square, `px-4 py-3`, full width in form column.

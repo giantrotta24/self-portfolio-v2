@@ -22,7 +22,6 @@ import { contactInterests } from '../data/contact-interests';
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      data-interests={JSON.stringify(contactInterests)}
       class="mt-10 space-y-6"
     >
       <input type="hidden" name="form-name" value="project" />
@@ -59,6 +58,7 @@ import { contactInterests } from '../data/contact-interests';
         <textarea
           id="message"
           name="message"
+          data-interests={JSON.stringify(contactInterests)}
           rows="5"
           required
           class="mt-2 w-full border border-field bg-white px-4 py-3"

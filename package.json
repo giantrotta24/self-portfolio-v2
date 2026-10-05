@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/generate-markdown-pages.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "node --test 'tests/*.test.mjs'"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.1",

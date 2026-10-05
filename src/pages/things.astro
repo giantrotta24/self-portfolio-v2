@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<!-- Unlisted utility: the Inbox Clerk bot links here because its chat apps
+     drop things:// links. public/scripts/things.js does the work. -->
+<Base title="Add to Things — Gian Trotta" description="Opens a to-do in Things." noindex>
+  <meta slot="head" name="referrer" content="no-referrer" />
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="eyebrow">Things</p>
+    <h1 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">Add to Things</h1>
+
+    <div data-things-valid hidden>
+      <p class="mt-4 text-lg text-mist">Opening Things. If nothing happens, tap the button.</p>
+      <a data-things-open class="btn-primary mt-8 inline-block">Open in Things</a>
+
+      <div class="mt-12 border border-line bg-white p-8">
+        <p class="eyebrow">To-do</p>
+        <ul data-things-titles class="mt-3 grid gap-2 text-lg font-semibold break-words"></ul>
+        <div data-things-notes class="mt-8">
+          <p class="eyebrow">Notes</p>
+          <p data-things-notes-text class="mt-3 whitespace-pre-wrap break-words"></p>
+        </div>
+      </div>
+    </div>
+
+    <p data-things-invalid hidden class="mt-4 text-lg text-mist">
+      This link isn't a valid Things add link.
+    </p>
+    <noscript>
+      <p class="mt-4 text-lg text-mist">This page needs JavaScript to open Things.</p>
+    </noscript>
+  </section>
+  <script type="module" src="/scripts/things.js"></script>
+</Base>

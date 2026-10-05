@@ -41,6 +41,7 @@ docs/evidence/  "Before" Lighthouse reports + full-page screenshots of the
 - **Blog posts** ship when `draft: false` in frontmatter.
 - **JSON-LD** (`ProfessionalService` + `Person`) lives in `src/components/SEO.astro`.
 - **Booking** on Contact is a plain link to cal.com that opens in a new tab. Cal's embed modal needs inline styles, which the CSP's `style-src 'self'` blocks, so don't bring it back without loosening that.
+- **`/things/`** is an unlisted helper for the Inbox Clerk bot, whose chat apps drop `things://` links. Link to `https://giantrotta.dev/things#` + `encodeURIComponent('things:///add?…')` and it opens Things' quick entry. Only the `add` command with an allow-listed set of parameters gets through (`public/scripts/things-link.js`, tested by `npm test`). The to-do stays in the fragment so it never reaches Netlify; keep analytics off this page.
 - Planned: `.md` versions of pages + richer `llms.txt` via a custom build step.
 - The hero "checkup receipt" numbers (100/100, sub-second) must be verified against the deployed site before launch.
 

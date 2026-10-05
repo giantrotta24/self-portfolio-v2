@@ -32,6 +32,7 @@ const { title, description, noindex = false } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="google-site-verification" content="ol2LsMbTpDoMiHRm1ClYzcul2EHpQSsWgAS_Emr8MII" />
     <SEO title={title} description={description} path={Astro.url.pathname} noindex={noindex} />
+    <slot name="head" />
   </head>
   <body class="flex min-h-screen flex-col">
     <a

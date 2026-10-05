@@ -46,3 +46,11 @@
   for = "/checkup/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# /things/#<encoded things:///add URL>: the to-do rides in the fragment, which
+# never reaches the server. no-referrer so the page leaks nothing onward.
+[[headers]]
+  for = "/things/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"

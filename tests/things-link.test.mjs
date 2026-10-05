@@ -6,7 +6,7 @@ const hashFor = (thingsUrl) => `#${encodeURIComponent(thingsUrl)}`;
 
 test('accepts a single add and rebuilds the same URL', () => {
   const thingsUrl =
-    'things:///add?title=Reply%20to%20Sam&notes=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F%23inbox%2Fabc&when=today&tags=email&show-quick-entry=true';
+    'things:///add?title=Reply%20to%20Sam&notes=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F%23inbox%2Fabc&show-quick-entry=true';
   assert.deepEqual(parseThingsLink(hashFor(thingsUrl)), {
     url: thingsUrl,
     titles: ['Reply to Sam'],
@@ -15,7 +15,7 @@ test('accepts a single add and rebuilds the same URL', () => {
 });
 
 test('accepts a titles multi-add', () => {
-  const thingsUrl = 'things:///add?titles=Pay%20invoice%0ABook%20dentist&when=today&tags=email';
+  const thingsUrl = 'things:///add?titles=Pay%20invoice%0ABook%20dentist';
   const link = parseThingsLink(hashFor(thingsUrl));
   assert.equal(link.url, thingsUrl);
   assert.deepEqual(link.titles, ['Pay invoice', 'Book dentist']);
@@ -23,8 +23,15 @@ test('accepts a titles multi-add', () => {
 });
 
 test('accepts an unencoded fragment', () => {
-  const thingsUrl = 'things:///add?title=Call%20Mom&when=today';
+  const thingsUrl = 'things:///add?title=Call%20Mom';
   assert.equal(parseThingsLink(`#${thingsUrl}`).url, thingsUrl);
+});
+
+test('drops scheduling and filing parameters', () => {
+  const link = parseThingsLink(
+    hashFor('things:///add?title=x&when=today&tags=email&list=Work&heading=A&deadline=2026-10-09&checklist-items=a&reveal=true'),
+  );
+  assert.equal(link.url, 'things:///add?title=x');
 });
 
 test('rejects an auth-token parameter', () => {

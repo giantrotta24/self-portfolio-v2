@@ -54,3 +54,17 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
     Referrer-Policy = "no-referrer"
+
+# /gmail/#acct=<email>&t=<threadId>: same idea. The fragment never reaches
+# the server. no-referrer so the hop to Gmail carries nothing.
+[[headers]]
+  for = "/gmail"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"
+
+[[headers]]
+  for = "/gmail/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"

@@ -440,9 +440,10 @@ html {
   }
 }
 
-/* Blog post body — tables/links/headings need explicit rules; Astro markdown
-   otherwise falls back to dense browser defaults. Scoped under .prose-custom
-   so the blog template can opt in without affecting the rest of the site. */
+/* Long-form markdown body (blog posts, notes) — tables/links/headings need
+   explicit rules; Astro markdown otherwise falls back to dense browser
+   defaults. Scoped under .prose-custom so templates opt in without affecting
+   the rest of the site. */
 .prose-custom h2 {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
@@ -451,6 +452,47 @@ html {
   font-weight: 700;
   line-height: 1.2;
   color: var(--color-ink);
+}
+
+.prose-custom h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+/* Tailwind's preflight strips list markers, so prose lists restore them. */
+.prose-custom ul,
+.prose-custom ol {
+  padding-left: 1.4em;
+}
+
+.prose-custom ul {
+  list-style: square;
+}
+
+.prose-custom ol {
+  list-style: decimal;
+}
+
+.prose-custom li + li {
+  margin-top: 0.6rem;
+}
+
+.prose-custom li::marker {
+  color: var(--color-flare-deep);
+}
+
+.prose-custom code {
+  font-family: var(--font-utility);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line);
+  overflow-wrap: anywhere;
 }
 
 .prose-custom a {
@@ -514,6 +556,17 @@ html {
 
   .prose-custom table {
     width: auto;
+    white-space: nowrap;
+  }
+
+  /* Sentence-length cells (notes) wrap instead of scrolling; the first
+     column stays on one line as the row's label. */
+  .prose-wrap-tables table {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .prose-wrap-tables td:first-child {
     white-space: nowrap;
   }
 }

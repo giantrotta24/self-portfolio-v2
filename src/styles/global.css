@@ -559,14 +559,64 @@ html {
     white-space: nowrap;
   }
 
-  /* Sentence-length cells (notes) wrap instead of scrolling; the first
-     column stays on one line as the row's label. */
-  .prose-wrap-tables table {
+  /* Sentence-length tables (notes) stack each row into a block instead of
+     scrolling: cells run top to bottom, each under its column's label
+     (`data-label`, set by rehype-scrollable-tables). The header row stays
+     for screen readers only. */
+  .prose-stack-tables .table-scroll {
+    overflow-x: visible;
+    border-top: 2px solid var(--color-ink);
+  }
+
+  .prose-stack-tables table,
+  .prose-stack-tables tbody,
+  .prose-stack-tables tr,
+  .prose-stack-tables td {
+    display: block;
     width: 100%;
     white-space: normal;
   }
 
-  .prose-wrap-tables td:first-child {
+  .prose-stack-tables thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
     white-space: nowrap;
+  }
+
+  .prose-stack-tables tr {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .prose-stack-tables td {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .prose-stack-tables td:first-child {
+    font-weight: 700;
+  }
+
+  .prose-stack-tables td + td {
+    margin-top: 0.6rem;
+  }
+
+  .prose-stack-tables td:empty {
+    display: none;
+  }
+
+  .prose-stack-tables td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.15rem;
+    font-family: var(--font-utility);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-mist);
   }
 }

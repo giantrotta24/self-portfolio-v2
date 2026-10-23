@@ -54,3 +54,9 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
     Referrer-Policy = "no-referrer"
+
+# Unlisted notes written for one reader and sent by link (e.g. /notes/clcpa-praxis/).
+[[headers]]
+  for = "/notes/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

@@ -259,6 +259,10 @@ Component feel: **square and decisive, paper and ink** — sharp CTAs, white pan
 ### Eyebrow
 - Mono uppercase mist label; `.eyebrow-accent` shifts to `flare-deep` for local emphasis (About, case-study kickers).
 
+### Long-form prose
+- Markdown bodies (blog posts, `/notes/*`) sit in `max-w-3xl` under `.prose-custom`, `text-lg` relaxed. H2 and H3 in display; links steel, hovering to `flare-deep`; tables with mono uppercase heads and hairline rows, scrolling below 640px.
+- Lists keep square markers in `flare-deep` (preflight strips them otherwise). Inline code is mono at 0.85em on a white chip with a `line` hairline, square, and wraps anywhere so long paths never widen the page.
+
 ### Stat Grid
 - Mosaic of white cells separated by 1px `line` gutters. Mono bold steel values; eyebrow labels. Proof furniture, not marketing badges.
 

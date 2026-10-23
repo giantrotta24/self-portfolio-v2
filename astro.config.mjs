@@ -6,7 +6,7 @@ import rehypeScrollableTables from './src/plugins/rehype-scrollable-tables.mjs';
 
 export default defineConfig({
   site: 'https://giantrotta.dev',
-  integrations: [sitemap({ filter: (page) => !page.includes('/checkup/') && !page.includes('/ai-consulting/') && !page.includes('/things/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/checkup/') && !page.includes('/ai-consulting/') && !page.includes('/things/') && !page.includes('/notes/') })],
   markdown: {
     rehypePlugins: [rehypeScrollableTables],
   },

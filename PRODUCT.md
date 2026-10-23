@@ -34,6 +34,7 @@ Site tagline in use: "Your website should bring in customers, not another monthl
 - Geography: Cleveland and Northeast Ohio (Akron, Parma, Lakewood, surrounding suburbs); remote-friendly build; in-person kickoff when local
 - Conversion path: free 15-minute call (Cal.com) and Netlify Forms contact
 - Content: case studies with before/after numbers, blog posts, availability badge
+- Unlisted notes (`/notes/*`): long-form pages written for one reader and sent by link, e.g. `/notes/clcpa-praxis/`. Same hiding as `/checkup/`: noindex meta and `X-Robots-Tag`, out of the sitemap and markdown output, unlinked. Not marketing copy, so the AI consulting copy rules above don't bind them
 - Day job credibility: senior engineer on a high-traffic marketplace
 
 ## Capabilities and Constraints

@@ -9,7 +9,7 @@ import TurndownService from 'turndown';
 const SITE = 'https://giantrotta.dev';
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const SKIP = new Set(['404.html']);
-const SKIP_DIRS = new Set(['checkup', 'ai-consulting', 'things', 'notes', 'gmail']);
+const SKIP_DIRS = new Set(['checkup', 'ai-consulting', 'things', 'notes']);
 
 const turndown = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
 
